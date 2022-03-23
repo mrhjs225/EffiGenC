@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: gumtree.spoon.AstComparatorTest
+-------------------------------------------------------------------------------
+Tests run: 107, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 12.022 s - in gumtree.spoon.AstComparatorTest

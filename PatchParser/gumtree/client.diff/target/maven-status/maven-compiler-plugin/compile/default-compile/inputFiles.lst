@@ -1,0 +1,17 @@
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/swing/SwingDiff.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/DirectoryComparatorView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/MergelyView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/swing/TreePanel.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/swing/MappingsPanel.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/TextDiff.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/JsonDiff.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/BootstrapFooterView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/swing/SwingTree.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/BootstrapHeaderView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/ScriptView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/DiffView.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/HtmlDiffs.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/TagIndex.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/AnnotatedXmlDiff.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/web/WebDiff.java
+/root/PatchParser/gumtree/client.diff/src/main/java/com/github/gumtreediff/client/diff/AbstractDiffClient.java

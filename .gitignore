@@ -1,0 +1,9 @@
+.classpath
+.project
+.settings/
+.temp/
+.DS_Store
+.__MACOSX
+logs/
+Data/
+data.tar.gz
