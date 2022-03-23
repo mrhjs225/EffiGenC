@@ -56,8 +56,8 @@ edu/lu/uni/serval/tbar/fixpatterns/StatementRemover.class
 edu/lu/uni/serval/tbar/AbstractFixer$SuspCodeNode.class
 edu/lu/uni/serval/tbar/context/Field.class
 edu/lu/uni/serval/jdt/generator/ExpJdtTreeGenerator.class
-edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer$2.class
 edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy.class
+edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer$2.class
 edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$ArithmeticOperatorMutator.class
 edu/lu/uni/serval/tbar/dataprepare/CustomClassLoaderThreadFactory.class
 edu/lu/uni/serval/tbar/utils/ASTNodeMap.class
@@ -112,8 +112,8 @@ edu/lu/uni/serval/jdt/tree/hash/RollingHashGenerator$JavaRollingHashGenerator.cl
 edu/lu/uni/serval/tbar/fixpatterns/RangeChecker$CollectionRangeChecker.class
 edu/lu/uni/serval/jdt/tree/TreeUtils$3.class
 edu/lu/uni/serval/tbar/utils/JunitRunner.class
-edu/lu/uni/serval/tbar/utils/PathUtils.class
 edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy$2.class
+edu/lu/uni/serval/tbar/utils/PathUtils.class
 edu/lu/uni/serval/tbar/utils/JsUtils.class
 edu/lu/uni/serval/tbar/utils/FileHelper.class
 edu/lu/uni/serval/tbar/utils/CodeUtils.class
