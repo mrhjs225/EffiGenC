@@ -16,27 +16,45 @@ import edu.lu.uni.serval.tbar.utils.Checker;
 public class JsUtils {
 
 	public static void staticSlicing(ArrayList<ITree> slicedStatementList, ArrayList<String> contextElementList, ITree node) {
-		if (Checker.isStatement(node.getType())) {
+		if (Checker.isPureStatement(node.getType()) || Checker.isComplexExpression(node.getType())) {
 			for (String contextElement : contextElementList) {
-                if (node.getLabel().contains(contextElement)) {
-                    System.out.println("Node:" + node.getLabel());
+                if (checkSimpleName(node, contextElement)) {
+                    // System.out.println("==========");
+                    // System.out.println("ContextElement: " + contextElement);
+                    // System.out.println(node.getType());
+                    // System.out.println(node.getId() + ":" + node.toTreeString());
+                    slicedStatementList.add(node)
                 }
             }
 		}
-		for(int i = 0; i < node.getChildren().size(); i++) {
-			staticSlicing(slicedStatementList, contextElementList, node.getChildren().get(i));
+		for(ITree childNode : node.getChildren()) {
+			staticSlicing(slicedStatementList, contextElementList, childNode);
 		}
 	}
 
-
-	public static ITree getMethodNode(ITree node) {
-		for(ITree parentNode : node.getParents()) {
-			if(parentNode.getLabel().contains("MethodName:")) {
-                return parentNode;
-			}
-		}
-        return null;
-	}
+    private static boolean checkSimpleName(ITree node, String element) {
+        int nodeType = node.getType();
+        if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType) || (Checker.isMethodInvocation(nodeType) && node.toShortString().contains("Name:"))) {
+            String nodeName = "";
+            if (node.toShortString().contains("Name:")) {
+                nodeName = node.getLabel().split(":")[1].trim();
+            } else {
+                nodeName = node.getLabel().trim();
+            }
+            if (nodeName.equals(element)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        for (ITree childNode : node.getChildren()) {
+            boolean flag = checkSimpleName(childNode, element);
+            if (flag == true) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public static String searchFile(File srcPath, String targetFile) {
 		File files[] = srcPath.listFiles();
@@ -174,8 +192,9 @@ public class JsUtils {
     }
 
     public static void extractNode(ITree targetTree, ArrayList<ITree> contetElementNodes) {
-        if (Checker.isSimpleName(targetTree.getType()) || Checker.isSimpleType(targetTree.getType()) ||
-        (Checker.isMethodInvocation(targetTree.getType()) && targetTree.toShortString().contains("Name:")) ) {
+        int nodeType = targetTree.getType();
+        if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType) ||
+        (Checker.isMethodInvocation(nodeType) && targetTree.toShortString().contains("Name:")) ) {
             String tempStr = targetTree.toShortString().split("@@")[1];
             contetElementNodes.add(targetTree);
         }

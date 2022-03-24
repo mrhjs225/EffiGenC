@@ -524,16 +524,15 @@ public class TBarFixer extends AbstractFixer {
 		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
-			int i = 0;
+			// int i = 0;
 			for (String projectFile : projectFileList) {
 				File tempFile = new File(projectFile);
 				ITree projectFileTree = new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
-				// JsUtils.constructContextTree(rootNode, projectFileTree);
 				JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
-				if (i > 3) {
-					break;
-				}
-				i++;
+				// if (i > 5) {
+				// 	break;
+				// }
+				// i++;
 			}
 		}
 
@@ -557,8 +556,8 @@ public class TBarFixer extends AbstractFixer {
 		// End calculate original hit ratio
 		
 		// ft.generatePatches(patchIngredient);
-		// below code is for original tbar system
 		System.exit(0);
+		// below code is for original tbar system
 		// ft.generatePatches();
 		// List<Patch> patchCandidates = ft.getPatches();
 		// if (patchCandidates.isEmpty()) return;

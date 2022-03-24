@@ -40,6 +40,21 @@ public class Checker {
 		if (type == 60) return true; // VariableDeclarationStatement
 		return withBlockStatement(type);
 	}
+
+	public static boolean isPureStatement(int type) {
+		if (type == 6)  return true; // AssertStatement
+		if (type == 10) return true; // BreakStatement
+		if (type == 17) return true; // ConstructorInvocation
+		if (type == 18) return true; // ContinueStatement
+		if (type == 21) return true; // ExpressionStatement
+		if (type == 41) return true; // ReturnStatement
+		if (type == 46) return true; // SuperConstructorInvocation
+		if (type == 49) return true; // SwitchCase
+		if (type == 53) return true; // ThrowStatement
+		if (type == 56) return true; // TypeDeclarationStatement
+		if (type == 60) return true; // VariableDeclarationStatement
+		return false;
+	}
 	
 	public static boolean isStatement2(int type) {
 		if (type == 8)  return true; // block
