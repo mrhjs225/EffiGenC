@@ -39,8 +39,6 @@ import edu.lu.uni.serval.tbar.utils.FileHelper;
 import edu.lu.uni.serval.tbar.utils.FileUtils;
 import edu.lu.uni.serval.tbar.utils.SuspiciousPosition;
 import edu.lu.uni.serval.tbar.utils.JsUtils;
-import edu.lu.uni.serval.tbar.heirarchycontext.ContextNode;
-import edu.lu.uni.serval.tbar.heirarchycontext.SearchStrategy;
 
 
 /**
@@ -516,31 +514,31 @@ public class TBarFixer extends AbstractFixer {
 		ITree targetTree = scn.suspCodeAstNode;
 		int parentSize = targetTree.getParents().size();
 		ITree suspFileTree = targetTree.getParents().get(parentSize - 1);
-		ArrayList<ITree> contextNodeList = new ArrayList<>();
-		JsUtils.extractContextNode(targetTree, contextNodeList);
-		ArrayList<String> contextElementList = JsUtils.extractContextElement(contextNodeList);
+		ArrayList<ITree> contetElementNodes = new ArrayList<>();
+		JsUtils.extractContextNode(targetTree, contetElementNodes);
+		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 
-		System.exit(0);
-		ContextNode rootNode = new ContextNode(targetTree, 0);
-
-
-		HashSet<String> originalIngredient = new HashSet<String>();
+		HashSet<String> originalIngredient = new HashSet<>();
+		ArrayList<ITree> slicedStatementList = new ArrayList<>();
 
 		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
+			int i = 0;
 			for (String projectFile : projectFileList) {
 				File tempFile = new File(projectFile);
 				ITree projectFileTree = new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
-				JsUtils.constructContextTree(rootNode, projectFileTree);
-				// JsUtils.collectOriginalElements(projectFileTree, originalIngredient);
+				// JsUtils.constructContextTree(rootNode, projectFileTree);
+				JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
+				if (i > 3) {
+					break;
+				}
+				i++;
 			}
 		}
 
 		HashSet<String> patchIngredient = new HashSet<String>();
-		JsUtils.collectElements(rootNode, patchIngredient);
 
-		SearchStrategy.getDonorCode(this.buggyProject, mode, rootNode);
 
 		// For calculate context hit ratio
 		// try {
@@ -560,11 +558,11 @@ public class TBarFixer extends AbstractFixer {
 		
 		// ft.generatePatches(patchIngredient);
 		// below code is for original tbar system
-		ft.generatePatches();
-		// System.exit(0);
-		List<Patch> patchCandidates = ft.getPatches();
-		if (patchCandidates.isEmpty()) return;
-		System.out.println("number of patch:" + patchCandidates.size());
+		System.exit(0);
+		// ft.generatePatches();
+		// List<Patch> patchCandidates = ft.getPatches();
+		// if (patchCandidates.isEmpty()) return;
+		// System.out.println("number of patch:" + patchCandidates.size());
 		// For normal running please un-comment below code
 		// testGeneratedPatches(patchCandidates, scn);
 	}

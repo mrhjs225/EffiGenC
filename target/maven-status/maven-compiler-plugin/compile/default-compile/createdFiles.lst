@@ -56,7 +56,6 @@ edu/lu/uni/serval/tbar/fixpatterns/StatementRemover.class
 edu/lu/uni/serval/tbar/AbstractFixer$SuspCodeNode.class
 edu/lu/uni/serval/tbar/context/Field.class
 edu/lu/uni/serval/jdt/generator/ExpJdtTreeGenerator.class
-edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy.class
 edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer$2.class
 edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$ArithmeticOperatorMutator.class
 edu/lu/uni/serval/tbar/dataprepare/CustomClassLoaderThreadFactory.class
@@ -78,7 +77,6 @@ edu/lu/uni/serval/tbar/utils/SuspiciousCodeParser.class
 edu/lu/uni/serval/tbar/fixpatterns/ConditionalExpressionMutator.class
 edu/lu/uni/serval/tbar/fixpatterns/VariableReplacer$LongestCommonSubsequence.class
 edu/lu/uni/serval/jdt/tree/hash/RollingHashGenerator$RandomRollingHashGenerator.class
-edu/lu/uni/serval/tbar/heirarchycontext/ContextNode.class
 edu/lu/uni/serval/tbar/fixpatterns/NullPointerChecker$SuspNullExpStr.class
 edu/lu/uni/serval/tbar/AbstractFixer.class
 edu/lu/uni/serval/tbar/fixpatterns/RangeChecker$1.class
@@ -92,7 +90,6 @@ edu/lu/uni/serval/jdt/tree/ITree.class
 edu/lu/uni/serval/tbar/dataprepare/TestType.class
 edu/lu/uni/serval/jdt/generator/Registry$Factory.class
 edu/lu/uni/serval/tbar/fixpatterns/NullPointerChecker$NPNullOnSomePathFromReturnValue$ExpStr.class
-edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy$1.class
 edu/lu/uni/serval/tbar/utils/MapSorter.class
 edu/lu/uni/serval/AST/ASTGenerator.class
 edu/lu/uni/serval/jdt/generator/Registry$2.class
@@ -112,7 +109,6 @@ edu/lu/uni/serval/jdt/tree/hash/RollingHashGenerator$JavaRollingHashGenerator.cl
 edu/lu/uni/serval/tbar/fixpatterns/RangeChecker$CollectionRangeChecker.class
 edu/lu/uni/serval/jdt/tree/TreeUtils$3.class
 edu/lu/uni/serval/tbar/utils/JunitRunner.class
-edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy$2.class
 edu/lu/uni/serval/tbar/utils/PathUtils.class
 edu/lu/uni/serval/tbar/utils/JsUtils.class
 edu/lu/uni/serval/tbar/utils/FileHelper.class
