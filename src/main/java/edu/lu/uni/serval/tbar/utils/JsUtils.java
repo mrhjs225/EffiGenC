@@ -168,34 +168,6 @@ public class JsUtils {
         hitRatioBuf.close();
     }
 
-    public static void extractContextElements(ITree targetTree, ArrayList<ContextNode> contextElements) {
-        if (Checker.isIfStatement(targetTree.getType())) {
-            for (ITree childNode : targetTree.getChildren()) {
-                if (Checker.isInfixExpression(childNode.getType())) {
-                    extractElements(childNode, contextElements);
-                    break;
-                }
-            }
-        } else {
-            extractElements(targetTree, contextElements);
-        }
-    }
-
-	public static void extractElements(ITree targetTree, ArrayList<ContextNode> contextElements) {
-        if (Checker.isSimpleName(targetTree.getType()) || Checker.isSimpleType(targetTree.getType()) ||
-        (Checker.isMethodInvocation(targetTree.getType()) && targetTree.toShortString().contains("Name:")) ) {
-            String tempStr = targetTree.toShortString().split("@@")[1];
-            ContextNode contextNode = new ContextNode(targetTree, 1);
-            if (tempStr.contains("Name:")) {
-                contextNode.setIsColon(true);
-            }
-            contextElements.add(contextNode);
-        }
-        for (ITree childNode : targetTree.getChildren()) {
-            extractElements(childNode, contextElements);
-        }
-    }
-
     public static ArrayList<String> extractContextElement(ArrayList<ITree> contextNodeList) {
         ArrayList<String> contextElementList  = new ArrayList<String>();
 

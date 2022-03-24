@@ -516,45 +516,17 @@ public class TBarFixer extends AbstractFixer {
 		ITree targetTree = scn.suspCodeAstNode;
 		int parentSize = targetTree.getParents().size();
 		ITree suspFileTree = targetTree.getParents().get(parentSize - 1);
-		ArrayList<ContextNode> contextElements = new ArrayList<ContextNode>();
 		ArrayList<ITree> contextNodeList = new ArrayList<>();
-		JsUtils.extractContextElements(targetTree, contextElements);
 		JsUtils.extractContextNode(targetTree, contextNodeList);
-		for (ITree contextNode : contextNodeList) {
-			System.out.println(contextNode.toShortString());
-		}
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contextNodeList);
-		for (String contextElement : contextElementList) {
-			System.out.println("Element:" + contextElement);
-		}
+
 		System.exit(0);
 		ContextNode rootNode = new ContextNode(targetTree, 0);
-		for(ContextNode contextNode : contextElements) {
-			rootNode.addChild(contextNode);
-		}
+
 
 		HashSet<String> originalIngredient = new HashSet<String>();
 
-		if (this.mode.equals("method")) {
-			ITree methodNode = JsUtils.findMethodNode(targetTree);
-			JsUtils.constructContextTree(rootNode, methodNode);
-			// JsUtils.collectOriginalElements(methodNode, originalIngredient);
-		} else if (this.mode.equals("file")) {
-			JsUtils.constructContextTree(rootNode, suspFileTree);
-			// JsUtils.collectOriginalElements(suspFileTree, originalIngredient);
-		} else if (this.mode.equals("package")) {
-			String targetFilePath = FileUtils.getFileAddressOfJava(projectPath, sourceCodeFile);
-			String packagePath = JsUtils.searchFile(new File(projectPath), sourceCodeFile);
-			ArrayList<String> packageFileList = new ArrayList<>();
-			packagePath = packagePath.substring(0, packagePath.length() - sourceCodeFile.length());
-			JsUtils.listUpFiles(new File(packagePath), packageFileList);
-			for (String packageFile : packageFileList) {
-				File tempFile = new File(packageFile);
-				ITree packageFileTree = new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
-				JsUtils.constructContextTree(rootNode, packageFileTree);
-				// JsUtils.collectOriginalElements(packageFileTree, originalIngredient);
-			}
-		} else if (this.mode.equals("project")) {
+		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
 			for (String projectFile : projectFileList) {
