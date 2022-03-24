@@ -195,28 +195,42 @@ public class JsUtils {
             extractElements(childNode, contextElements);
         }
     }
+
+    public static ArrayList<String> extractContextElement(ArrayList<ITree> contextNodeList) {
+        ArrayList<String> contextElementList  = new ArrayList<String>();
+
+        for(ITree contextNode : contextNodeList) {
+            String nodeContent =  contextNode.toShortString().split("@@")[1];
+            if (nodeContent.contains("Name:")) {
+                contextElementList.add(nodeContent.split(":")[1].trim());
+            } else {
+                contextElementList.add(nodeContent.trim());
+            }
+        }
+        return contextElementList;
+    }
 	
-	public static void extractContextElement(ITree targetTree, ArrayList<ITree> contextElementList) {
+	public static void extractContextNode(ITree targetTree, ArrayList<ITree> contextNodeList) {
         if (Checker.isIfStatement(targetTree.getType())) {
             for (ITree childNode : targetTree.getChildren()) {
                 if (Checker.isInfixExpression(childNode.getType())) {
-                    extractElement(childNode, contextElementList);
+                    extractNode(childNode, contextNodeList);
                     break;
                 }
             }
         } else {
-            extractElement(targetTree, contextElementList);
+            extractNode(targetTree, contextNodeList);
         }
     }
 
-    public static void extractElement(ITree targetTree, ArrayList<ITree> contextElementList) {
+    public static void extractNode(ITree targetTree, ArrayList<ITree> contextNodeList) {
         if (Checker.isSimpleName(targetTree.getType()) || Checker.isSimpleType(targetTree.getType()) ||
         (Checker.isMethodInvocation(targetTree.getType()) && targetTree.toShortString().contains("Name:")) ) {
             String tempStr = targetTree.toShortString().split("@@")[1];
-            contextElementList.add(targetTree);
+            contextNodeList.add(targetTree);
         }
         for (ITree childNode : targetTree.getChildren()) {
-            extractElement(childNode, contextElementList);
+            extractNode(childNode, contextNodeList);
         }
     }
 

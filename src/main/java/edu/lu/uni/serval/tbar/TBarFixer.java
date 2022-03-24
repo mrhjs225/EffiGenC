@@ -517,20 +517,21 @@ public class TBarFixer extends AbstractFixer {
 		int parentSize = targetTree.getParents().size();
 		ITree suspFileTree = targetTree.getParents().get(parentSize - 1);
 		ArrayList<ContextNode> contextElements = new ArrayList<ContextNode>();
-		ArrayList<ITree> contextElementList = new ArrayList<>();
+		ArrayList<ITree> contextNodeList = new ArrayList<>();
 		JsUtils.extractContextElements(targetTree, contextElements);
-		JsUtils.extractContextElement(targetTree, contextElementList);
-		for (ITree contextElement : contextElementList) {
-			System.out.println(contextElement.toShortString());
+		JsUtils.extractContextNode(targetTree, contextNodeList);
+		for (ITree contextNode : contextNodeList) {
+			System.out.println(contextNode.toShortString());
+		}
+		ArrayList<String> contextElementList = JsUtils.extractContextElement(contextNodeList);
+		for (String contextElement : contextElementList) {
+			System.out.println("Element:" + contextElement);
 		}
 		System.exit(0);
 		ContextNode rootNode = new ContextNode(targetTree, 0);
 		for(ContextNode contextNode : contextElements) {
 			rootNode.addChild(contextNode);
 		}
-
-
-				
 
 		HashSet<String> originalIngredient = new HashSet<String>();
 
