@@ -621,27 +621,11 @@ public class TBarFixer extends AbstractFixer {
 			}
 		}
 		HashMap<ITree, Double> rankedStatement = new HashMap<ITree, Double>();
-		JsUtils.levenRanking(slicedStatementList, suspStatementTree, rankedStatement);
+		JsUtils.levenDist(slicedStatementList, suspStatementTree, rankedStatement);
 
 		HashSet<String> patchIngredient = new HashSet<String>();
 
-
-		// For calculate context hit ratio
-		// try {
-		// JsUtils.hitRatio(patchIngredient, this.buggyProject, mode);
-		// } catch(Exception e) {
-		// e.printStackTrace();
-		// }
-		// End calculate context hit ratio
-
-		// For calculate original hit ratio
-		// try {
-		// JsUtils.hitRatioOriginal(originalIngredient, this.buggyProject, mode);
-		// } catch(Exception e) {
-		// e.printStackTrace();
-		// }
-		// End calculate original hit ratio
-
+		 
 		// ft.generatePatches(patchIngredient);
 		System.exit(0);
 		// below code is for original tbar system

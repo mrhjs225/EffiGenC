@@ -106,82 +106,6 @@ public class JsUtils {
         return findMethodNode(node.getParent());
     }
 
-    public static void hitRatio(HashSet<String> patchIngredient, String buggyProject, String mode)
-            throws Exception {
-        ArrayList<String> donorCodes = new ArrayList<>();
-        FileReader donorCodeReader = null;
-        BufferedReader donorCodeBuf = null;
-        FileWriter hitRatioWriter = null;
-        BufferedWriter hitRatioBuf = null;
-
-        donorCodeReader =
-                new FileReader(new File("/root/EffiGenC/Answerfiles/" + buggyProject.split("_")[0]
-                        + "/" + buggyProject.split("_")[1] + "/DonorCode.txt"));
-        donorCodeBuf = new BufferedReader(donorCodeReader);
-        String line = null;
-
-        while ((line = donorCodeBuf.readLine()) != null) {
-            donorCodes = new ArrayList<>(Arrays.asList(line.split(",")));
-        }
-
-        int hitNum = 0;
-        for (String donorCode : donorCodes) {
-            if (patchIngredient.contains(donorCode)) {
-                hitNum++;
-            }
-        }
-        hitRatioWriter =
-                new FileWriter("/root/EffiGenC/Results/HitRatio/HitRatio_" + mode + ".csv", true);
-        hitRatioBuf = new BufferedWriter(hitRatioWriter);
-        String tempStr = buggyProject + "," + hitNum + "," + donorCodes.size() + ","
-                + patchIngredient.size() + "\n";
-        hitRatioBuf.write(tempStr);
-        hitRatioBuf.flush();
-
-        donorCodeReader.close();
-        donorCodeBuf.close();
-        hitRatioWriter.close();
-        hitRatioBuf.close();
-    }
-
-    public static void hitRatioOriginal(HashSet<String> patchIngredient, String buggyProject,
-            String mode) throws Exception {
-        ArrayList<String> donorCodes = new ArrayList<>();
-        FileReader donorCodeReader = null;
-        BufferedReader donorCodeBuf = null;
-        FileWriter hitRatioWriter = null;
-        BufferedWriter hitRatioBuf = null;
-
-        donorCodeReader =
-                new FileReader(new File("/root/EffiGenC/Answerfiles/" + buggyProject.split("_")[0]
-                        + "/" + buggyProject.split("_")[1] + "/DonorCode.txt"));
-        donorCodeBuf = new BufferedReader(donorCodeReader);
-        String line = null;
-
-        while ((line = donorCodeBuf.readLine()) != null) {
-            donorCodes = new ArrayList<>(Arrays.asList(line.split(",")));
-        }
-
-        int hitNum = 0;
-        for (String donorCode : donorCodes) {
-            if (patchIngredient.contains(donorCode)) {
-                hitNum++;
-            }
-        }
-        hitRatioWriter = new FileWriter(
-                "/root/EffiGenC/Results/HitRatio/HitRatio_original_" + mode + ".csv", true);
-        hitRatioBuf = new BufferedWriter(hitRatioWriter);
-        String tempStr = buggyProject + "," + hitNum + "," + donorCodes.size() + ","
-                + patchIngredient.size() + "\n";
-        hitRatioBuf.write(tempStr);
-        hitRatioBuf.flush();
-
-        donorCodeReader.close();
-        donorCodeBuf.close();
-        hitRatioWriter.close();
-        hitRatioBuf.close();
-    }
-
     public static ArrayList<String> extractContextElement(ArrayList<ITree> contetElementNodes) {
         ArrayList<String> contextElementList = new ArrayList<String>();
 
@@ -222,7 +146,7 @@ public class JsUtils {
         }
     }
 
-    public static void levenRanking(ArrayList<ITree> slicedStatementList, ITree suspStatementTree,
+    public static void levenDist(ArrayList<ITree> slicedStatementList, ITree suspStatementTree,
             HashMap<ITree, Double> rankedStatement) {
         String suspStatementStr = suspStatementTree.getLabel();
         for (ITree slicedStatement : slicedStatementList) {
@@ -230,13 +154,13 @@ public class JsUtils {
             rankedStatement.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
             break;
         }
-        // List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
-        // Double>>(rankedStatement.entrySet());
-        // Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
-        // public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
-        // return obj2.getValue().compareTo(obj1.getValue());
-        // }
-        // });
+        List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
+        Double>>(rankedStatement.entrySet());
+        Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
+        public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
+        return obj2.getValue().compareTo(obj1.getValue());
+        }
+        });
     }
 
     private static double similarity(String s1, String s2) {
