@@ -230,11 +230,12 @@ public class JsUtils {
             rankedStatement.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
             break;
         }
-        // List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree, Double>>(rankedStatement.entrySet());
+        // List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
+        // Double>>(rankedStatement.entrySet());
         // Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
-        //     public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
-        //         return obj2.getValue().compareTo(obj1.getValue());
-        //     }
+        // public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
+        // return obj2.getValue().compareTo(obj1.getValue());
+        // }
         // });
     }
 
@@ -258,7 +259,7 @@ public class JsUtils {
         int[] costs = new int[s2.length() + 1];
 
         for (int i = 0; i <= s1.length(); i++) {
-                int lastValue = i;
+            int lastValue = i;
             for (int j = 0; j <= s2.length(); j++) {
                 if (i == 0) {
                     costs[j] = j;
