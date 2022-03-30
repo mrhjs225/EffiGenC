@@ -99,7 +99,6 @@ public class TBarFixer extends AbstractFixer {
 			List<SuspCodeNode> scns = parseSuspiciousCode(suspiciousCode);
 			if (scns == null) continue;
 
-			System.out.println("# of scns:" + scns.size());
 			for (SuspCodeNode scn : scns) {
 //				log.debug(scn.suspCodeStr);
 				if (triedSuspNode.contains(scn)) continue;
@@ -286,7 +285,6 @@ public class TBarFixer extends AbstractFixer {
 			boolean typeChanged = false;
 			boolean methodChanged = false;
 			boolean operator = false;
-			System.out.println("# of dist:" + distinctContextInfo.size());
 			for (Integer contextInfo : distinctContextInfo) {
 				if (Checker.isCastExpression(contextInfo)) {
 					ft = new ClassCastChecker();
@@ -511,11 +509,11 @@ public class TBarFixer extends AbstractFixer {
 		String projectPath = ft.getSourceCodePath();
 		String sourceCodeFile = ft.getSourceCodeFile().getName();
 		
-		ITree targetTree = scn.suspCodeAstNode;
-		int parentSize = targetTree.getParents().size();
-		ITree suspFileTree = targetTree.getParents().get(parentSize - 1);
+		ITree suspStatementTree = scn.suspCodeAstNode;
+		int parentSize = suspStatementTree.getParents().size();
+		ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
 		ArrayList<ITree> contetElementNodes = new ArrayList<>();
-		JsUtils.extractContextNode(targetTree, contetElementNodes);
+		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 
 		HashSet<String> originalIngredient = new HashSet<>();
@@ -535,6 +533,8 @@ public class TBarFixer extends AbstractFixer {
 				// i++;
 			}
 		}
+		HashMap<ITree, Double> rankedStatement = new HashMap<ITree, Double>();
+		JsUtils.levenRanking(slicedStatementList, suspStatementTree, rankedStatement);
 
 		HashSet<String> patchIngredient = new HashSet<String>();
 
