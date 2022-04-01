@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Arrays;
@@ -19,16 +20,14 @@ import edu.lu.uni.serval.tbar.utils.Checker;
 
 public class JsUtils {
 
+    private static String donorCodesFileDir = "/root/DIRECTION/Data/DonorCodes.txt";
+
     public static void staticSlicing(ArrayList<ITree> slicedStatementList,
             ArrayList<String> contextElementList, ITree node) {
         if (Checker.isPureStatement(node.getType())
                 || Checker.isComplexExpression(node.getType())) {
             for (String contextElement : contextElementList) {
                 if (checkSimpleName(node, contextElement)) {
-                    // System.out.println("==========");
-                    // System.out.println("ContextElement: " + contextElement);
-                    // System.out.println(node.getType());
-                    // System.out.println(node.getId() + ":" + node.toTreeString());
                     slicedStatementList.add(node);
                 }
             }
@@ -154,13 +153,13 @@ public class JsUtils {
             rankedStatement.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
             break;
         }
-        List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
-        Double>>(rankedStatement.entrySet());
-        Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
-        public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
-        return obj2.getValue().compareTo(obj1.getValue());
-        }
-        });
+        // List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
+        // Double>>(rankedStatement.entrySet());
+        // Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
+        // public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
+        // return obj2.getValue().compareTo(obj1.getValue());
+        // }
+        // });
     }
 
     private static double similarity(String s1, String s2) {
@@ -206,5 +205,23 @@ public class JsUtils {
         }
 
         return costs[s2.length()];
+    }
+
+    public static ArrayList<String> getDonorCodes(String buggyProject) {
+        try {
+            BufferedReader donorCodesReader = new BufferedReader(new FileReader(new File(donorCodesFileDir)));
+            String line = "";
+            while((line = donorCodesReader.readLine()) != null) {
+                if (line.split("@")[0].trim().equals(buggyProject)) {
+                    System.out.println(line.split("@")[1]);
+                }
+            }
+            donorCodesReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 }
