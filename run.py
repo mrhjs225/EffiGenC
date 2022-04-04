@@ -5,11 +5,9 @@ os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSH
 os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
-projects = ['Chart']
+projects = ['Closure']
 bugList = []
-# method, file, package, project
-modes = ['method', 'file', 'package', 'project']
-modes = ['project']
+mode = 'project'
 
 for project in projects:
     if project == 'Chart':
@@ -17,6 +15,7 @@ for project in projects:
         bugList = [7]
     elif project == 'Closure':
         bugList = [2, 4, 6, 10, 11, 13, 18, 21, 22, 31, 38, 40, 46, 62, 63, 70, 73, 85, 86, 102, 106, 115, 126]
+        bugList = [62]
     elif project == 'Lang':
         bugList = [6, 7, 10, 15, 22, 24, 26, 33, 39, 47, 51, 57, 59, 63]
     elif project == 'Math':
@@ -27,7 +26,6 @@ for project in projects:
         bugList = [3, 7, 19, 26]
     
     for bugNum in bugList:
-        for mode in modes:
-            bugId = project + '_' + str(bugNum)
-            # os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false > ./Results/' + bugId + '.txt')
-            os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode)
+        bugId = project + '_' + str(bugNum)
+        # os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false > ./Results/' + bugId + '.txt')
+        os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode)

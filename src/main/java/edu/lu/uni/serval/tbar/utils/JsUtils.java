@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import edu.lu.uni.serval.tbar.utils.Checker;
 public class JsUtils {
 
     private static String donorCodesFileDir = "/root/DIRECTION/Data/DonorCodes.txt";
+    private static String hitRatioResultFolderDir = "/root/DIRECTION/Data/Results/HitRatio/";
 
     public static void staticSlicing(ArrayList<ITree> slicedStatementList,
             ArrayList<String> contextElementList, ITree node) {
@@ -207,7 +209,7 @@ public class JsUtils {
             BufferedReader donorCodesReader = new BufferedReader(new FileReader(new File(donorCodesFileDir)));
             String line = "";
             while((line = donorCodesReader.readLine()) != null) {
-                if (line.split("@")[0].trim().equals(buggyProject)) {
+                if (line.split("@").length == 2) {
                     donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
                 }
             }
@@ -220,7 +222,7 @@ public class JsUtils {
         return donorCodes;
     }
 
-    public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredient) {
+    public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
         System.out.println("scoredStatements size: " + scoredStatements.size());
         List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,Double>>(scoredStatements.entrySet());
         Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
@@ -251,18 +253,42 @@ public class JsUtils {
                     if (targetStr.contains("Name:")) {
                         targetStr = targetStr.split(":")[1].trim();
                     }
-                    patchIngredient.add(targetStr);
+                    patchIngredients.add(targetStr);
                 }
             }
             // break;
         }
-        System.out.println("patchingredient size: " + patchIngredient.size());
-        for (String ingredient : patchIngredient) {
-            System.out.println(ingredient);
-        }
+        System.out.println("patchingredients size: " + patchIngredients.size());
     }
 
-    public static void hitRatiodIRECTION() {
-        
+    public static void hitRatio(String buggyProject, ArrayList<String> donorCodes, HashSet<String> patchIngredients) {
+        String hitRatioResultDir = hitRatioResultFolderDir + "HitRatio.csv";
+        for (String donorCode : donorCodes) {
+            boolean flag = false;
+            int rank = 1;
+            for (String patchIngredient : patchIngredients) {
+                if (donorCode.equals(patchIngredient)) {
+                    flag = true;
+                    try {
+                        BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
+                        hitRatioWriter.write(buggyProject + "," + donorCode + "," + rank + "," + patchIngredients.size() + "\n");
+                        hitRatioWriter.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+                rank++;
+            }
+            if (flag == false) {
+                try {
+                    BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
+                    hitRatioWriter.write(buggyProject + "," + donorCode + ",fail," + patchIngredients.size() + "\n");
+                    hitRatioWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
