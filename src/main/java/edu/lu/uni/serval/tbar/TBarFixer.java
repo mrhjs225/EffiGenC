@@ -602,7 +602,9 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
-		System.exit(0);
+		if (donorCodes.size() == 0) {
+			System.exit(0);
+		}
 		HashSet<String> originalIngredient = new HashSet<>();
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
 
@@ -627,7 +629,7 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
 		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients);
 		 
-		// System.exit(0);
+		System.exit(0);
 
 		// ft.generatePatches(patchIngredients);
 		// below code is for original tbar system

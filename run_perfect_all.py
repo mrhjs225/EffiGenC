@@ -5,7 +5,7 @@ os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSH
 os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
-projects = ['Chart']
+projects = ['Closure', 'Lang', 'Math', 'Mockito', 'Time']
 bugList = []
 mode = 'project'
 
@@ -16,7 +16,6 @@ for project_name in projects:
 
     if project_name == 'Chart':
         buggy_num = 26
-        buggy_num = 11
     elif project_name == 'Closure':
         start_num = 62
         buggy_num = 133
