@@ -601,6 +601,7 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<ITree> contetElementNodes = new ArrayList<>();
 		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
+		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 
 		HashSet<String> originalIngredient = new HashSet<>();
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
@@ -620,10 +621,11 @@ public class TBarFixer extends AbstractFixer {
 				// i++;
 			}
 		}
-		HashMap<ITree, Double> rankedStatement = new HashMap<ITree, Double>();
-		JsUtils.levenDist(slicedStatementList, suspStatementTree, rankedStatement);
-
+		HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
+		JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
 		HashSet<String> patchIngredient = new HashSet<String>();
+
+		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredient);
 
 		 
 		// ft.generatePatches(patchIngredient);

@@ -15,7 +15,6 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/LiteralExpressionMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixtemplate/IFixTemplate.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/ShellUtils.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/heirarchycontext/SearchStrategy.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/tree/AssociationMap.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/SuspiciousCodeParser.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/AlterMethodInvocation.java
@@ -44,7 +43,6 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/entity/Pair.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/ClassCastChecker.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/entity/EntityType.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/heirarchycontext/ContextNode.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JavaLibrary.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/StatementMover.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer.java

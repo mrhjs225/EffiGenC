@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Comparator;
 
 
 import edu.lu.uni.serval.jdt.tree.ITree;
@@ -77,7 +78,6 @@ public class JsUtils {
                 if (tempStr != null) {
                     return tempStr;
                 }
-
             }
         }
         return null;
@@ -105,10 +105,10 @@ public class JsUtils {
         return findMethodNode(node.getParent());
     }
 
-    public static ArrayList<String> extractContextElement(ArrayList<ITree> contetElementNodes) {
+    public static ArrayList<String> extractContextElement(ArrayList<ITree> contextElementNodes) {
         ArrayList<String> contextElementList = new ArrayList<String>();
 
-        for (ITree contextNode : contetElementNodes) {
+        for (ITree contextNode : contextElementNodes) {
             String nodeContent = contextNode.toShortString().split("@@")[1];
             if (nodeContent.contains("Name:")) {
                 contextElementList.add(nodeContent.split(":")[1].trim());
@@ -119,47 +119,41 @@ public class JsUtils {
         return contextElementList;
     }
 
-    public static void extractContextNode(ITree targetTree, ArrayList<ITree> contetElementNodes) {
+    public static void extractContextNode(ITree targetTree, ArrayList<ITree> contextElementNodes) {
         if (Checker.isIfStatement(targetTree.getType())) {
             for (ITree childNode : targetTree.getChildren()) {
                 if (Checker.isInfixExpression(childNode.getType())) {
-                    extractNode(childNode, contetElementNodes);
+                    extractNode(childNode, contextElementNodes);
                     break;
                 }
             }
         } else {
-            extractNode(targetTree, contetElementNodes);
+            extractNode(targetTree, contextElementNodes);
         }
     }
 
-    public static void extractNode(ITree targetTree, ArrayList<ITree> contetElementNodes) {
+    public static void extractNode(ITree targetTree, ArrayList<ITree> nodeList) {
         int nodeType = targetTree.getType();
         if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType)
                 || (Checker.isMethodInvocation(nodeType)
                         && targetTree.toShortString().contains("Name:"))) {
             String tempStr = targetTree.toShortString().split("@@")[1];
-            contetElementNodes.add(targetTree);
+            nodeList.add(targetTree);
         }
         for (ITree childNode : targetTree.getChildren()) {
-            extractNode(childNode, contetElementNodes);
+            extractNode(childNode, nodeList);
         }
     }
 
     public static void levenDist(ArrayList<ITree> slicedStatementList, ITree suspStatementTree,
-            HashMap<ITree, Double> rankedStatement) {
+            HashMap<ITree, Double> scoredStatements) {
+        // System.out.println("slicedStatement size:" + slicedStatementList.size());
         String suspStatementStr = suspStatementTree.getLabel();
         for (ITree slicedStatement : slicedStatementList) {
+            // System.out.println("count");
             String slicedStatementStr = slicedStatement.getLabel();
-            rankedStatement.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
-            break;
+            scoredStatements.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
         }
-        // List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,
-        // Double>>(rankedStatement.entrySet());
-        // Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
-        // public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
-        // return obj2.getValue().compareTo(obj1.getValue());
-        // }
-        // });
     }
 
     private static double similarity(String s1, String s2) {
@@ -208,12 +202,13 @@ public class JsUtils {
     }
 
     public static ArrayList<String> getDonorCodes(String buggyProject) {
+        ArrayList<String> donorCodes = new ArrayList<>();
         try {
             BufferedReader donorCodesReader = new BufferedReader(new FileReader(new File(donorCodesFileDir)));
             String line = "";
             while((line = donorCodesReader.readLine()) != null) {
                 if (line.split("@")[0].trim().equals(buggyProject)) {
-                    System.out.println(line.split("@")[1]);
+                    donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
                 }
             }
             donorCodesReader.close();
@@ -222,6 +217,52 @@ public class JsUtils {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        return null;
+        return donorCodes;
+    }
+
+    public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredient) {
+        System.out.println("scoredStatements size: " + scoredStatements.size());
+        List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,Double>>(scoredStatements.entrySet());
+        Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
+            public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
+                return obj2.getValue().compareTo(obj1.getValue());
+            }
+        });
+        for (Entry<ITree, Double> entry: listEntries) {
+            ArrayList<ITree> targetNodeList = new ArrayList<>();
+            extractNode(entry.getKey(), targetNodeList);
+            boolean flag = false;
+
+            for (String contextElement: contextElementList) {
+                for (ITree targetNode : targetNodeList) {
+                    if (contextElement.equals(targetNode.getLabel().trim())) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag == true) {
+                    break;
+                }
+            }
+
+            if (flag == true) {
+                for (ITree targetNode : targetNodeList) {
+                    String targetStr = targetNode.getLabel().trim();
+                    if (targetStr.contains("Name:")) {
+                        targetStr = targetStr.split(":")[1].trim();
+                    }
+                    patchIngredient.add(targetStr);
+                }
+            }
+            // break;
+        }
+        System.out.println("patchingredient size: " + patchIngredient.size());
+        for (String ingredient : patchIngredient) {
+            System.out.println(ingredient);
+        }
+    }
+
+    public static void hitRatiodIRECTION() {
+        
     }
 }
