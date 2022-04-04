@@ -209,9 +209,14 @@ public class JsUtils {
             BufferedReader donorCodesReader = new BufferedReader(new FileReader(new File(donorCodesFileDir)));
             String line = "";
             while((line = donorCodesReader.readLine()) != null) {
-                if (line.split("@").length == 2) {
-                    donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
+                try {
+                    if (line.split("@").length > 1) {
+                        donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
                 }
+
             }
             donorCodesReader.close();
         } catch (FileNotFoundException e) {

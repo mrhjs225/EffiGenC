@@ -602,6 +602,7 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
+		System.out.println("fucking donorcode: " + donorCodes.size());
 		if (donorCodes.size() == 0) {
 			System.exit(0);
 		}

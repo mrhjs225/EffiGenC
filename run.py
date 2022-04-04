@@ -26,6 +26,16 @@ for project in projects:
         bugList = [3, 7, 19, 26]
     
     for bugNum in bugList:
+        if project_name == 'Cli' and temp_buggy_num == 6:
+            continue
+        elif project_name == 'Closure' and (temp_buggy_num == 63 or temp_buggy_num == 93):
+            continue
+        elif project_name == 'Collections' and (temp_buggy_num <= 24):
+            continue
+        elif project_name == 'Lang' and temp_buggy_num == 2:
+            continue
+        elif project_name == 'Time' and temp_buggy_num == 21:
+            continue
         bugId = project + '_' + str(bugNum)
         # os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false > ./Results/' + bugId + '.txt')
         os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode)
