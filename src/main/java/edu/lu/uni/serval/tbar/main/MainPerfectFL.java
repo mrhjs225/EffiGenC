@@ -43,7 +43,7 @@ public class MainPerfectFL {
 		boolean isTestFixPatterns = Boolean.valueOf(args[3]);
 		String mode = args[4];
 		String granularityStr = "Line";
-		System.out.println(bugId);
+		System.out.println("=-=-=-=-=-= " + bugId + " =-=-=-=-=-=");
 		// donorIdentify(bugId);
 
 		// TODO:

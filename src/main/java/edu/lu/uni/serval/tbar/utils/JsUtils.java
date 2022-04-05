@@ -53,8 +53,6 @@ public class JsUtils {
             }
             if (nodeName.equals(element)) {
                 return true;
-            } else {
-                return false;
             }
         }
         for (ITree childNode : node.getChildren()) {
@@ -139,7 +137,6 @@ public class JsUtils {
         if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType)
                 || (Checker.isMethodInvocation(nodeType)
                         && targetTree.toShortString().contains("Name:"))) {
-            String tempStr = targetTree.toShortString().split("@@")[1];
             nodeList.add(targetTree);
         }
         for (ITree childNode : targetTree.getChildren()) {
@@ -149,10 +146,8 @@ public class JsUtils {
 
     public static void levenDist(ArrayList<ITree> slicedStatementList, ITree suspStatementTree,
             HashMap<ITree, Double> scoredStatements) {
-        // System.out.println("slicedStatement size:" + slicedStatementList.size());
         String suspStatementStr = suspStatementTree.getLabel();
         for (ITree slicedStatement : slicedStatementList) {
-            // System.out.println("count");
             String slicedStatementStr = slicedStatement.getLabel();
             scoredStatements.put(slicedStatement, similarity(suspStatementStr, slicedStatementStr));
         }
@@ -210,13 +205,12 @@ public class JsUtils {
             String line = "";
             while((line = donorCodesReader.readLine()) != null) {
                 try {
-                    if (line.split("@").length > 1) {
+                    if (line.split("@").length > 1 && line.split("@")[0].equals(buggyProject)) {
                         donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
                     }
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
-
             }
             donorCodesReader.close();
         } catch (FileNotFoundException e) {
@@ -228,7 +222,6 @@ public class JsUtils {
     }
 
     public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
-        System.out.println("scoredStatements size: " + scoredStatements.size());
         List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,Double>>(scoredStatements.entrySet());
         Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
             public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
@@ -263,7 +256,6 @@ public class JsUtils {
             }
             // break;
         }
-        System.out.println("patchingredients size: " + patchIngredients.size());
     }
 
     public static void hitRatio(String buggyProject, ArrayList<String> donorCodes, HashSet<String> patchIngredients) {

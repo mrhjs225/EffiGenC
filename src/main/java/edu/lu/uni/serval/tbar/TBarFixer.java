@@ -602,8 +602,10 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
-		System.out.println("fucking donorcode: " + donorCodes.size());
+		System.out.println("============ Analyze info ============");
+		System.out.println(" donorcode size: " + donorCodes.size());
 		if (donorCodes.size() == 0) {
+			System.out.println("======================================");
 			System.exit(0);
 		}
 		HashSet<String> originalIngredient = new HashSet<>();
@@ -629,6 +631,13 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
 		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
 		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients);
+		
+		System.out.println(" slicedStatement size: " + slicedStatementList.size());
+		System.out.println(" patchIngredient size: " + patchIngredients.size());
+		System.out.println("======================================");
+		for (ITree statement : slicedStatementList) {
+			System.out.println(statement.toShortString());
+		}
 		 
 		System.exit(0);
 

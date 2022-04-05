@@ -6,7 +6,7 @@ os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
 projects = ['Closure', 'Lang', 'Math', 'Mockito', 'Time']
-projects = ['Closure']
+# projects = ['Closure']
 bugList = []
 mode = 'project'
 
@@ -18,9 +18,9 @@ for project_name in projects:
     if project_name == 'Chart':
         buggy_num = 26
     elif project_name == 'Closure':
-        start_num = 63
+        start_num = 66
         buggy_num = 133
-        buggy_num = 65
+        # buggy_num = 65
     elif project_name == 'Lang':
         buggy_num = 65
     elif project_name == 'Math':
