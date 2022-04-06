@@ -595,35 +595,29 @@ public class TBarFixer extends AbstractFixer {
 		String projectPath = ft.getSourceCodePath();
 		String sourceCodeFile = ft.getSourceCodeFile().getName();
 
+		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
+		if (donorCodes.size() == 0) {
+			System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
+			System.exit(0);
+		}
 		ITree suspStatementTree = scn.suspCodeAstNode;
 		int parentSize = suspStatementTree.getParents().size();
 		ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
 		ArrayList<ITree> contetElementNodes = new ArrayList<>();
 		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
-		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
-		System.out.println("============ Analyze info ============");
-		System.out.println(" donorcode size: " + donorCodes.size());
-		if (donorCodes.size() == 0) {
-			System.out.println("======================================");
-			System.exit(0);
-		}
+		
 		HashSet<String> originalIngredient = new HashSet<>();
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
 
 		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
-			// int i = 0;
 			for (String projectFile : projectFileList) {
 				File tempFile = new File(projectFile);
 				ITree projectFileTree =
 						new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
 				JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
-				// if (i > 5) {
-				// break;
-				// }
-				// i++;
 			}
 		}
 		HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
@@ -631,11 +625,12 @@ public class TBarFixer extends AbstractFixer {
 		JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
 		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
 		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients);
-		
+
+		System.out.println("============ Analyze info ============");
+		System.out.println(" donorcode size: " + donorCodes.size());
 		System.out.println(" slicedStatement size: " + slicedStatementList.size());
 		System.out.println(" patchIngredient size: " + patchIngredients.size());
 		System.out.println("======================================");
-		 
 		System.exit(0);
 
 		// ft.generatePatches(patchIngredients);

@@ -223,6 +223,8 @@ public class JsUtils {
 
     public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
         List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,Double>>(scoredStatements.entrySet());
+        HashMap<String, ArrayList<Double>> ingredientScoreList = new HashMap<>();
+        HashMap<String, Double> scoredIngredients = new HashMap<>();
         Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
             public int compare(Entry<ITree, Double> obj1, Entry<ITree, Double> obj2) {
                 return obj2.getValue().compareTo(obj1.getValue());
@@ -251,10 +253,37 @@ public class JsUtils {
                     if (targetStr.contains("Name:")) {
                         targetStr = targetStr.split(":")[1].trim();
                     }
-                    patchIngredients.add(targetStr);
+                    if (ingredientScoreList.containsKey(targetStr)) {
+                        ingredientScoreList.get(targetStr).add(entry.getValue());
+                    } else {
+                        ArrayList<Double> scoreList = new ArrayList<>();
+                        scoreList.add(entry.getValue());
+                        ingredientScoreList.put(targetStr, scoreList);
+                    }
                 }
             }
-            // break;
+        }
+
+        // Converting list to single score by calculating average.
+        for (HashMap.Entry<String, ArrayList<Double>> entry : ingredientScoreList.entrySet()) {
+            int i = 0;
+            double final_score = 0.0;
+            for (double single_score : entry.getValue()) {
+                final_score += single_score;
+            }
+            final_score /= (double) i;
+            scoredIngredients.put(entry.getKey(), final_score);
+        }
+
+        // Patch ingredient prioritization
+        List<Entry<String, Double>> ingredientEntries = new ArrayList<Entry<String,Double>>(scoredIngredients.entrySet());
+        Collections.sort(ingredientEntries, new Comparator<Entry<String, Double>>() {
+            public int compare(Entry<String, Double> obj1, Entry<String, Double> obj2) {
+                return obj2.getValue().compareTo(obj1.getValue());
+            }
+        });
+        for (Entry<String, Double> entry : ingredientEntries) {
+            patchIngredients.add(entry.getKey());
         }
     }
 
