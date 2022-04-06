@@ -635,9 +635,6 @@ public class TBarFixer extends AbstractFixer {
 		System.out.println(" slicedStatement size: " + slicedStatementList.size());
 		System.out.println(" patchIngredient size: " + patchIngredients.size());
 		System.out.println("======================================");
-		for (ITree statement : slicedStatementList) {
-			System.out.println(statement.toShortString());
-		}
 		 
 		System.exit(0);
 

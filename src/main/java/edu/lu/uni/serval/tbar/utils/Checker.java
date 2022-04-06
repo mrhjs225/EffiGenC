@@ -42,6 +42,7 @@ public class Checker {
 	}
 
 	public static boolean isPureStatement(int type) {
+		if (type == 8)  return true; // block
 		if (type == 6)  return true; // AssertStatement
 		if (type == 10) return true; // BreakStatement
 		if (type == 17) return true; // ConstructorInvocation
