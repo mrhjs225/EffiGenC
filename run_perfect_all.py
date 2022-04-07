@@ -4,13 +4,14 @@ os.system('mvn package')
 os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSHOT.jar')
 os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
-projects = []
 # projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
+projects = []
 bugList = []
 mode = 'project'
 
 # 1: 148.effigenc1, 2: 148.effigenc2, 3:160.effigenc1, 4:160.effigenc2
 machine_num = 1
+
 if machine_num == 1:
     projects = ['Chart', 'Closure']
 elif machine_num == 3:

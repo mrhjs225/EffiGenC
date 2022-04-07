@@ -266,12 +266,12 @@ public class JsUtils {
 
         // Converting list to single score by calculating average.
         for (HashMap.Entry<String, ArrayList<Double>> entry : ingredientScoreList.entrySet()) {
-            int i = 0;
             double final_score = 0.0;
             for (double single_score : entry.getValue()) {
                 final_score += single_score;
             }
-            final_score /= (double) i;
+            final_score /= (double) entry.getValue().size();
+
             scoredIngredients.put(entry.getKey(), final_score);
         }
 
