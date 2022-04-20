@@ -176,6 +176,28 @@ public class FileUtils {
 		return "";
 	}
 
+	public static String getMethodCode(String code, String targetFunctionName) {
+		if (code.contains("@Test")) {
+			String[] tests = code.split("@Test");
+			for (String test : tests) {
+				if (test.contains("public void " + targetFunctionName + "()")) {
+					if (test.contains("private void ")) {
+						test = test.split("private void ")[0];
+					}
+					return test;
+				}
+			}
+		} else {
+			List<String> tests = divideTestFunction(code);
+			for (String test : tests) {
+				if (test.trim().startsWith(targetFunctionName + "()")) {
+					return "public" + test.trim();
+				}
+			}
+		}
+		return "";
+	}
+
 	private static List<String> divideTestFunction(String code) {
 		List<String> result = new ArrayList<String>();
 		code = code.replaceAll("private void", "public void");
@@ -198,6 +220,8 @@ public class FileUtils {
 		}
 		return result;
 	}
+
+
 
 	public static String getTestFunctionBodyFromCode(String code, String targetFunctionName) {
 		String methodString = getTestFunctionCodeFromCode(code, targetFunctionName);

@@ -201,14 +201,16 @@ public class JsUtils {
     public static ArrayList<String> getDonorCodes(String buggyProject) {
         ArrayList<String> donorCodes = new ArrayList<>();
         try {
-            BufferedReader donorCodesReader = new BufferedReader(new FileReader(new File(donorCodesFileDir)));
+            BufferedReader donorCodesReader =
+                    new BufferedReader(new FileReader(new File(donorCodesFileDir)));
             String line = "";
-            while((line = donorCodesReader.readLine()) != null) {
+            while ((line = donorCodesReader.readLine()) != null) {
                 try {
                     if (line.split("@").length > 1 && line.split("@")[0].equals(buggyProject)) {
-                        donorCodes =  new ArrayList<>(Arrays.asList(line.split("@")[1].trim().split(",")));
+                        donorCodes = new ArrayList<>(
+                                Arrays.asList(line.split("@")[1].trim().split(",")));
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -221,8 +223,10 @@ public class JsUtils {
         return donorCodes;
     }
 
-    public static void getPatchIngredient(ArrayList<String> contextElementList, HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
-        List<Entry<ITree, Double>> listEntries = new ArrayList<Entry<ITree,Double>>(scoredStatements.entrySet());
+    public static void getPatchIngredient(ArrayList<String> contextElementList,
+            HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
+        List<Entry<ITree, Double>> listEntries =
+                new ArrayList<Entry<ITree, Double>>(scoredStatements.entrySet());
         HashMap<String, ArrayList<Double>> ingredientScoreList = new HashMap<>();
         HashMap<String, Double> scoredIngredients = new HashMap<>();
         Collections.sort(listEntries, new Comparator<Entry<ITree, Double>>() {
@@ -230,36 +234,21 @@ public class JsUtils {
                 return obj2.getValue().compareTo(obj1.getValue());
             }
         });
-        for (Entry<ITree, Double> entry: listEntries) {
+        for (Entry<ITree, Double> entry : listEntries) {
             ArrayList<ITree> targetNodeList = new ArrayList<>();
             extractNode(entry.getKey(), targetNodeList);
-            boolean flag = false;
 
-            for (String contextElement: contextElementList) {
-                for (ITree targetNode : targetNodeList) {
-                    if (contextElement.equals(targetNode.getLabel().trim())) {
-                        flag = true;
-                        break;
-                    }
+            for (ITree targetNode : targetNodeList) {
+                String targetStr = targetNode.getLabel().trim();
+                if (targetStr.contains("Name:")) {
+                    targetStr = targetStr.split(":")[1].trim();
                 }
-                if (flag == true) {
-                    break;
-                }
-            }
-
-            if (flag == true) {
-                for (ITree targetNode : targetNodeList) {
-                    String targetStr = targetNode.getLabel().trim();
-                    if (targetStr.contains("Name:")) {
-                        targetStr = targetStr.split(":")[1].trim();
-                    }
-                    if (ingredientScoreList.containsKey(targetStr)) {
-                        ingredientScoreList.get(targetStr).add(entry.getValue());
-                    } else {
-                        ArrayList<Double> scoreList = new ArrayList<>();
-                        scoreList.add(entry.getValue());
-                        ingredientScoreList.put(targetStr, scoreList);
-                    }
+                if (ingredientScoreList.containsKey(targetStr)) {
+                    ingredientScoreList.get(targetStr).add(entry.getValue());
+                } else {
+                    ArrayList<Double> scoreList = new ArrayList<>();
+                    scoreList.add(entry.getValue());
+                    ingredientScoreList.put(targetStr, scoreList);
                 }
             }
         }
@@ -276,7 +265,8 @@ public class JsUtils {
         }
 
         // Patch ingredient prioritization
-        List<Entry<String, Double>> ingredientEntries = new ArrayList<Entry<String,Double>>(scoredIngredients.entrySet());
+        List<Entry<String, Double>> ingredientEntries =
+                new ArrayList<Entry<String, Double>>(scoredIngredients.entrySet());
         Collections.sort(ingredientEntries, new Comparator<Entry<String, Double>>() {
             public int compare(Entry<String, Double> obj1, Entry<String, Double> obj2) {
                 return obj2.getValue().compareTo(obj1.getValue());
@@ -287,8 +277,9 @@ public class JsUtils {
         }
     }
 
-    public static void hitRatio(String buggyProject, ArrayList<String> donorCodes, HashSet<String> patchIngredients) {
-        String hitRatioResultDir = hitRatioResultFolderDir + "HitRatio.csv";
+    public static void hitRatio(String buggyProject, ArrayList<String> donorCodes,
+            HashSet<String> patchIngredients, String resultFileName) {
+        String hitRatioResultDir = hitRatioResultFolderDir + resultFileName + ".csv";
         for (String donorCode : donorCodes) {
             boolean flag = false;
             int rank = 1;
@@ -296,8 +287,10 @@ public class JsUtils {
                 if (donorCode.equals(patchIngredient)) {
                     flag = true;
                     try {
-                        BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
-                        hitRatioWriter.write(buggyProject + "," + donorCode + "," + rank + "," + patchIngredients.size() + "\n");
+                        BufferedWriter hitRatioWriter = new BufferedWriter(
+                                new FileWriter(new File(hitRatioResultDir), true));
+                        hitRatioWriter.write(buggyProject + "," + donorCode + "," + rank + ","
+                                + patchIngredients.size() + "\n");
                         hitRatioWriter.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -308,13 +301,118 @@ public class JsUtils {
             }
             if (flag == false) {
                 try {
-                    BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
-                    hitRatioWriter.write(buggyProject + "," + donorCode + ",fail," + patchIngredients.size() + "\n");
+                    BufferedWriter hitRatioWriter =
+                            new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
+                    hitRatioWriter.write(buggyProject + "," + donorCode + ",fail,"
+                            + patchIngredients.size() + "\n");
                     hitRatioWriter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public static ITree findMethod(ITree node) {
+        for (ITree parentNode : node.getParents()) {
+            if (parentNode.getLabel().contains("MethodName:")) {
+                return parentNode;
+            }
+        }
+        return null;
+    }
+
+    public static String getMethodName(ITree methodNode) {
+        for (ITree childNode : methodNode.getChildren()) {
+            if (childNode.toShortString().contains("42@@MethodName:")) {
+                return childNode.toShortString().split(":")[1].trim();
+            }
+        }
+        return null;
+    }
+
+    public static void testNodePrint(ITree node) {
+        if (Checker.isMethodDeclaration(node.getType())) {
+            System.out.println("================================");
+            System.out.println(node.toShortString());
+            System.out.println(node.getSize());
+            System.out.println(node.getLength());
+            System.out.println(node.getHeight());
+            System.out.println(node.getPos());
+            System.out.println(node.getEndPos());
+        }
+        // System.out.println(node.toShortString());
+        for (ITree childNode: node.getChildren()) {
+            testNodePrint(childNode);
+        }
+    }
+
+    public static List<String> getMethodCodeList(String code) {
+		List<String> result = new ArrayList<String>();
+		code = code.replaceAll("private", "public");
+		String[] items = code.split("public");
+		for (int j = 1; j < items.length; j++) {
+			String item = items[j];
+			int startPoint = item.indexOf('{') + 1;
+			int braceCount = 1;
+			for (int i = startPoint; i < item.length(); i++) {
+				if (item.charAt(i) == '}') {
+					if (--braceCount == 0) {
+						result.add(item.substring(0, i + 1));
+						break;
+					}
+				}
+				if (item.charAt(i) == '{') {
+					braceCount++;
+				}
+			}
+		}
+		return result;
+	}
+
+    public static String getMethodString(String code, ITree methodNode) {
+        List<String> getMethodList = getMethodCodeList(code);
+        String methodName = getMethodName(methodNode);
+        String arguments = methodNode.toShortString().split("@@")[3].split(":")[1].trim();
+        ArrayList<String> argumentList = new ArrayList<>();
+        if (!arguments.equals("null")) {
+            int i = 0;
+            String argument = "";
+            for (String tempString : arguments.split("\\+")) {
+                if (i == 0) {
+                    argument += tempString;
+                    i++;
+                } else {
+                    argumentList.add(argument + " " + tempString);
+                    i = 0;
+                    argument = "";
+                }
+            }
+        }
+        for (String methodCode : getMethodList) {
+            if (methodCode.contains("{")) {
+                String tempStr = methodCode.substring(0, methodCode.indexOf("{")).trim();
+                if (arguments.equals("null")) {
+                    tempStr = tempStr.replaceAll(" ", "");
+                    if (tempStr.contains(methodName + "()")) {
+                        return methodCode;
+                    }
+                } else {
+                    if (tempStr.contains(methodName)) {
+                        boolean tag = true;
+                        for (String argument : argumentList) {
+                            if (!(tempStr.contains(argument+",") || tempStr.contains(argument + " ") || tempStr.contains(argument + ")"))) {
+                                tag = false;
+                                break;
+                            }
+                        }
+                        if (tag == true) {
+                            return methodCode;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import ch.qos.logback.core.util.FileUtil;
 import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.AST.ASTGenerator;
 import edu.lu.uni.serval.AST.ASTGenerator.TokenType;
@@ -39,6 +39,7 @@ import edu.lu.uni.serval.tbar.utils.FileHelper;
 import edu.lu.uni.serval.tbar.utils.FileUtils;
 import edu.lu.uni.serval.tbar.utils.SuspiciousPosition;
 import edu.lu.uni.serval.tbar.utils.JsUtils;
+import edu.lu.uni.serval.tbar.utils.SimUtils;
 
 
 /**
@@ -601,6 +602,10 @@ public class TBarFixer extends AbstractFixer {
 			System.exit(0);
 		}
 		ITree suspStatementTree = scn.suspCodeAstNode;
+		ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
+		String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
+		String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
+
 		int parentSize = suspStatementTree.getParents().size();
 		ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
 		ArrayList<ITree> contetElementNodes = new ArrayList<>();
@@ -609,22 +614,35 @@ public class TBarFixer extends AbstractFixer {
 		
 		HashSet<String> originalIngredient = new HashSet<>();
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
-
+		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
+		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
 		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
-			for (String projectFile : projectFileList) {
-				File tempFile = new File(projectFile);
+			for (String filePath : projectFileList) {
+				File tempFile = new File(filePath);
 				ITree projectFileTree =
 						new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
+				String fileCode = FileUtils.getCodeFromFile(filePath);
 				JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
+				SimUtils.lcsSimNoContext(suspStatementTree, projectFileTree, noContextLcsScores);
+				SimUtils.lcsSimContext(suspMethodCode, projectFileTree, filePath, contextLcsScores);
 			}
 		}
+		// System.exit(0);
+
 		HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
 		HashSet<String> patchIngredients = new HashSet<String>();
+		HashSet<String> lcsNoContextIngredients = new HashSet<String>();
+		HashSet<String> lcsContextIngredients = new HashSet<String>();
 		JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
 		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
-		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients);
+		JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
+		JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+
+		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients, "HitRatio");
+		JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
+		JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
 
 		System.out.println("============ Analyze info ============");
 		System.out.println(" donorcode size: " + donorCodes.size());

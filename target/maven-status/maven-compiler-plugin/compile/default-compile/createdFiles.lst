@@ -61,6 +61,7 @@ edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$ArithmeticOperatorMutator.cla
 edu/lu/uni/serval/tbar/dataprepare/CustomClassLoaderThreadFactory.class
 edu/lu/uni/serval/tbar/utils/ASTNodeMap.class
 edu/lu/uni/serval/jdt/generator/AbstractJdtTreeGenerator.class
+edu/lu/uni/serval/tbar/DiffMatchPatch$1.class
 edu/lu/uni/serval/tbar/fixpatterns/ReturnStatementMutator.class
 edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$DLSDeadLocalStoreInReturn.class
 edu/lu/uni/serval/tbar/fixpatterns/CNIdiomNoSuperCall.class
