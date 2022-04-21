@@ -23,7 +23,7 @@ import edu.lu.uni.serval.tbar.utils.Checker;
 public class JsUtils {
 
     private static String donorCodesFileDir = "/root/DIRECTION/Data/DonorCodes.txt";
-    private static String hitRatioResultFolderDir = "/root/DIRECTION/Data/Results/HitRatio/";
+    private static String hitRatioResultFolderDir = "/root/DIRECTION/Data/HitRatio/";
 
     public static void staticSlicing(ArrayList<ITree> slicedStatementList,
             ArrayList<String> contextElementList, ITree node) {

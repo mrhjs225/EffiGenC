@@ -616,6 +616,8 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
 		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
+		HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
+		HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
 		if (this.mode.equals("project")) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
