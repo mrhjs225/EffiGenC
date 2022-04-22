@@ -11,6 +11,7 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/RangeChecker.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/ASTNodeMap.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JsUtils.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JsStaticSlicer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/TBarFixer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/LiteralExpressionMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixtemplate/IFixTemplate.java

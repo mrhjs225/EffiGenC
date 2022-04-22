@@ -23,6 +23,7 @@ edu/lu/uni/serval/tbar/fixpatterns/AlterMethodInvocation.class
 edu/lu/uni/serval/entity/Pair.class
 edu/lu/uni/serval/jdt/generator/AbstractRawTokenJdtTreeGenerator.class
 edu/lu/uni/serval/jdt/generator/Registry$Priority.class
+edu/lu/uni/serval/tbar/utils/JsStaticSlicer.class
 edu/lu/uni/serval/tbar/code/analyser/JavaCodeFileParser.class
 edu/lu/uni/serval/tbar/dataprepare/SourceFolderFinder.class
 edu/lu/uni/serval/jdt/tree/TreeUtils$TreeVisitor.class

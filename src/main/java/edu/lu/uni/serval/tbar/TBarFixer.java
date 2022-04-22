@@ -39,6 +39,7 @@ import edu.lu.uni.serval.tbar.utils.FileHelper;
 import edu.lu.uni.serval.tbar.utils.FileUtils;
 import edu.lu.uni.serval.tbar.utils.SuspiciousPosition;
 import edu.lu.uni.serval.tbar.utils.JsUtils;
+import edu.lu.uni.serval.tbar.utils.JsStaticSlicer;
 import edu.lu.uni.serval.tbar.utils.SimUtils;
 
 
@@ -599,10 +600,14 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 		if (donorCodes.size() == 0) {
 			System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
-			System.exit(0);
+			// System.exit(0);
 		}
 		ITree suspStatementTree = scn.suspCodeAstNode;
+		// JsStaticSlicer.testPrint(suspStatementTree);
+		// JsStaticSlicer.staticBackwardSlicer(suspStatementTree);
 		ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
+		JsStaticSlicer.testPrint(suspMethodNode);
+		System.exit(0);
 		String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
 		String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
 
