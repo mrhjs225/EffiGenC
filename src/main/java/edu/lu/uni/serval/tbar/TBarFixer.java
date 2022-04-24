@@ -2,7 +2,11 @@ package edu.lu.uni.serval.tbar;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
@@ -603,11 +607,16 @@ public class TBarFixer extends AbstractFixer {
 			// System.exit(0);
 		}
 		ITree suspStatementTree = scn.suspCodeAstNode;
-		// JsStaticSlicer.testPrint(suspStatementTree);
-		// JsStaticSlicer.staticBackwardSlicer(suspStatementTree);
 		ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
-		JsStaticSlicer.testPrint(suspMethodNode);
-		System.exit(0);
+		JsStaticSlicer slicer = new JsStaticSlicer(projectPath);
+		ITree testNode = slicer.findRoot(suspStatementTree);
+		// System.out.println(testNode.toShortString());
+		slicer.staticSlicer(suspStatementTree);
+		ArrayList<ITree> slicedStatementList = slicer.getSlicedStatement();
+		// System.out.println("size: " + slicer.getSlicedStatement().size());
+
+
+		// System.exit(0);
 		String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
 		String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
 
@@ -618,24 +627,23 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 		
 		HashSet<String> originalIngredient = new HashSet<>();
-		ArrayList<ITree> slicedStatementList = new ArrayList<>();
+		// ArrayList<ITree> slicedStatementList = new ArrayList<>();
 		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
 		HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
-		if (this.mode.equals("project")) {
-			ArrayList<String> projectFileList = new ArrayList<>();
-			JsUtils.listUpFiles(new File(projectPath), projectFileList);
-			for (String filePath : projectFileList) {
-				File tempFile = new File(filePath);
-				ITree projectFileTree =
-						new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
-				String fileCode = FileUtils.getCodeFromFile(filePath);
-				JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
-				SimUtils.lcsSimNoContext(suspStatementTree, projectFileTree, noContextLcsScores);
-				SimUtils.lcsSimContext(suspMethodCode, projectFileTree, filePath, contextLcsScores);
-			}
+
+		ArrayList<String> projectFileList = new ArrayList<>();
+		JsUtils.listUpFiles(new File(projectPath), projectFileList);
+		for (String filePath : projectFileList) {
+			File tempFile = new File(filePath);
+			ITree projectFileTree =
+					new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
+			// JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
+			SimUtils.lcsSimNoContext(suspStatementTree, projectFileTree, noContextLcsScores);
+			SimUtils.lcsSimContext(suspMethodCode, projectFileTree, filePath, contextLcsScores);
 		}
+
 		// System.exit(0);
 
 		HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();

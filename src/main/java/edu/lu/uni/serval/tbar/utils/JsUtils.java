@@ -313,6 +313,16 @@ public class JsUtils {
         }
     }
 
+    public static ITree findStatement(ITree node) {
+        if (Checker.isPureStatement(node.getType())) {
+            return node;
+        }
+        if (node.getParent() == null) {
+            return null;
+        }
+        return findStatement(node.getParent());
+    }
+
     public static ITree findMethod(ITree node) {
         for (ITree parentNode : node.getParents()) {
             if (parentNode.getLabel().contains("MethodName:")) {
@@ -325,7 +335,26 @@ public class JsUtils {
     public static String getMethodName(ITree methodNode) {
         for (ITree childNode : methodNode.getChildren()) {
             if (childNode.toShortString().contains("42@@MethodName:")) {
-                return childNode.toShortString().split(":")[1].trim();
+                return childNode.toShortString();
+            }
+        }
+        return null;
+    }
+
+    public static ITree findClass(ITree targetNode) {
+        for (ITree parentNode : targetNode.getParents()) {
+            if (parentNode.getLabel().contains("ClassName:")) {
+                return parentNode;
+            }
+        }
+        return null;
+    }
+
+    // except two class in one file
+    public static String getClassName(ITree classNode) {
+        for (ITree childNode : classNode.getChildren()) {
+            if (childNode.toShortString().contains("42@@ClassName:")) {
+                return childNode.toShortString();
             }
         }
         return null;
@@ -375,6 +404,8 @@ public class JsUtils {
         String methodName = getMethodName(methodNode);
         String arguments = methodNode.toShortString().split("@@")[3].split(":")[1].trim();
         ArrayList<String> argumentList = new ArrayList<>();
+        methodName.split(":")[1].trim();
+
         if (!arguments.equals("null")) {
             int i = 0;
             String argument = "";

@@ -9,7 +9,8 @@
 [[1;34mINFO[m] skip non existing resourceDirectory /root/DIRECTION/src/main/resources
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.2:compile[m [1m(default-compile)[m @ [36mTBar[0;1m ---[m
-[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 89 source files to /root/DIRECTION/target/classes
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mTBar[0;1m ---[m
 [[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
@@ -25,342 +26,1625 @@
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  1.039 s
-[[1;34mINFO[m] Finished at: 2022-04-20T12:00:34Z
+[[1;34mINFO[m] Total time:  1.537 s
+[[1;34mINFO[m] Finished at: 2022-04-24T09:21:35Z
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-=-=-=-=-=-= Chart_5 =-=-=-=-=-=
-12:00:48.322 [main] INFO edu.lu.uni.serval.tbar.AbstractFixer - Chart_5 Failed Tests: 1
+=-=-=-=-=-= Chart_6 =-=-=-=-=-=
+09:21:41.589 [main] INFO edu.lu.uni.serval.tbar.AbstractFixer - Chart_6 Failed Tests: 2
 number of suspiciousCodeList1
-12:00:48.904 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Start to fix suspicious code======
-12:00:48.904 [main] DEBUG edu.lu.uni.serval.tbar.AbstractFixer - org/jfree/data/xy/XYSeries ===548
-12:00:49.595 [main] DEBUG edu.lu.uni.serval.tbar.AbstractFixer - Suspicious Code: 
-if (index >= 0 && !this.allowDuplicateXValues) {
-            XYDataItem existing = (XYDataItem) this.data.get(index);
-            try {
-                overwritten = (XYDataItem) existing.clone();
-            }
-            catch (CloneNotSupportedException e) {
-                throw new SeriesException("Couldn't clone XYDataItem!");
-            }
-            existing.setY(y);
-        }
-        else {
-            // if the series is sorted, the negative index is a result from
-            // Collections.binarySearch() and tells us where to insert the
-            // new item...otherwise it will be just -1 and we should just
-            // append the value to the list...
-            if (this.autoSort) {
-                this.data.add(-index - 1, new XYDataItem(x, y));
-            }
-            else {
-                this.data.add(new XYDataItem(x, y));
-            }
-            // check if this addition will exceed the maximum item count...
-            if (getItemCount() > this.maximumItemCount) {
-                this.data.remove(0);
-            }
-        }
-=-=-=-=-=--=
-objects
-prev
-ArrayList
-paint
-getXValue
-String
-seriesNeedle
-setStroke
-state
-readInt
-curr
-foregroundDomainMarkers
-IllegalArgumentException
-pointers
-pointer
-getObject
-xyItem
-TimeSeriesDataItem
-autoSort
-setRangeAxisLocation
-labels
-readObject
-input
-VectorDataItem
-size
-lookupTable
-rowData
-XYDataset
-items
-object
-minStartIndex
-maximumItemAge
-renderer
-minMiddleIndex
-domainAxisLocations
-WindNeedle
-DialScale
-MAX_VALUE
-datasets
-ValueDataset
-setSeriesNeedle
-seriesIndex
-seen
-getDomainAxisEdge
-result
-min
-setRenderer
-getDomainAxisForDataset
-quadrantPaint
-key
-Stroke
-getRenderer
-b
-c
-set
-subtasks
-ArrowNeedle
-getDomainAxis
-i
-k
-cp
-m
-seriesNumber
-n
-r
-blue
-getSeries
-LegendItem
-enterData
-series
-v
-x
-y
-setSelectedIndex
-dataset
-XYDataItem
-ts
-ShipNeedle
-Comparable
-TimeSeries
-xAxis
-OHLCItem
-xHigh
-allowDuplicateXValues
-source
-getUpperBound
-TimePeriodValues
-red
-white
-getRange
-layers
-getSubtitleCount
-Collections
-newest
-DIRECTIONS
-plotArea
-setPaint
-info
-SerialUtilities
-add
-setCrosshairDatasetIndex
-IndexOutOfBoundsException
-last
-Color
-Paint
-g2
-orientationCombo
-readPaint
-datasetToRangeAxisMap
-autoTickIndex
-datasetToDomainAxisMap
-isVertical
-removeValue
-getLegendItem
-Long
-setDomainAxis
-longNeedle
-binarySearch
-DialLayer
-backgroundRangeMarkers
-firstCategoryIndex
-remove
-scaleIndex
-Number
-plot
-setRangeAxis
-removeRow
-end
-DatasetChangeEvent
-lines
-PinNeedle
-TextLine
-blocks
-length
-start
-getRowKey
-Title
-enlarged
-getDatasetCount
-ComparableObjectItem
-stroke
-pair
-rendererIndex
-Integer
-lastIndexOf
-existing
-getValue
-CategoryAxis
-maxEndIndex
-valueHistory
-location
-datasetToScaleMap
-rowKey
-xy
-axisCollection
-setSeriesPaint
-tickUnits
-Math
-put
-addRangeMarker
-getRangeMarkers
-getYValue
-XYIntervalDataItem
-keyIndex
-XYItemRenderer
-Boolean
-XIntervalDataItem
-PiePlotState
-tasks
-period
-item
-shape
-pieIndex
-rangeAxes
-getSerialIndex
-index
-underlying
-getDataItem
-ceil
-ORIENTATION_VERTICAL
-removeDomainMarker
-getRangeAxisLocation
-maxStartIndex
-getRangeAxisEdge
-getComparable
-subtitle
-getColumnIndex
-Object
-getLowerBound
-columnKey
-dataItem
-readStroke
-Shape
-CategoryItemRendererState
-columns
-getItemCount
-increment
-minEndIndex
-getPeriod
-layer
-getRangeAxis
-datasetIndex
-rangeAxis
-stream
-domainAxis
-get
-ValueAxis
-pkgName
-setDomainAxisLocation
-readShape
-initialise
-sectionIndex
-CategoryItemRenderer
-max
-menu
-itemCount
-setHighlightPaint
-yAxis
-getTimePeriod
-entities
-setSeriesOutlineStroke
-equals
-getRangeAxisForDataset
-ChartEntity
-subplotInfo
-markers
-TimePeriodValue
-KeyedObject
-PointerNeedle
-Task
-getIndex
-data
-getDomainMarkers
-getDomainAxisLocation
-compareTo
-xLow
-axis
-LineNeedle
-getDataset
-that
-removeRangeMarker
-CategoryDataset
-dataPoints
-inverted
-indexOf
-baseName
-maxMiddleIndex
-blockCount
-datasetChanged
-PlotRenderingInfo
-crosshairDatasetIndex
-foregroundRangeMarkers
-TaskSeries
-TickUnit
-DialPointer
-getComponentCount
-entry
-getIndexOf
-getRowIndex
-unit
-rangeAxisLocations
-renderers
-marker
-scales
-getSelectedIndex
-Collection
-Block
-BasicStroke
-AxisLocation
-keys
-line
-values
-scale
-ORIENTATION_HORIZONTAL
-backgroundDomainMarkers
-MiddlePinNeedle
-dataArea
-substring
-domainAxes
-floor
-value
-direction
-subtitles
-temp
-addDomainMarker
-intValue
-PieLabelRecord
-lastCategoryIndex
-YIntervalDataItem
-setShape
-axisIndex
-getX
-getColumnKey
-getY
-PlumNeedle
-needle
-currentDataset
-=-=-=-=-=--=
-============ Analyze info ============
- donorcode size: 4
- slicedStatement size: 1381
- patchIngredient size: 297
-======================================
+09:21:41.816 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Start to fix suspicious code======
+09:21:41.816 [main] DEBUG edu.lu.uni.serval.tbar.AbstractFixer - org/jfree/chart/util/ShapeList ===111
+09:21:42.103 [main] DEBUG edu.lu.uni.serval.tbar.AbstractFixer - Suspicious Code: 
+return super.equals(obj);
+41@@SuperMethodInvocation:super.equals(obj)
+41@@SuperMethodInvocation:super.equals(obj)
+8@@ElseBody
+8@@ElseBody
+25@@InfixExpression:v1 == null
+24@@[int c=0];c < colCount;[c++]
+24@@[int r=0];r < rowCount;[r++]
+8@@ThenBody
+8@@ThenBody
+25@@InfixExpression:result < 0
+21@@Assignment:groupIndex[i]=map.getGroupIndex(map.getGroup(dataset.getRowKey(i)))
+21@@Assignment:groupIndex[i]=map.getGroupIndex(map.getGroup(dataset.getRowKey(i)))
+24@@[int i=0];i < dataset.getRowCount();[i++]
+8@@ThenBody
+25@@InfixExpression:dataset != null
+41@@MethodInvocation:findStackedRangeBounds(dataset,0.0)
+41@@MethodInvocation:findStackedRangeBounds(dataset,0.0)
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds((TableXYDataset)dataset)
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds((TableXYDataset)dataset)
+8@@ThenBody
+25@@InfixExpression:dataset != null
+41@@MethodInvocation:findRangeBounds(dataset,true)
+41@@MethodInvocation:findRangeBounds(dataset,true)
+21@@Assignment:result=Range.combine(result,r.findRangeBounds(d))
+21@@Assignment:result=Range.combine(result,r.findRangeBounds(d))
+8@@ThenBody
+25@@InfixExpression:r != null
+61@@MethodInvocation:iterator.hasNext()
+60@@Range r=vap.getDataRange(this);
+60@@Range r=vap.getDataRange(this);
+8@@ThenBody
+25@@InstanceofExpression:plot instanceof ValueAxisPlot
+41@@SuperMethodInvocation:super.getDataRange(axis)
+41@@SuperMethodInvocation:super.getDataRange(axis)
+21@@Assignment:result=Range.combine(result,subplot.getDataRange(axis))
+21@@Assignment:result=Range.combine(result,subplot.getDataRange(axis))
+61@@MethodInvocation:iterator.hasNext()
+8@@ThenBody
+25@@InfixExpression:this.subplots != null
+21@@Assignment:result=Range.combine(result,DatasetUtilities.findRangeBounds(this.dataset))
+21@@Assignment:result=Range.combine(result,DatasetUtilities.findRangeBounds(this.dataset))
+8@@ThenBody
+25@@InfixExpression:this.dataset != null
+21@@Assignment:result=Range.combine(result,DatasetUtilities.findRangeBounds(d))
+21@@Assignment:result=Range.combine(result,DatasetUtilities.findRangeBounds(d))
+8@@ElseBody
+25@@InfixExpression:r != null
+8@@ElseBody
+25@@SimpleName:isDomainAxis
+8@@ThenBody
+25@@InfixExpression:d != null
+61@@MethodInvocation:iterator.hasNext()
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset,false)
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset,false)
+8@@ThenBody
+25@@InfixExpression:dataset != null
+60@@Range r=DatasetUtilities.findRangeBounds(dataset,false);
+60@@Range r=DatasetUtilities.findRangeBounds(dataset,false);
+8@@ThenBody
+25@@InfixExpression:dataset != null
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset,true)
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset,true)
+8@@ThenBody
+25@@InfixExpression:dataset != null
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset)
+41@@MethodInvocation:DatasetUtilities.findRangeBounds(dataset)
+60@@Range result=DatasetUtilities.findRangeBounds(dataset);
+60@@Range result=DatasetUtilities.findRangeBounds(dataset);
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds(dataset)
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds(dataset)
+8@@ElseBody
+25@@FieldAccess:this.renderAsPercentages
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds(dataset,getBase())
+41@@MethodInvocation:DatasetUtilities.findStackedRangeBounds(dataset,getBase())
+8@@ElseBody
+25@@FieldAccess:this.renderAsPercentages
+60@@Range r=DatasetUtilities.findStackedRangeBounds(dataset,this.seriesToGroupMap);
+60@@Range r=DatasetUtilities.findStackedRangeBounds(dataset,this.seriesToGroupMap);
+60@@int groupIndex=this.seriesToGroupMap.getGroupIndex(this.seriesToGroupMap.getGroup(plot.getDataset(plot.getIndexOf(this)).getRowKey(row)));
+60@@int groupIndex=this.seriesToGroupMap.getGroupIndex(this.seriesToGroupMap.getGroup(plot.getDataset(plot.getIndexOf(this)).getRowKey(row)));
+60@@double barW0=calculateBarW0(plot,orientation,adjusted,domainAxis,state,row,column);
+60@@double barW0=calculateBarW0(plot,orientation,adjusted,domainAxis,state,row,column);
+21@@MethodInvocation:renderer.drawItem(g2,state,dataArea,this,domainAxis,rangeAxis,currentDataset,row,column,pass)
+21@@MethodInvocation:renderer.drawItem(g2,state,dataArea,this,domainAxis,rangeAxis,currentDataset,row,column,pass)
+24@@[int row=0];row < rowCount;[row++]
+8@@ThenBody
+25@@InfixExpression:this.rowRenderingOrder == SortOrder.ASCENDING
+24@@[int column=0];column < columnCount;[column++]
+8@@ThenBody
+25@@InfixExpression:this.columnRenderingOrder == SortOrder.ASCENDING
+24@@[int pass=0];pass < passCount;[pass++]
+8@@ThenBody
+25@@InfixExpression:hasData && renderer != null
+21@@MethodInvocation:render(g2,dataArea,info,null)
+21@@MethodInvocation:render(g2,dataArea,info,null)
+21@@MethodInvocation:draw(g2,area,null,null)
+21@@MethodInvocation:draw(g2,area,null,null)
+21@@MethodInvocation:draw(g2,area,null,info)
+21@@MethodInvocation:draw(g2,area,null,info)
+21@@MethodInvocation:g2.draw(borderArea)
+21@@MethodInvocation:g2.draw(borderArea)
+8@@ThenBody
+25@@InfixExpression:paint != null && stroke != null
+8@@ThenBody
+25@@MethodInvocation:isBorderVisible()
+21@@MethodInvocation:this.plot.draw(g2,plotArea,anchor,null,plotInfo)
+21@@MethodInvocation:this.plot.draw(g2,plotArea,anchor,null,plotInfo)
+21@@Assignment:retValue=t.draw(g2,titleArea,p)
+21@@Assignment:retValue=t.draw(g2,titleArea,p)
+8@@ThenBody
+25@@InfixExpression:position == RectangleEdge.TOP
+60@@EntityCollection e=drawTitle(this.title,g2,nonTitleArea,(entities != null));
+60@@EntityCollection e=drawTitle(this.title,g2,nonTitleArea,(entities != null));
+8@@ThenBody
+25@@InfixExpression:this.title != null
+21@@MethodInvocation:draw(g2,new Rectangle2D.Double(0,0,width,height),null,info)
+21@@MethodInvocation:draw(g2,new Rectangle2D.Double(0,0,width,height),null,info)
+41@@MethodInvocation:createBufferedImage(width,height,null)
+41@@MethodInvocation:createBufferedImage(width,height,null)
+41@@MethodInvocation:createBufferedImage(width,height,BufferedImage.TYPE_INT_ARGB,info)
+41@@MethodInvocation:createBufferedImage(width,height,BufferedImage.TYPE_INT_ARGB,info)
+60@@BufferedImage bufferedImage=chart.createBufferedImage(width,height,info);
+60@@BufferedImage bufferedImage=chart.createBufferedImage(width,height,info);
+21@@MethodInvocation:writeChartAsPNG(out,chart,width,height,null)
+21@@MethodInvocation:writeChartAsPNG(out,chart,width,height,null)
+21@@MethodInvocation:ChartUtilities.writeChartAsPNG(out,chart,width,height,null,encodeAlpha,compression)
+21@@MethodInvocation:ChartUtilities.writeChartAsPNG(out,chart,width,height,null,encodeAlpha,compression)
+21@@MethodInvocation:ChartUtilities.writeChartAsPNG(out,chart,width,height,info)
+21@@MethodInvocation:ChartUtilities.writeChartAsPNG(out,chart,width,height,info)
+54@@try:[]
+21@@MethodInvocation:ChartUtilities.saveChartAsPNG(new File(filename),this.chart,getWidth(),getHeight())
+21@@MethodInvocation:ChartUtilities.saveChartAsPNG(new File(filename),this.chart,getWidth(),getHeight())
+8@@ThenBody
+25@@InfixExpression:option == JFileChooser.APPROVE_OPTION
+21@@MethodInvocation:saveChartAsPNG(file,chart,width,height,null)
+21@@MethodInvocation:saveChartAsPNG(file,chart,width,height,null)
+41@@MethodInvocation:ServletUtilities.saveChartAsPNG(chart,width,height,null,session)
+41@@MethodInvocation:ServletUtilities.saveChartAsPNG(chart,width,height,null,session)
+21@@MethodInvocation:ChartUtilities.saveChartAsPNG(tempFile,chart,width,height,info)
+21@@MethodInvocation:ChartUtilities.saveChartAsPNG(tempFile,chart,width,height,info)
+21@@MethodInvocation:writeChartAsPNG(out,chart,width,height,info,encodeAlpha,compression)
+21@@MethodInvocation:writeChartAsPNG(out,chart,width,height,info,encodeAlpha,compression)
+54@@try:[]
+60@@BufferedImage chartImage=chart.createBufferedImage(width,height,BufferedImage.TYPE_INT_ARGB,info);
+60@@BufferedImage chartImage=chart.createBufferedImage(width,height,BufferedImage.TYPE_INT_ARGB,info);
+60@@BufferedImage image=chart.createBufferedImage(width,height,info);
+60@@BufferedImage image=chart.createBufferedImage(width,height,info);
+21@@MethodInvocation:writeChartAsJPEG(out,chart,width,height,null)
+21@@MethodInvocation:writeChartAsJPEG(out,chart,width,height,null)
+21@@MethodInvocation:ChartUtilities.writeChartAsJPEG(out,quality,chart,width,height,null)
+21@@MethodInvocation:ChartUtilities.writeChartAsJPEG(out,quality,chart,width,height,null)
+21@@MethodInvocation:writeChartAsJPEG(out,chart,width,height,info)
+21@@MethodInvocation:writeChartAsJPEG(out,chart,width,height,info)
+54@@try:[]
+21@@MethodInvocation:saveChartAsJPEG(file,chart,width,height,null)
+21@@MethodInvocation:saveChartAsJPEG(file,chart,width,height,null)
+21@@MethodInvocation:saveChartAsJPEG(file,quality,chart,width,height,null)
+21@@MethodInvocation:saveChartAsJPEG(file,quality,chart,width,height,null)
+41@@MethodInvocation:ServletUtilities.saveChartAsJPEG(chart,width,height,null,session)
+41@@MethodInvocation:ServletUtilities.saveChartAsJPEG(chart,width,height,null,session)
+21@@MethodInvocation:ChartUtilities.saveChartAsJPEG(tempFile,chart,width,height,info)
+21@@MethodInvocation:ChartUtilities.saveChartAsJPEG(tempFile,chart,width,height,info)
+21@@MethodInvocation:writeChartAsJPEG(out,quality,chart,width,height,info)
+21@@MethodInvocation:writeChartAsJPEG(out,quality,chart,width,height,info)
+54@@try:[]
+21@@MethodInvocation:draw(g2,new Rectangle2D.Double(0,0,drawWidth,drawHeight),null,info)
+21@@MethodInvocation:draw(g2,new Rectangle2D.Double(0,0,drawWidth,drawHeight),null,info)
+21@@SuperMethodInvocation:super.draw(g2,area,null)
+21@@SuperMethodInvocation:super.draw(g2,area,null)
+21@@MethodInvocation:draw(g2,area,null)
+21@@MethodInvocation:draw(g2,area,null)
+21@@MethodInvocation:border.draw(g2,target)
+21@@MethodInvocation:border.draw(g2,target)
+41@@MethodInvocation:container.draw(g2,target,params)
+41@@MethodInvocation:container.draw(g2,target,params)
+21@@MethodInvocation:getFrame().draw(g2,target)
+21@@MethodInvocation:getFrame().draw(g2,target)
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMaxY() - this.stripWidth,target.getWidth(),this.stripWidth))
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMaxY() - this.stripWidth,target.getWidth(),this.stripWidth))
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.TOP
+8@@ThenBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:this.axis.draw(g2,target.getMaxY() - this.stripWidth - this.axisOffset,target,target,RectangleEdge.TOP,null)
+21@@MethodInvocation:this.axis.draw(g2,target.getMaxY() - this.stripWidth - this.axisOffset,target,target,RectangleEdge.TOP,null)
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.TOP
+8@@ThenBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMinY(),target.getWidth(),this.stripWidth))
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMinY(),target.getWidth(),this.stripWidth))
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.BOTTOM
+8@@ElseBody
+25@@InfixExpression:axisEdge == RectangleEdge.TOP
+8@@ThenBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:this.axis.draw(g2,target.getMinY() + this.stripWidth + this.axisOffset,target,target,RectangleEdge.BOTTOM,null)
+21@@MethodInvocation:this.axis.draw(g2,target.getMinY() + this.stripWidth + this.axisOffset,target,target,RectangleEdge.BOTTOM,null)
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.BOTTOM
+8@@ElseBody
+25@@InfixExpression:axisEdge == RectangleEdge.TOP
+8@@ThenBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMaxX() - this.stripWidth,target.getMinY(),this.stripWidth,target.getHeight()))
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMaxX() - this.stripWidth,target.getMinY(),this.stripWidth,target.getHeight()))
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.LEFT
+8@@ElseBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:this.axis.draw(g2,target.getMaxX() - this.stripWidth - this.axisOffset,target,target,RectangleEdge.LEFT,null)
+21@@MethodInvocation:this.axis.draw(g2,target.getMaxX() - this.stripWidth - this.axisOffset,target,target,RectangleEdge.LEFT,null)
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.LEFT
+8@@ElseBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMinY(),this.stripWidth,target.getHeight()))
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(target.getMinX(),target.getMinY(),this.stripWidth,target.getHeight()))
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.RIGHT
+8@@ElseBody
+25@@InfixExpression:axisEdge == RectangleEdge.LEFT
+8@@ElseBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:this.axis.draw(g2,target.getMinX() + this.stripWidth + this.axisOffset,target,target,RectangleEdge.RIGHT,null)
+21@@MethodInvocation:this.axis.draw(g2,target.getMinX() + this.stripWidth + this.axisOffset,target,target,RectangleEdge.RIGHT,null)
+8@@ThenBody
+25@@InfixExpression:axisEdge == RectangleEdge.RIGHT
+8@@ElseBody
+25@@InfixExpression:axisEdge == RectangleEdge.LEFT
+8@@ElseBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(getPosition())
+21@@MethodInvocation:this.container.draw(g2,area)
+21@@MethodInvocation:this.container.draw(g2,area)
+21@@MethodInvocation:draw(g2,area)
+21@@MethodInvocation:draw(g2,area)
+21@@MethodInvocation:g2.draw(aLine)
+21@@MethodInvocation:g2.draw(aLine)
+8@@ThenBody
+25@@FieldAccess:this.lineVisible
+21@@MethodInvocation:g2.draw(s)
+21@@MethodInvocation:g2.draw(s)
+8@@ThenBody
+25@@FieldAccess:this.shapeOutlineVisible
+8@@ThenBody
+25@@FieldAccess:this.shapeVisible
+21@@MethodInvocation:this.content.draw(g2,x,y,anchor)
+21@@MethodInvocation:this.content.draw(g2,x,y,anchor)
+21@@MethodInvocation:drawHorizontal(g2,titleArea)
+21@@MethodInvocation:drawHorizontal(g2,titleArea)
+8@@ThenBody
+25@@InfixExpression:position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM
+21@@MethodInvocation:this.content.draw(g2,x,y,anchor,x,y,-Math.PI / 2.0)
+21@@MethodInvocation:this.content.draw(g2,x,y,anchor,x,y,-Math.PI / 2.0)
+21@@MethodInvocation:drawVertical(g2,titleArea)
+21@@MethodInvocation:drawVertical(g2,titleArea)
+8@@ThenBody
+25@@InfixExpression:position == RectangleEdge.LEFT || position == RectangleEdge.RIGHT
+8@@ElseBody
+25@@InfixExpression:position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM
+21@@MethodInvocation:g2.draw(inside)
+21@@MethodInvocation:g2.draw(inside)
+8@@ThenBody
+25@@InfixExpression:t0 > firstOnAxis
+61@@InfixExpression:t0 <= lastOnAxis
+21@@MethodInvocation:drawTickMarksHorizontal(g2,state,dataArea,edge)
+21@@MethodInvocation:drawTickMarksHorizontal(g2,state,dataArea,edge)
+8@@ThenBody
+25@@MethodInvocation:RectangleEdge.isTopOrBottom(edge)
+21@@MethodInvocation:drawTickMarks(g2,axisState,dataArea,edge)
+21@@MethodInvocation:drawTickMarks(g2,axisState,dataArea,edge)
+21@@MethodInvocation:g2.draw(outside)
+21@@MethodInvocation:g2.draw(outside)
+8@@ThenBody
+25@@InfixExpression:t0 > firstOnAxis
+61@@InfixExpression:t0 <= lastOnAxis
+21@@MethodInvocation:g2.draw(new Line2D.Float(mid2d,y,mid2d,y + yDelta))
+21@@MethodInvocation:g2.draw(new Line2D.Float(mid2d,y,mid2d,y + yDelta))
+8@@ThenBody
+25@@MethodInvocation:this.labelInfo[band].getDrawDividers()
+8@@ThenBody
+25@@InfixExpression:lastXX > 0L
+61@@InfixExpression:p.getFirstMillisecond(this.calendar) <= axisMax
+21@@Assignment:axisState=drawTickLabels(band,g2,axisState,dataArea,edge)
+21@@Assignment:axisState=drawTickLabels(band,g2,axisState,dataArea,edge)
+24@@[int band=0];band < this.labelInfo.length;[band++]
+21@@MethodInvocation:g2.draw(r)
+21@@MethodInvocation:g2.draw(r)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:block.draw(g2,(float)anchorPoint.getX(),(float)anchorPoint.getY(),position.getLabelAnchor(),(float)anchorPoint.getX(),(float)anchorPoint.getY(),position.getAngle())
+21@@MethodInvocation:block.draw(g2,(float)anchorPoint.getX(),(float)anchorPoint.getY(),position.getLabelAnchor(),(float)anchorPoint.getX(),(float)anchorPoint.getY(),position.getAngle())
+61@@MethodInvocation:iterator.hasNext()
+8@@ThenBody
+25@@MethodInvocation:isTickLabelsVisible()
+21@@Assignment:state=drawCategoryLabels(g2,plotArea,dataArea,edge,state,plotState)
+21@@Assignment:state=drawCategoryLabels(g2,plotArea,dataArea,edge,state,plotState)
+21@@Assignment:info=super.draw(g2,cursor,plotArea,dataArea,edge,plotState)
+21@@Assignment:info=super.draw(g2,cursor,plotArea,dataArea,edge,plotState)
+8@@ThenBody
+25@@MethodInvocation:isVisible()
+21@@MethodInvocation:g2.draw(axisLine)
+21@@MethodInvocation:g2.draw(axisLine)
+21@@MethodInvocation:drawAxisLine(g2,cursor,dataArea,edge)
+21@@MethodInvocation:drawAxisLine(g2,cursor,dataArea,edge)
+8@@ThenBody
+25@@MethodInvocation:isAxisLineVisible()
+21@@MethodInvocation:g2.draw(shape)
+21@@MethodInvocation:g2.draw(shape)
+8@@ThenBody
+25@@SimpleName:drawUpOrRight
+21@@MethodInvocation:g2.draw(mark)
+21@@MethodInvocation:g2.draw(mark)
+8@@ThenBody
+25@@InfixExpression:isTickMarksVisible() && tick.getTickType().equals(TickType.MAJOR)
+61@@MethodInvocation:iterator.hasNext()
+21@@Assignment:state=drawTickMarksAndLabels(g2,cursor,plotArea,dataArea,edge,plotState)
+21@@Assignment:state=drawTickMarksAndLabels(g2,cursor,plotArea,dataArea,edge,plotState)
+60@@AxisState ret=super.draw(g2,cursor,plotArea,dataArea,edge,plotState);
+60@@AxisState ret=super.draw(g2,cursor,plotArea,dataArea,edge,plotState);
+21@@MethodInvocation:fragment.draw(g2,x,anchorY + yOffset,TextAnchor.BASELINE_LEFT,rotateX,rotateY,angle)
+21@@MethodInvocation:fragment.draw(g2,x,anchorY + yOffset,TextAnchor.BASELINE_LEFT,rotateX,rotateY,angle)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:draw(g2,x,y,anchor,0.0f,0.0f,0.0)
+21@@MethodInvocation:draw(g2,x,y,anchor,0.0f,0.0f,0.0)
+21@@MethodInvocation:line.draw(g2,anchorX + offsets[0] + lineOffset,anchorY + offsets[1] + yCursor,TextAnchor.TOP_LEFT,rotateX,rotateY,angle)
+21@@MethodInvocation:line.draw(g2,anchorX + offsets[0] + lineOffset,anchorY + offsets[1] + yCursor,TextAnchor.TOP_LEFT,rotateX,rotateY,angle)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:g2.draw(bounds)
+21@@MethodInvocation:g2.draw(bounds)
+8@@ThenBody
+25@@InfixExpression:this.outlinePaint != null && this.outlineStroke != null
+21@@MethodInvocation:this.textBlock.draw(g2,(float)(xx + this.interiorGap.calculateLeftInset(w)),(float)(yy + this.interiorGap.calculateTopInset(h)),TextBlockAnchor.TOP_LEFT)
+21@@MethodInvocation:this.textBlock.draw(g2,(float)(xx + this.interiorGap.calculateLeftInset(w)),(float)(yy + this.interiorGap.calculateTopInset(h)),TextBlockAnchor.TOP_LEFT)
+21@@MethodInvocation:tl.draw(g2,textX,textY)
+21@@MethodInvocation:tl.draw(g2,textX,textY)
+8@@ThenBody
+25@@SimpleName:useDrawRotatedStringWorkaround
+21@@MethodInvocation:TextUtilities.drawRotatedString(label,g2,xx,yy,TextAnchor.CENTER,0.0,TextAnchor.CENTER)
+21@@MethodInvocation:TextUtilities.drawRotatedString(label,g2,xx,yy,TextAnchor.CENTER,0.0,TextAnchor.CENTER)
+24@@[int i=0];i < subCategoryCount;[i++]
+24@@[int categoryIndex=0];categoryIndex < categoryCount;[categoryIndex++]
+21@@Assignment:state=drawSubCategoryLabels(g2,plotArea,dataArea,edge,state,plotState)
+21@@Assignment:state=drawSubCategoryLabels(g2,plotArea,dataArea,edge,state,plotState)
+60@@Object r=block.draw(g2,drawArea,params);
+60@@Object r=block.draw(g2,drawArea,params);
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:this.frame.draw(g2,area)
+21@@MethodInvocation:this.frame.draw(g2,area)
+21@@MethodInvocation:drawBorder(g2,area)
+21@@MethodInvocation:drawBorder(g2,area)
+21@@MethodInvocation:this.label.draw(g2,(float)area.getX(),(float)area.getY(),TextBlockAnchor.TOP_LEFT)
+21@@MethodInvocation:this.label.draw(g2,(float)area.getX(),(float)area.getY(),TextBlockAnchor.TOP_LEFT)
+21@@MethodInvocation:g2.draw(line)
+21@@MethodInvocation:g2.draw(line)
+8@@ThenBody
+25@@InfixExpression:t > 0.0
+21@@MethodInvocation:g2.draw(shape1)
+21@@MethodInvocation:g2.draw(shape1)
+8@@ThenBody
+25@@InfixExpression:getOutlinePaint() != null
+21@@SuperMethodInvocation:super.drawNeedle(g2,plotArea,rotate,angle)
+21@@SuperMethodInvocation:super.drawNeedle(g2,plotArea,rotate,angle)
+21@@SuperMethodInvocation:super.drawNeedle(g2,newArea,newRotate,angle)
+21@@SuperMethodInvocation:super.drawNeedle(g2,newArea,newRotate,angle)
+8@@ThenBody
+25@@InfixExpression:(rotate != null) && (plotArea != null)
+21@@MethodInvocation:drawNeedle(g2,plotArea,rotate,Math.toRadians(angle))
+21@@MethodInvocation:drawNeedle(g2,plotArea,rotate,Math.toRadians(angle))
+21@@MethodInvocation:g2.draw(shape2)
+21@@MethodInvocation:g2.draw(shape2)
+8@@ThenBody
+25@@InfixExpression:getOutlinePaint() != null
+21@@MethodInvocation:g2.draw(s1)
+21@@MethodInvocation:g2.draw(s1)
+8@@ThenBody
+25@@InfixExpression:getOutlinePaint() != null
+21@@MethodInvocation:g2.draw(s2)
+21@@MethodInvocation:g2.draw(s2)
+8@@ThenBody
+25@@InfixExpression:getOutlinePaint() != null
+21@@MethodInvocation:g2.draw(s3)
+21@@MethodInvocation:g2.draw(s3)
+8@@ThenBody
+25@@InfixExpression:getOutlinePaint() != null
+21@@MethodInvocation:draw(g2,plotArea,0)
+21@@MethodInvocation:draw(g2,plotArea,0)
+21@@MethodInvocation:draw(g2,plotArea,pt,angle)
+21@@MethodInvocation:draw(g2,plotArea,pt,angle)
+21@@MethodInvocation:this.pieChart.draw(g2,rect,subinfo)
+21@@MethodInvocation:this.pieChart.draw(g2,rect,subinfo)
+24@@[int pieIndex=0];pieIndex < pieCount;[pieIndex++]
+21@@MethodInvocation:g2.draw(chip)
+21@@MethodInvocation:g2.draw(chip)
+24@@[int y=1];y <= ychips;[y++]
+24@@[int x=1];x <= xchips;[x++]
+21@@MethodInvocation:drawChipGrid(g2,area)
+21@@MethodInvocation:drawChipGrid(g2,area)
+21@@MethodInvocation:g2.draw(waferEdge)
+21@@MethodInvocation:g2.draw(waferEdge)
+21@@MethodInvocation:drawWaferEdge(g2,area)
+21@@MethodInvocation:drawWaferEdge(g2,area)
+21@@MethodInvocation:g2.draw(notch)
+21@@MethodInvocation:g2.draw(notch)
+21@@MethodInvocation:g2.draw(path)
+21@@MethodInvocation:g2.draw(path)
+8@@ThenBody
+25@@InfixExpression:outlinePaint != null && outlineStroke != null
+8@@ThenBody
+25@@InfixExpression:currentPass == 1
+8@@ElseBody
+25@@InfixExpression:currentPass == 0
+8@@ThenBody
+25@@InfixExpression:Math.abs(angle) > getMinimumArcAngleToDraw()
+21@@MethodInvocation:drawItem(g2,section,explodeArea,state,pass)
+21@@MethodInvocation:drawItem(g2,section,explodeArea,state,pass)
+8@@ThenBody
+25@@InfixExpression:value > 0.0
+8@@ThenBody
+25@@InfixExpression:n != null
+24@@[int section=0];section < keys.size();[section++]
+24@@[int pass=0];pass < passesRequired;[pass++]
+8@@ThenBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getKeys().size() > 0)
+21@@MethodInvocation:drawPie(g2,area,info)
+21@@MethodInvocation:drawPie(g2,area,info)
+8@@ThenBody
+25@@PrefixExpression:!DatasetUtilities.isEmptyOrNull(this.dataset)
+21@@MethodInvocation:g2.draw(extendedSeparator)
+21@@MethodInvocation:g2.draw(extendedSeparator)
+8@@ThenBody
+25@@FieldAccess:this.separatorsVisible
+8@@ThenBody
+25@@InfixExpression:currentPass == 2
+8@@ElseBody
+25@@InfixExpression:currentPass == 1
+8@@ElseBody
+25@@InfixExpression:currentPass == 0
+8@@ThenBody
+25@@InfixExpression:Math.abs(angle) > getMinimumArcAngleToDraw()
+21@@MethodInvocation:renderer.drawItem(g2,state,dataArea,info,this,xAxis,yAxis,dataset,series,item,crosshairState,pass)
+21@@MethodInvocation:renderer.drawItem(g2,state,dataArea,info,this,xAxis,yAxis,dataset,series,item,crosshairState,pass)
+24@@[int item=firstItem];item <= lastItem;[item++]
+24@@[int series=seriesCount - 1];series >= 0;[series--]
+24@@[int pass=0];pass < passCount;[pass++]
+8@@ThenBody
+25@@InfixExpression:seriesOrder == SeriesRenderingOrder.REVERSE
+8@@ThenBody
+25@@PrefixExpression:!DatasetUtilities.isEmptyOrNull(dataset)
+21@@Assignment:foundData=render(g2,dataArea,i,state) || foundData
+21@@Assignment:foundData=render(g2,dataArea,i,state) || foundData
+24@@[int i=0];i < datasetCount;[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+60@@AxisState domainAxisState=this.domainAxis.draw(g2,dataArea.getMaxY(),area,dataArea,RectangleEdge.BOTTOM,info);
+60@@AxisState domainAxisState=this.domainAxis.draw(g2,dataArea.getMaxY(),area,dataArea,RectangleEdge.BOTTOM,info);
+60@@AxisState rangeAxisState=this.rangeAxis.draw(g2,dataArea.getMinX(),area,dataArea,RectangleEdge.LEFT,info);
+60@@AxisState rangeAxisState=this.rangeAxis.draw(g2,dataArea.getMinX(),area,dataArea,RectangleEdge.LEFT,info);
+21@@MethodInvocation:this.seriesNeedle[current].draw(g2,needleArea,value)
+21@@MethodInvocation:this.seriesNeedle[current].draw(g2,needleArea,value)
+8@@ThenBody
+25@@InfixExpression:data != null && data.getValue() != null
+24@@[];i >= 0;[--i]
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.TOP,plotState);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.TOP,plotState);
+8@@ThenBody
+25@@InfixExpression:axis != null
+61@@MethodInvocation:iterator.hasNext()
+60@@Map axisStateMap=drawAxes(g2,area,dataArea,state);
+60@@Map axisStateMap=drawAxes(g2,area,dataArea,state);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.BOTTOM,plotState);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.BOTTOM,plotState);
+8@@ThenBody
+25@@InfixExpression:axis != null
+61@@MethodInvocation:iterator.hasNext()
+60@@Map axisStateMap=drawAxes(g2,area,dataArea,info);
+60@@Map axisStateMap=drawAxes(g2,area,dataArea,info);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.LEFT,plotState);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.LEFT,plotState);
+8@@ThenBody
+25@@InfixExpression:axis != null
+61@@MethodInvocation:iterator.hasNext()
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.RIGHT,plotState);
+60@@AxisState axisState=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.RIGHT,plotState);
+8@@ThenBody
+25@@InfixExpression:axis != null
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:annotation.draw(g2,this,dataArea,getDomainAxis(),getRangeAxis(),0,info)
+21@@MethodInvocation:annotation.draw(g2,this,dataArea,getDomainAxis(),getRangeAxis(),0,info)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.BACKGROUND,state)
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.BACKGROUND,state)
+8@@ThenBody
+25@@InfixExpression:r != null
+24@@[int i=0];i < datasetCount;[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+21@@Assignment:this.drawSharedDomainAxis=draw
+21@@Assignment:this.drawSharedDomainAxis=draw
+21@@MethodInvocation:g2.draw(area)
+21@@MethodInvocation:g2.draw(area)
+8@@ThenBody
+25@@InfixExpression:(this.outlineStroke != null) && (this.outlinePaint != null)
+21@@MethodInvocation:drawOutline(g2,area)
+21@@MethodInvocation:drawOutline(g2,area)
+21@@MethodInvocation:block.draw(g2,(float)area.getCenterX(),(float)area.getCenterY(),TextBlockAnchor.CENTER)
+21@@MethodInvocation:block.draw(g2,(float)area.getCenterX(),(float)area.getCenterY(),TextBlockAnchor.CENTER)
+8@@ThenBody
+25@@InfixExpression:message != null
+21@@MethodInvocation:drawNoDataMessage(g2,area)
+21@@MethodInvocation:drawNoDataMessage(g2,area)
+8@@ThenBody
+25@@MethodInvocation:DatasetUtilities.isEmptyOrNull(this.dataset)
+41@@MethodInvocation:this.axis.draw(g2,dataArea.getMinY(),plotArea,dataArea,RectangleEdge.TOP,null)
+41@@MethodInvocation:this.axis.draw(g2,dataArea.getMinY(),plotArea,dataArea,RectangleEdge.TOP,null)
+60@@AxisState state=drawAxis(g2,area,quadrant);
+60@@AxisState state=drawAxis(g2,area,quadrant);
+60@@AxisState axisState=axis.draw(g2,cursor,area,dataArea,domainEdge,info);
+60@@AxisState axisState=axis.draw(g2,cursor,area,dataArea,domainEdge,info);
+21@@MethodInvocation:plot.draw(g2,this.subplotAreas[i],null,parentState,subplotInfo)
+21@@MethodInvocation:plot.draw(g2,this.subplotAreas[i],null,parentState,subplotInfo)
+24@@[int i=0];i < this.subplots.size();[i++]
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(igx1,igy1,igx2 - igx1,igy2 - igy1))
+21@@MethodInvocation:g2.draw(new Rectangle2D.Double(igx1,igy1,igx2 - igx1,igy2 - igy1))
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_INTERIOR
+21@@MethodInvocation:g2.draw(linkArea)
+21@@MethodInvocation:g2.draw(linkArea)
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_LINK_AREA
+21@@MethodInvocation:g2.draw(new Ellipse2D.Double(linkArea.getX(),linkArea.getY(),linkArea.getWidth(),linkArea.getHeight()))
+21@@MethodInvocation:g2.draw(new Ellipse2D.Double(linkArea.getX(),linkArea.getY(),linkArea.getWidth(),linkArea.getHeight()))
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_LINK_AREA
+21@@MethodInvocation:g2.draw(pieArea)
+21@@MethodInvocation:g2.draw(pieArea)
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_PIE_AREA
+21@@MethodInvocation:g2.draw(arc)
+21@@MethodInvocation:g2.draw(arc)
+8@@ThenBody
+25@@FieldAccess:this.sectionOutlinesVisible
+8@@ThenBody
+25@@InfixExpression:currentPass == 1
+8@@ElseBody
+25@@InfixExpression:currentPass == 0
+8@@ThenBody
+25@@InfixExpression:Math.abs(angle) > getMinimumArcAngleToDraw()
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+8@@ThenBody
+25@@InfixExpression:(!getPlotLines()) || ((!(domainAxis instanceof CyclicNumberAxis)) && (!(rangeAxis instanceof CyclicNumberAxis))) || (item <= 0)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,1,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,1,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,2,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,2,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,3,crosshairState,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,info,plot,domainAxis,rangeAxis,newset,series,3,crosshairState,pass)
+8@@ThenBody
+25@@InfixExpression:x.length == 4
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column,pass)
+21@@SuperMethodInvocation:super.drawItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column,pass)
+8@@ElseBody
+25@@InstanceofExpression:dataset instanceof IntervalCategoryDataset
+21@@MethodInvocation:g2.draw(bg)
+21@@MethodInvocation:g2.draw(bg)
+8@@ThenBody
+25@@InfixExpression:this.labelOutlinePaint != null && this.labelOutlineStroke != null
+8@@ThenBody
+25@@SimpleName:include
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:drawSimpleLabels(g2,keys,totalValue,plotArea,linkArea,state)
+21@@MethodInvocation:drawSimpleLabels(g2,keys,totalValue,plotArea,linkArea,state)
+8@@ThenBody
+25@@FieldAccess:this.simpleLabels
+8@@ThenBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getKeys().size() > 0)
+21@@MethodInvocation:drawSimpleLabels(g2,keys,totalValue,adjustedPlotArea,linkArea,state)
+21@@MethodInvocation:drawSimpleLabels(g2,keys,totalValue,adjustedPlotArea,linkArea,state)
+8@@ThenBody
+25@@MethodInvocation:getSimpleLabels()
+21@@MethodInvocation:g2.draw(new Line2D.Double(linkX,linkY,elbowX,elbowY))
+21@@MethodInvocation:g2.draw(new Line2D.Double(linkX,linkY,elbowX,elbowY))
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:drawLeftLabel(g2,state,this.labelDistributor.getPieLabelRecord(i))
+21@@MethodInvocation:drawLeftLabel(g2,state,this.labelDistributor.getPieLabelRecord(i))
+24@@[int i=0];i < this.labelDistributor.getItemCount();[i++]
+21@@MethodInvocation:drawLeftLabels(leftKeys,g2,plotArea,linkArea,labelWidth,state)
+21@@MethodInvocation:drawLeftLabels(leftKeys,g2,plotArea,linkArea,labelWidth,state)
+8@@ThenBody
+25@@InfixExpression:this.labelGenerator != null
+21@@MethodInvocation:drawLabels(g2,keys,totalValue,plotArea,linkArea,state)
+21@@MethodInvocation:drawLabels(g2,keys,totalValue,plotArea,linkArea,state)
+8@@ElseBody
+25@@FieldAccess:this.simpleLabels
+8@@ThenBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getKeys().size() > 0)
+21@@MethodInvocation:drawLabels(g2,keys,totalValue,adjustedPlotArea,linkArea,state)
+21@@MethodInvocation:drawLabels(g2,keys,totalValue,adjustedPlotArea,linkArea,state)
+8@@ElseBody
+25@@MethodInvocation:getSimpleLabels()
+21@@MethodInvocation:g2.draw(new Line2D.Double(anchorX,anchorY,elbowX,elbowY))
+21@@MethodInvocation:g2.draw(new Line2D.Double(anchorX,anchorY,elbowX,elbowY))
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:g2.draw(new Line2D.Double(anchorX,anchorY,targetX,targetY))
+21@@MethodInvocation:g2.draw(new Line2D.Double(anchorX,anchorY,targetX,targetY))
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:g2.draw(q)
+21@@MethodInvocation:g2.draw(q)
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.QUAD_CURVE)
+8@@ElseBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:g2.draw(new Line2D.Double(elbowX,elbowY,linkX,linkY))
+21@@MethodInvocation:g2.draw(new Line2D.Double(elbowX,elbowY,linkX,linkY))
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.QUAD_CURVE)
+8@@ElseBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:g2.draw(c)
+21@@MethodInvocation:g2.draw(c)
+8@@ThenBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.CUBIC_CURVE)
+8@@ElseBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.QUAD_CURVE)
+8@@ElseBody
+25@@MethodInvocation:style.equals(PieLabelLinkStyle.STANDARD)
+8@@ThenBody
+25@@FieldAccess:this.labelLinksVisible
+21@@MethodInvocation:tb.draw(g2,(float)targetX,(float)targetY,RectangleAnchor.RIGHT)
+21@@MethodInvocation:tb.draw(g2,(float)targetX,(float)targetY,RectangleAnchor.RIGHT)
+21@@MethodInvocation:tb.draw(g2,(float)targetX,(float)targetY,RectangleAnchor.LEFT)
+21@@MethodInvocation:tb.draw(g2,(float)targetX,(float)targetY,RectangleAnchor.LEFT)
+21@@MethodInvocation:drawRightLabel(g2,state,this.labelDistributor.getPieLabelRecord(i))
+21@@MethodInvocation:drawRightLabel(g2,state,this.labelDistributor.getPieLabelRecord(i))
+24@@[int i=0];i < this.labelDistributor.getItemCount();[i++]
+21@@MethodInvocation:drawRightLabels(rightKeys,g2,plotArea,linkArea,labelWidth,state)
+21@@MethodInvocation:drawRightLabels(rightKeys,g2,plotArea,linkArea,labelWidth,state)
+8@@ThenBody
+25@@InfixExpression:this.labelGenerator != null
+21@@MethodInvocation:g2.draw(arcInner)
+21@@MethodInvocation:g2.draw(arcInner)
+21@@MethodInvocation:g2.draw(arcOuter)
+21@@MethodInvocation:g2.draw(arcOuter)
+21@@MethodInvocation:g2.draw(fb)
+21@@MethodInvocation:g2.draw(fb)
+21@@MethodInvocation:g2.draw(workingLine)
+21@@MethodInvocation:g2.draw(workingLine)
+24@@[double v=this.lowerBound];v <= this.upperBound;[v+=this.majorTickIncrement]
+21@@MethodInvocation:this.background.draw(g2,this,frame,area)
+21@@MethodInvocation:this.background.draw(g2,this,frame,area)
+8@@ThenBody
+25@@MethodInvocation:this.background.isClippedToWindow()
+8@@ThenBody
+25@@InfixExpression:this.background != null && this.background.isVisible()
+21@@MethodInvocation:current.draw(g2,this,frame,area)
+21@@MethodInvocation:current.draw(g2,this,frame,area)
+8@@ThenBody
+25@@MethodInvocation:current.isClippedToWindow()
+8@@ThenBody
+25@@MethodInvocation:current.isVisible()
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:this.cap.draw(g2,this,frame,area)
+21@@MethodInvocation:this.cap.draw(g2,this,frame,area)
+8@@ThenBody
+25@@MethodInvocation:this.cap.isClippedToWindow()
+8@@ThenBody
+25@@InfixExpression:this.cap != null && this.cap.isVisible()
+21@@MethodInvocation:this.dialFrame.draw(g2,this,frame,area)
+21@@MethodInvocation:this.dialFrame.draw(g2,this,frame,area)
+8@@ThenBody
+25@@MethodInvocation:this.dialFrame.isVisible()
+21@@MethodInvocation:g2.draw(e)
+21@@MethodInvocation:g2.draw(e)
+21@@MethodInvocation:g2.draw(window)
+21@@MethodInvocation:g2.draw(window)
+21@@MethodInvocation:g2.draw(outerWindow)
+21@@MethodInvocation:g2.draw(outerWindow)
+21@@MethodInvocation:g2.draw(linkAreaXX)
+21@@MethodInvocation:g2.draw(linkAreaXX)
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_LINK_AREA
+21@@MethodInvocation:g2.draw(new Ellipse2D.Double(linkAreaXX.getX(),linkAreaXX.getY(),linkAreaXX.getWidth(),linkAreaXX.getHeight()))
+21@@MethodInvocation:g2.draw(new Ellipse2D.Double(linkAreaXX.getX(),linkAreaXX.getY(),linkAreaXX.getWidth(),linkAreaXX.getHeight()))
+8@@ThenBody
+25@@SimpleName:DEBUG_DRAW_LINK_AREA
+21@@MethodInvocation:g2.draw(polygon)
+21@@MethodInvocation:g2.draw(polygon)
+24@@[int categoryIndex=0];categoryIndex < categoryCount;[categoryIndex++]
+21@@MethodInvocation:g2.draw(upperArc)
+21@@MethodInvocation:g2.draw(upperArc)
+24@@[int sectionIndex=0];sectionIndex < categoryCount;[sectionIndex++]
+21@@MethodInvocation:g2.draw(side)
+21@@MethodInvocation:g2.draw(side)
+8@@ThenBody
+25@@SimpleName:drawFront
+8@@ThenBody
+25@@InfixExpression:extent > -180.0
+8@@ThenBody
+25@@PrefixExpression:!isAngleAtBack(end)
+8@@ThenBody
+25@@MethodInvocation:isAngleAtFront(start)
+8@@ThenBody
+25@@InfixExpression:extent < 0.0
+21@@MethodInvocation:drawSide(g2,pieArea,segment,front,back,paint,outlinePaint,outlineStroke,false,true)
+21@@MethodInvocation:drawSide(g2,pieArea,segment,front,back,paint,outlinePaint,outlineStroke,false,true)
+8@@ThenBody
+25@@InfixExpression:segment != null
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:g2.draw(side1)
+21@@MethodInvocation:g2.draw(side1)
+8@@ThenBody
+25@@SimpleName:drawFront
+8@@ElseBody
+25@@InfixExpression:extent > -180.0
+8@@ThenBody
+25@@PrefixExpression:!isAngleAtBack(end)
+8@@ThenBody
+25@@MethodInvocation:isAngleAtFront(start)
+8@@ThenBody
+25@@InfixExpression:extent < 0.0
+21@@MethodInvocation:drawSide(g2,pieArea,segment,front,back,paint,outlinePaint,outlineStroke,true,false)
+21@@MethodInvocation:drawSide(g2,pieArea,segment,front,back,paint,outlinePaint,outlineStroke,true,false)
+8@@ThenBody
+25@@InfixExpression:segment != null
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:g2.draw(side2)
+21@@MethodInvocation:g2.draw(side2)
+8@@ThenBody
+25@@SimpleName:drawFront
+8@@ElseBody
+25@@InfixExpression:extent > -180.0
+8@@ThenBody
+25@@PrefixExpression:!isAngleAtBack(end)
+8@@ThenBody
+25@@MethodInvocation:isAngleAtFront(start)
+8@@ThenBody
+25@@InfixExpression:extent < 0.0
+21@@MethodInvocation:g2.draw(back)
+21@@MethodInvocation:g2.draw(back)
+8@@ThenBody
+25@@SimpleName:drawBack
+8@@ElseBody
+25@@InfixExpression:extent > -180.0
+8@@ThenBody
+25@@PrefixExpression:!isAngleAtBack(end)
+8@@ThenBody
+25@@MethodInvocation:isAngleAtFront(start)
+8@@ThenBody
+25@@InfixExpression:extent < 0.0
+21@@MethodInvocation:g2.draw(front)
+21@@MethodInvocation:g2.draw(front)
+8@@ThenBody
+25@@SimpleName:drawFront
+8@@ElseBody
+25@@InfixExpression:extent > -180.0
+8@@ThenBody
+25@@PrefixExpression:!isAngleAtFront(end)
+8@@ElseBody
+25@@MethodInvocation:isAngleAtFront(start)
+8@@ThenBody
+25@@InfixExpression:extent < 0.0
+21@@MethodInvocation:g2.draw(head)
+21@@MethodInvocation:g2.draw(head)
+8@@ThenBody
+25@@InfixExpression:value >= 0
+8@@ThenBody
+25@@InfixExpression:dataValue != null
+24@@[int cat=0];cat < catCount;[cat++]
+21@@MethodInvocation:drawRadarPoly(g2,radarArea,centre,info,series,catCount,headH,headW)
+21@@MethodInvocation:drawRadarPoly(g2,radarArea,centre,info,series,catCount,headH,headW)
+24@@[int series=0];series < seriesCount;[series++]
+8@@ThenBody
+25@@PrefixExpression:!DatasetUtilities.isEmptyOrNull(this.dataset)
+60@@AxisState axisState=axis.draw(g2,cursor,area,dataArea,edge,info);
+60@@AxisState axisState=axis.draw(g2,cursor,area,dataArea,edge,info);
+21@@MethodInvocation:plot.draw(g2,this.subplotAreas[i],anchor,parentState,subplotInfo)
+21@@MethodInvocation:plot.draw(g2,this.subplotAreas[i],anchor,parentState,subplotInfo)
+24@@[int i=0];i < this.subplots.size();[i++]
+21@@MethodInvocation:this.rangeAxis.draw(g2,cursor,area,drawArea,RectangleEdge.RIGHT,null)
+21@@MethodInvocation:this.rangeAxis.draw(g2,cursor,area,drawArea,RectangleEdge.RIGHT,null)
+50@@FieldAccess:this.axisLocation
+8@@ThenBody
+25@@InfixExpression:(this.rangeAxis != null) && (this.axisLocation != NONE)
+8@@ThenBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getValue() != null)
+21@@MethodInvocation:this.rangeAxis.draw(g2,cursor,area,drawArea,RectangleEdge.LEFT,null)
+21@@MethodInvocation:this.rangeAxis.draw(g2,cursor,area,drawArea,RectangleEdge.LEFT,null)
+50@@FieldAccess:this.axisLocation
+8@@ThenBody
+25@@InfixExpression:(this.rangeAxis != null) && (this.axisLocation != NONE)
+8@@ThenBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getValue() != null)
+21@@MethodInvocation:g2.draw(outerThermometer)
+21@@MethodInvocation:g2.draw(outerThermometer)
+21@@MethodInvocation:g2.draw(innerThermometer)
+21@@MethodInvocation:g2.draw(innerThermometer)
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.TOP,plotState);
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.TOP,plotState);
+61@@MethodInvocation:iterator.hasNext()
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.BOTTOM,plotState);
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.BOTTOM,plotState);
+61@@MethodInvocation:iterator.hasNext()
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.LEFT,plotState);
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.LEFT,plotState);
+61@@MethodInvocation:iterator.hasNext()
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.RIGHT,plotState);
+60@@AxisState info=axis.draw(g2,cursor,plotArea,dataArea,RectangleEdge.RIGHT,plotState);
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:annotation.draw(g2,this,dataArea,xAxis,yAxis,0,info)
+21@@MethodInvocation:annotation.draw(g2,this,dataArea,xAxis,yAxis,0,info)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.FOREGROUND,state)
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.FOREGROUND,state)
+8@@ThenBody
+25@@InfixExpression:r != null
+24@@[int i=0];i < datasetCount;[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+21@@Assignment:this.drawBorder=draw
+21@@Assignment:this.drawBorder=draw
+60@@AxisState state=axis.draw(g2,cursor,area,dataArea,rangeEdge,info);
+60@@AxisState state=axis.draw(g2,cursor,area,dataArea,rangeEdge,info);
+21@@MethodInvocation:plot.draw(g2,this.subplotArea[i],null,parentState,subplotInfo)
+21@@MethodInvocation:plot.draw(g2,this.subplotArea[i],null,parentState,subplotInfo)
+24@@[int i=0];i < this.subplots.size();[i++]
+21@@MethodInvocation:this.chart.draw(bufferG2,chartArea,this.anchor,this.info)
+21@@MethodInvocation:this.chart.draw(bufferG2,chartArea,this.anchor,this.info)
+8@@ThenBody
+25@@SimpleName:scale
+8@@ThenBody
+25@@FieldAccess:this.refreshBuffer
+8@@ThenBody
+25@@FieldAccess:this.useBuffer
+21@@SuperMethodInvocation:super.paintComponent(g)
+21@@SuperMethodInvocation:super.paintComponent(g)
+21@@MethodInvocation:this.chart.draw(bufferG2,bufferArea,this.anchor,this.info)
+21@@MethodInvocation:this.chart.draw(bufferG2,bufferArea,this.anchor,this.info)
+8@@ElseBody
+25@@SimpleName:scale
+8@@ThenBody
+25@@FieldAccess:this.refreshBuffer
+8@@ThenBody
+25@@FieldAccess:this.useBuffer
+21@@MethodInvocation:this.chart.draw(g2,chartArea,this.anchor,this.info)
+21@@MethodInvocation:this.chart.draw(g2,chartArea,this.anchor,this.info)
+8@@ElseBody
+25@@FieldAccess:this.useBuffer
+21@@MethodInvocation:g2.draw(this.zoomRectangle)
+21@@MethodInvocation:g2.draw(this.zoomRectangle)
+8@@ElseBody
+25@@FieldAccess:this.fillZoomRectangle
+8@@ThenBody
+25@@InfixExpression:this.zoomRectangle != null
+21@@MethodInvocation:drawZoomRectangle(g2)
+21@@MethodInvocation:drawZoomRectangle(g2)
+21@@MethodInvocation:g2.draw(this.verticalTraceLine)
+21@@MethodInvocation:g2.draw(this.verticalTraceLine)
+8@@ThenBody
+25@@InfixExpression:this.verticalTraceLine != null
+8@@ThenBody
+25@@InfixExpression:((int)dataArea.getMinX() < x) && (x < (int)dataArea.getMaxX())
+21@@MethodInvocation:drawHorizontalAxisTrace(g2,e.getX())
+21@@MethodInvocation:drawHorizontalAxisTrace(g2,e.getX())
+8@@ThenBody
+25@@FieldAccess:this.horizontalAxisTrace
+21@@MethodInvocation:g2.draw(this.horizontalTraceLine)
+21@@MethodInvocation:g2.draw(this.horizontalTraceLine)
+8@@ThenBody
+25@@InfixExpression:this.horizontalTraceLine != null
+8@@ThenBody
+25@@InfixExpression:((int)dataArea.getMinY() < y) && (y < (int)dataArea.getMaxY())
+21@@MethodInvocation:drawVerticalAxisTrace(g2,e.getY())
+21@@MethodInvocation:drawVerticalAxisTrace(g2,e.getY())
+8@@ThenBody
+25@@FieldAccess:this.verticalAxisTrace
+21@@MethodInvocation:this.chart.draw(g2,new Rectangle2D.Double(x,y,w,h),this.anchor,null)
+21@@MethodInvocation:this.chart.draw(g2,new Rectangle2D.Double(x,y,w,h),this.anchor,null)
+60@@JPopupMenu result=super.createPopupMenu(properties,save,print,zoom);
+60@@JPopupMenu result=super.createPopupMenu(properties,save,print,zoom);
+21@@Assignment:this.popup=createPopupMenu(properties,save,print,zoom)
+21@@Assignment:this.popup=createPopupMenu(properties,save,print,zoom)
+8@@ThenBody
+25@@InfixExpression:properties || save || print|| zoom
+17@@this(chart,DEFAULT_WIDTH,DEFAULT_HEIGHT,DEFAULT_MINIMUM_DRAW_WIDTH,DEFAULT_MINIMUM_DRAW_HEIGHT,DEFAULT_MAXIMUM_DRAW_WIDTH,DEFAULT_MAXIMUM_DRAW_HEIGHT,DEFAULT_BUFFER_USED,properties,save,print,zoom,tooltips);
+17@@this(chart,DEFAULT_WIDTH,DEFAULT_HEIGHT,DEFAULT_MINIMUM_DRAW_WIDTH,DEFAULT_MINIMUM_DRAW_HEIGHT,DEFAULT_MAXIMUM_DRAW_WIDTH,DEFAULT_MAXIMUM_DRAW_HEIGHT,DEFAULT_BUFFER_USED,properties,save,print,zoom,tooltips);
+21@@MethodInvocation:job.print()
+21@@MethodInvocation:job.print()
+54@@try:[]
+8@@ThenBody
+25@@MethodInvocation:job.printDialog()
+8@@ThenBody
+25@@InfixExpression:pf2 != pf
+21@@MethodInvocation:chart.draw(g2,new Rectangle2D.Double(0,0,defaultWidth,defaultHeight),null,null)
+21@@MethodInvocation:chart.draw(g2,new Rectangle2D.Double(0,0,defaultWidth,defaultHeight),null,null)
+8@@ThenBody
+25@@SimpleName:scale
+21@@MethodInvocation:this.drawable.draw(g2,area)
+21@@MethodInvocation:this.drawable.draw(g2,area)
+21@@MethodInvocation:g2.draw(box)
+21@@MethodInvocation:g2.draw(box)
+8@@ThenBody
+25@@InfixExpression:this.stroke != null && this.outlinePaint != null
+21@@MethodInvocation:annotation.draw(g2,this.plot,dataArea,domainAxis,rangeAxis,0,info)
+21@@MethodInvocation:annotation.draw(g2,this.plot,dataArea,domainAxis,rangeAxis,0,info)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:drawAnnotations(g2,dataArea,state)
+21@@MethodInvocation:drawAnnotations(g2,dataArea,state)
+21@@MethodInvocation:g2.draw(hotspot)
+21@@MethodInvocation:g2.draw(hotspot)
+8@@ThenBody
+25@@MethodInvocation:isOutline()
+21@@MethodInvocation:g2.draw(block)
+21@@MethodInvocation:g2.draw(block)
+21@@Assignment:this.drawBarOutline=draw
+21@@Assignment:this.drawBarOutline=draw
+21@@MethodInvocation:renderer.setDrawBarOutline(false)
+21@@MethodInvocation:renderer.setDrawBarOutline(false)
+60@@JFreeChart chart=createChart(createDataset());
+60@@JFreeChart chart=createChart(createDataset());
+60@@JFreeChart chart=createChart(dataset);
+60@@JFreeChart chart=createChart(dataset);
+21@@MethodInvocation:g2.draw(bar)
+21@@MethodInvocation:g2.draw(bar)
+8@@ThenBody
+25@@InfixExpression:stroke != null && paint != null
+8@@ThenBody
+25@@InfixExpression:isDrawBarOutline() && Math.abs(translatedEndX - translatedStartX) > 3
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyHigh,xx,yyMaxOpenClose,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyHigh,xx,yyMaxOpenClose,xx))
+8@@ThenBody
+25@@SimpleName:horiz
+8@@ThenBody
+25@@InfixExpression:yHigh > maxOpenClose
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyHigh,xx,yyMaxOpenClose))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyHigh,xx,yyMaxOpenClose))
+8@@ElseBody
+25@@SimpleName:horiz
+8@@ThenBody
+25@@InfixExpression:yHigh > maxOpenClose
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyLow,xx,yyMinOpenClose,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyLow,xx,yyMinOpenClose,xx))
+8@@ThenBody
+25@@SimpleName:horiz
+8@@ThenBody
+25@@InfixExpression:yLow < minOpenClose
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyLow,xx,yyMinOpenClose))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyLow,xx,yyMinOpenClose))
+8@@ElseBody
+25@@SimpleName:horiz
+8@@ThenBody
+25@@InfixExpression:yLow < minOpenClose
+21@@MethodInvocation:g2.draw(body)
+21@@MethodInvocation:g2.draw(body)
+21@@MethodInvocation:g2.draw(this.pArea)
+21@@MethodInvocation:g2.draw(this.pArea)
+8@@ThenBody
+25@@MethodInvocation:isOutline()
+8@@ThenBody
+25@@InfixExpression:getPlotArea() && item > 0 && this.pArea != null && (item == (itemCount - 1) || Double.isNaN(y1))
+21@@Assignment:this.drawXError=draw
+21@@Assignment:this.drawXError=draw
+8@@ThenBody
+25@@InfixExpression:this.drawXError != draw
+21@@Assignment:this.drawYError=draw
+21@@Assignment:this.drawYError=draw
+8@@ThenBody
+25@@InfixExpression:this.drawYError != draw
+21@@MethodInvocation:g2.draw(cap1)
+21@@MethodInvocation:g2.draw(cap1)
+8@@ThenBody
+25@@FieldAccess:this.drawXError
+8@@ThenBody
+25@@InfixExpression:pass == 0 && dataset instanceof IntervalXYDataset && getItemVisible(series,item)
+21@@MethodInvocation:g2.draw(cap2)
+21@@MethodInvocation:g2.draw(cap2)
+8@@ThenBody
+25@@FieldAccess:this.drawXError
+8@@ThenBody
+25@@InfixExpression:pass == 0 && dataset instanceof IntervalXYDataset && getItemVisible(series,item)
+21@@Assignment:this.drawOpenTicks=draw
+21@@Assignment:this.drawOpenTicks=draw
+21@@Assignment:this.drawCloseTicks=draw
+21@@Assignment:this.drawCloseTicks=draw
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyLow,xx,yyHigh,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyLow,xx,yyHigh,xx))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(yHigh) && !Double.isNaN(yLow)
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyLow,xx,yyHigh))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyLow,xx,yyHigh))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(yHigh) && !Double.isNaN(yLow)
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyOpen,xx + delta,yyOpen,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyOpen,xx + delta,yyOpen,xx))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@PrefixExpression:!Double.isNaN(yOpen)
+8@@ThenBody
+25@@MethodInvocation:getDrawOpenTicks()
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - delta,yyOpen,xx,yyOpen))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - delta,yyOpen,xx,yyOpen))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@PrefixExpression:!Double.isNaN(yOpen)
+8@@ThenBody
+25@@MethodInvocation:getDrawOpenTicks()
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyClose,xx,yyClose,xx - delta))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyClose,xx,yyClose,xx - delta))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@PrefixExpression:!Double.isNaN(yClose)
+8@@ThenBody
+25@@MethodInvocation:getDrawCloseTicks()
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyClose,xx + delta,yyClose))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyClose,xx + delta,yyClose))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@PrefixExpression:!Double.isNaN(yClose)
+8@@ThenBody
+25@@MethodInvocation:getDrawCloseTicks()
+8@@ThenBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(yy0,xx0,yy,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yy0,xx0,yy,xx))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+8@@ElseBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx0,yy0,xx,yy))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx0,yy0,xx,yy))
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+8@@ElseBody
+25@@InstanceofExpression:dataset instanceof OHLCDataset
+21@@MethodInvocation:g2.draw(circle)
+21@@MethodInvocation:g2.draw(circle)
+8@@ThenBody
+25@@PrefixExpression:!Double.isNaN(z)
+21@@MethodInvocation:g2.draw(p)
+21@@MethodInvocation:g2.draw(p)
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMax,xx,yyQ3Median,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMax,xx,yyQ3Median,xx))
+21@@MethodInvocation:drawHorizontalItem(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+21@@MethodInvocation:drawHorizontalItem(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,statData,row,column)
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,statData,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column)
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,data,row,column)
+21@@MethodInvocation:drawHorizontalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,data,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMax,xx - width / 2,yyMax,xx + width / 2))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMax,xx - width / 2,yyMax,xx + width / 2))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMin,xx,yyQ1Median,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMin,xx,yyQ1Median,xx))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMin,xx - width / 2,yyMin,xx + width / 2))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMin,xx - width / 2,yyMin,xx + width / 2))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMedian,xx - width / 2,yyMedian,xx + width / 2))
+21@@MethodInvocation:g2.draw(new Line2D.Double(yyMedian,xx - width / 2,yyMedian,xx + width / 2))
+21@@MethodInvocation:g2.draw(avgEllipse)
+21@@MethodInvocation:g2.draw(avgEllipse)
+8@@ThenBody
+25@@InfixExpression:(yyAverage > (dataArea.getMinX() - aRadius)) && (yyAverage < (dataArea.getMaxX() + aRadius))
+8@@ThenBody
+25@@InfixExpression:yAverage != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMax,xx,yyQ3Median))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMax,xx,yyQ3Median))
+21@@MethodInvocation:drawVerticalItem(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+21@@MethodInvocation:drawVerticalItem(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState,pass)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,statData,row,column)
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,statData,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column)
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,dataset,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,data,row,column)
+21@@MethodInvocation:drawVerticalItem(g2,state,dataArea,plot,domainAxis,rangeAxis,data,row,column)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMax,xx + width / 2,yyMax))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMax,xx + width / 2,yyMax))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMin,xx,yyQ1Median))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMin,xx,yyQ1Median))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMin,xx + width / 2,yyMin))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMin,xx + width / 2,yyMin))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMedian,xx + width / 2,yyMedian))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - width / 2,yyMedian,xx + width / 2,yyMedian))
+21@@MethodInvocation:g2.draw(dot)
+21@@MethodInvocation:g2.draw(dot)
+21@@MethodInvocation:drawEllipse(point,oRadius,g2)
+21@@MethodInvocation:drawEllipse(point,oRadius,g2)
+8@@ElseBody
+25@@MethodInvocation:list.isMultiple()
+24@@[Iterator iterator=outlierListCollection.iterator()];iterator.hasNext();[]
+21@@MethodInvocation:g2.draw(dot1)
+21@@MethodInvocation:g2.draw(dot1)
+21@@MethodInvocation:drawMultipleEllipse(point,width,oRadius,g2)
+21@@MethodInvocation:drawMultipleEllipse(point,width,oRadius,g2)
+8@@ThenBody
+25@@MethodInvocation:list.isMultiple()
+24@@[Iterator iterator=outlierListCollection.iterator()];iterator.hasNext();[]
+21@@MethodInvocation:drawMultipleEllipse(point,state.getBarWidth(),oRadius,g2)
+21@@MethodInvocation:drawMultipleEllipse(point,state.getBarWidth(),oRadius,g2)
+8@@ThenBody
+25@@MethodInvocation:list.isMultiple()
+24@@[Iterator iterator=outlierListCollection.iterator()];iterator.hasNext();[]
+8@@ThenBody
+25@@InfixExpression:yOutliers != null
+21@@MethodInvocation:g2.draw(dot2)
+21@@MethodInvocation:g2.draw(dot2)
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m + side,xx + side,m + side))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m + side,xx + side,m + side))
+21@@MethodInvocation:drawHighFarOut(aRadius,g2,xx,maxAxisValue)
+21@@MethodInvocation:drawHighFarOut(aRadius,g2,xx,maxAxisValue)
+8@@ThenBody
+25@@MethodInvocation:outlierListCollection.isHighFarOut()
+21@@MethodInvocation:drawHighFarOut(aRadius / 2.0,g2,xx + state.getBarWidth() / 2.0,maxAxisValue)
+21@@MethodInvocation:drawHighFarOut(aRadius / 2.0,g2,xx + state.getBarWidth() / 2.0,maxAxisValue)
+8@@ThenBody
+25@@MethodInvocation:outlierListCollection.isHighFarOut()
+8@@ThenBody
+25@@InfixExpression:yOutliers != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m + side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m + side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx + side,m + side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx + side,m + side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m - side,xx + side,m - side))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m - side,xx + side,m - side))
+21@@MethodInvocation:drawLowFarOut(aRadius,g2,xx,minAxisValue)
+21@@MethodInvocation:drawLowFarOut(aRadius,g2,xx,minAxisValue)
+8@@ThenBody
+25@@MethodInvocation:outlierListCollection.isLowFarOut()
+21@@MethodInvocation:drawLowFarOut(aRadius / 2.0,g2,xx + state.getBarWidth() / 2.0,minAxisValue)
+21@@MethodInvocation:drawLowFarOut(aRadius / 2.0,g2,xx + state.getBarWidth() / 2.0,minAxisValue)
+8@@ThenBody
+25@@MethodInvocation:outlierListCollection.isLowFarOut()
+8@@ThenBody
+25@@InfixExpression:yOutliers != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m - side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx - side,m - side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx + side,m - side,xx,m))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx + side,m - side,xx,m))
+21@@MethodInvocation:g2.draw(areaState.getLine())
+21@@MethodInvocation:g2.draw(areaState.getLine())
+8@@ThenBody
+25@@InfixExpression:item > 0
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+8@@ThenBody
+25@@InfixExpression:pass == 0
+21@@MethodInvocation:g2.draw(areaState.getSeriesArea())
+21@@MethodInvocation:g2.draw(areaState.getSeriesArea())
+8@@ThenBody
+25@@MethodInvocation:isOutline()
+8@@ThenBody
+25@@InfixExpression:getPlotArea() && item > 0 && item == (itemCount - 1)
+8@@ThenBody
+25@@InfixExpression:pass == 0
+21@@MethodInvocation:g2.draw(areaState.line)
+21@@MethodInvocation:g2.draw(areaState.line)
+8@@ThenBody
+25@@InfixExpression:item > 0
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@MethodInvocation:g2.draw(areaState.area)
+21@@MethodInvocation:g2.draw(areaState.area)
+8@@ThenBody
+25@@MethodInvocation:isOutline()
+8@@ThenBody
+25@@InfixExpression:getPlotArea() && item > 0 && item == (itemCount - 1)
+21@@MethodInvocation:g2.draw(s.seriesPath)
+21@@MethodInvocation:g2.draw(s.seriesPath)
+8@@ThenBody
+25@@InfixExpression:s.seriesIndex == series
+8@@ThenBody
+25@@InfixExpression:item == dataset.getItemCount(series) - 1
+8@@ThenBody
+25@@FieldAccess:this.drawSeriesLineAsPath
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@MethodInvocation:g2.draw(state.workingLine)
+21@@MethodInvocation:g2.draw(state.workingLine)
+8@@ThenBody
+25@@MethodInvocation:state.workingLine.intersects(dataArea)
+8@@ThenBody
+25@@SimpleName:drawLine
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(x0) && !Double.isNaN(y0)
+8@@ThenBody
+25@@InfixExpression:item != 0 && itemVisible
+8@@ElseBody
+25@@FieldAccess:this.drawSeriesLineAsPath
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@MethodInvocation:x_graphics.draw(l_line)
+21@@MethodInvocation:x_graphics.draw(l_line)
+8@@ThenBody
+25@@InfixExpression:(null != l_line) && l_line.intersects(x_dataArea)
+21@@MethodInvocation:drawItemPass1(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState)
+21@@MethodInvocation:drawItemPass1(g2,dataArea,info,plot,domainAxis,rangeAxis,dataset,series,item,crosshairState)
+8@@ThenBody
+25@@InfixExpression:pass == 1
+8@@ElseBody
+25@@InfixExpression:pass == 0
+21@@MethodInvocation:g2.draw(corner)
+21@@MethodInvocation:g2.draw(corner)
+21@@MethodInvocation:drawBackground(g2,area)
+21@@MethodInvocation:drawBackground(g2,area)
+21@@MethodInvocation:g2.draw(clip)
+21@@MethodInvocation:g2.draw(clip)
+8@@ThenBody
+25@@InfixExpression:(outlineStroke != null) && (outlinePaint != null)
+21@@MethodInvocation:drawOutline(g2,dataArea)
+21@@MethodInvocation:drawOutline(g2,dataArea)
+21@@MethodInvocation:g2.draw(line1)
+21@@MethodInvocation:g2.draw(line1)
+21@@MethodInvocation:renderer1.drawDomainGridline(g2,this,dataArea,xx)
+21@@MethodInvocation:renderer1.drawDomainGridline(g2,this,dataArea,xx)
+8@@ThenBody
+25@@InfixExpression:renderer1 != null
+24@@[int c=0];c < columnCount;[c++]
+8@@ThenBody
+25@@InfixExpression:axis != null
+8@@ThenBody
+25@@InfixExpression:data != null
+8@@ThenBody
+25@@InfixExpression:(gridStroke != null) && (gridPaint != null)
+8@@ThenBody
+25@@MethodInvocation:isDomainGridlinesVisible()
+21@@MethodInvocation:drawDomainGridlines(g2,dataArea,domainAxisState.getTicks())
+21@@MethodInvocation:drawDomainGridlines(g2,dataArea,domainAxisState.getTicks())
+21@@MethodInvocation:g2.draw(line2)
+21@@MethodInvocation:g2.draw(line2)
+21@@MethodInvocation:g2.draw(faces[f])
+21@@MethodInvocation:g2.draw(faces[f])
+8@@ThenBody
+25@@SimpleName:drawOutlines
+24@@[int f=0];f < 6;[f++]
+24@@[int k=0];k < blockCount;[k++]
+21@@MethodInvocation:drawStackHorizontal(values,category,g2,state,adjusted,plot,domainAxis,rangeAxis,dataset)
+21@@MethodInvocation:drawStackHorizontal(values,category,g2,state,adjusted,plot,domainAxis,rangeAxis,dataset)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+21@@Assignment:this.plotLines=draw
+21@@Assignment:this.plotLines=draw
+8@@ThenBody
+25@@InfixExpression:this.plotLines != draw
+21@@MethodInvocation:g2.draw(new Line2D.Double(x1,minY,x1,maxY))
+21@@MethodInvocation:g2.draw(new Line2D.Double(x1,minY,x1,maxY))
+8@@ThenBody
+25@@InfixExpression:orient == PlotOrientation.VERTICAL
+8@@ThenBody
+25@@InfixExpression:dataset.getRowCount() - 1 == row
+8@@ThenBody
+25@@InfixExpression:this.lastCategory == column
+8@@ThenBody
+25@@InfixExpression:value != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(minY,x1,maxY,x1))
+21@@MethodInvocation:g2.draw(new Line2D.Double(minY,x1,maxY,x1))
+8@@ElseBody
+25@@InfixExpression:orient == PlotOrientation.VERTICAL
+8@@ThenBody
+25@@InfixExpression:dataset.getRowCount() - 1 == row
+8@@ThenBody
+25@@InfixExpression:this.lastCategory == column
+8@@ThenBody
+25@@InfixExpression:value != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMax,yymid,xxQ3,yymid))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMax,yymid,xxQ3,yymid))
+8@@ThenBody
+25@@InfixExpression:xQ1 != null && xQ3 != null && xMax != null && xMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMax,yy,xxMax,yy + state.getBarWidth()))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMax,yy,xxMax,yy + state.getBarWidth()))
+8@@ThenBody
+25@@InfixExpression:xQ1 != null && xQ3 != null && xMax != null && xMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMin,yymid,xxQ1,yymid))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMin,yymid,xxQ1,yymid))
+8@@ThenBody
+25@@InfixExpression:xQ1 != null && xQ3 != null && xMax != null && xMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMin,yy,xxMin,yy + state.getBarWidth()))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMin,yy,xxMin,yy + state.getBarWidth()))
+8@@ThenBody
+25@@InfixExpression:xQ1 != null && xQ3 != null && xMax != null && xMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMedian,yy,xxMedian,yy + state.getBarWidth()))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxMedian,yy,xxMedian,yy + state.getBarWidth()))
+8@@ThenBody
+25@@InfixExpression:xMedian != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxmid,yyMax,xxmid,yyQ3))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxmid,yyMax,xxmid,yyQ3))
+8@@ThenBody
+25@@InfixExpression:yQ1 != null && yQ3 != null && yMax != null && yMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMax,xx + state.getBarWidth(),yyMax))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMax,xx + state.getBarWidth(),yyMax))
+8@@ThenBody
+25@@InfixExpression:yQ1 != null && yQ3 != null && yMax != null && yMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxmid,yyMin,xxmid,yyQ1))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xxmid,yyMin,xxmid,yyQ1))
+8@@ThenBody
+25@@InfixExpression:yQ1 != null && yQ3 != null && yMax != null && yMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMin,xx + state.getBarWidth(),yyMin))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMin,xx + state.getBarWidth(),yyMin))
+8@@ThenBody
+25@@InfixExpression:yQ1 != null && yQ3 != null && yMax != null && yMin != null
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMedian,xx + state.getBarWidth(),yyMedian))
+21@@MethodInvocation:g2.draw(new Line2D.Double(xx,yyMedian,xx + state.getBarWidth(),yyMedian))
+8@@ThenBody
+25@@InfixExpression:yMedian != null
+21@@MethodInvocation:g2.draw(bar3dRight)
+21@@MethodInvocation:g2.draw(bar3dRight)
+8@@ThenBody
+25@@InfixExpression:bar3dRight != null
+8@@ThenBody
+25@@InfixExpression:isDrawBarOutline() && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD
+21@@MethodInvocation:g2.draw(bar3dTop)
+21@@MethodInvocation:g2.draw(bar3dTop)
+8@@ThenBody
+25@@InfixExpression:bar3dTop != null
+8@@ThenBody
+25@@InfixExpression:isDrawBarOutline() && state.getBarWidth() > BAR_OUTLINE_WIDTH_THRESHOLD
+21@@MethodInvocation:g2.draw(state.line)
+21@@MethodInvocation:g2.draw(state.line)
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+21@@MethodInvocation:g2.drawLine(x1,y1,x2,y2)
+21@@MethodInvocation:g2.drawLine(x1,y1,x2,y2)
+24@@[int w=0];w < 360;[w+=15]
+21@@MethodInvocation:g2.draw(poly)
+21@@MethodInvocation:g2.draw(poly)
+8@@ElseBody
+25@@MethodInvocation:isSeriesFilled(seriesIndex)
+21@@MethodInvocation:this.renderer.drawSeries(g2,dataArea,info,this,this.dataset,series)
+21@@MethodInvocation:this.renderer.drawSeries(g2,dataArea,info,this,this.dataset,series)
+24@@[int series=0];series < seriesCount;[series++]
+8@@ThenBody
+25@@PrefixExpression:!DatasetUtilities.isEmptyOrNull(this.dataset)
+21@@MethodInvocation:render(g2,dataArea,info)
+21@@MethodInvocation:render(g2,dataArea,info)
+8@@ThenBody
+25@@InfixExpression:this.renderer != null
+21@@MethodInvocation:g2.draw(ring)
+21@@MethodInvocation:g2.draw(ring)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:this.renderer.drawRadialGridLines(g2,this,this.axis,radialTicks,dataArea)
+21@@MethodInvocation:this.renderer.drawRadialGridLines(g2,this,this.axis,radialTicks,dataArea)
+8@@ThenBody
+25@@InfixExpression:(gridStroke != null) && (gridPaint != null)
+8@@ThenBody
+25@@MethodInvocation:isRadiusGridlinesVisible()
+21@@MethodInvocation:drawGridlines(g2,dataArea,this.angleTicks,state.getTicks())
+21@@MethodInvocation:drawGridlines(g2,dataArea,this.angleTicks,state.getTicks())
+8@@ThenBody
+25@@InfixExpression:this.renderer != null
+21@@MethodInvocation:g2.draw(circle1)
+21@@MethodInvocation:g2.draw(circle1)
+21@@MethodInvocation:g2.draw(circle2)
+21@@MethodInvocation:g2.draw(circle2)
+21@@Assignment:foundData=render(g2,dataArea,i,info,crosshairState) || foundData
+21@@Assignment:foundData=render(g2,dataArea,i,info,crosshairState) || foundData
+24@@[int i=0];i < getDatasetCount();[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+21@@MethodInvocation:g2.drawLine((int)lineX1,(int)lineY1,(int)lineX2,(int)lineY2)
+21@@MethodInvocation:g2.drawLine((int)lineX1,(int)lineY1,(int)lineX2,(int)lineY2)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transX0,transY1,transX1)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transX0,transY1,transX1)
+8@@ThenBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transX0,transY0,transXs)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transX0,transY0,transXs)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transXs,transY1,transXs)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY0,transXs,transY1,transXs)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY1,transXs,transY1,transX1)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transY1,transXs,transY1,transX1)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transX0,transY0,transX1,transY1)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transX0,transY0,transX1,transY1)
+8@@ThenBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transX0,transY0,transXs,transY0)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transX0,transY0,transXs,transY0)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transXs,transY0,transXs,transY1)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transXs,transY0,transXs,transY1)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+21@@MethodInvocation:drawLine(g2,state.workingLine,transXs,transY1,transX1,transY1)
+21@@MethodInvocation:drawLine(g2,state.workingLine,transXs,transY1,transX1,transY1)
+8@@ElseBody
+25@@InfixExpression:transY0 == transY1
+8@@ThenBody
+25@@InfixExpression:orientation == PlotOrientation.VERTICAL
+8@@ElseBody
+25@@InfixExpression:orientation == PlotOrientation.HORIZONTAL
+8@@ThenBody
+25@@InfixExpression:item > 0
+60@@boolean drawLine=true;
+60@@boolean drawLine=true;
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(x0) && !Double.isNaN(y0)
+8@@ThenBody
+25@@InfixExpression:item != 0 && itemVisible
+8@@ElseBody
+25@@FieldAccess:this.drawSeriesLineAsPath
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@Assignment:drawLine=Math.abs(x1 - x0) <= this.gapThreshold
+21@@Assignment:drawLine=Math.abs(x1 - x0) <= this.gapThreshold
+8@@ThenBody
+25@@InfixExpression:this.gapThresholdType == UnitType.ABSOLUTE
+8@@ThenBody
+25@@MethodInvocation:getPlotDiscontinuous()
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(x0) && !Double.isNaN(y0)
+8@@ThenBody
+25@@InfixExpression:item != 0 && itemVisible
+8@@ElseBody
+25@@FieldAccess:this.drawSeriesLineAsPath
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@Assignment:drawLine=Math.abs(x1 - x0) <= ((maxX - minX) / numX * getGapThreshold())
+21@@Assignment:drawLine=Math.abs(x1 - x0) <= ((maxX - minX) / numX * getGapThreshold())
+8@@ElseBody
+25@@InfixExpression:this.gapThresholdType == UnitType.ABSOLUTE
+8@@ThenBody
+25@@MethodInvocation:getPlotDiscontinuous()
+8@@ThenBody
+25@@InfixExpression:!Double.isNaN(x0) && !Double.isNaN(y0)
+8@@ThenBody
+25@@InfixExpression:item != 0 && itemVisible
+8@@ElseBody
+25@@FieldAccess:this.drawSeriesLineAsPath
+8@@ThenBody
+25@@MethodInvocation:getPlotLines()
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x0e,y0,x1s,y0)
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x0e,y0,x1s,y0)
+8@@ThenBody
+25@@InfixExpression:previousValue != null
+8@@ThenBody
+25@@InfixExpression:column != 0
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x1s,y0,x1s,y1)
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x1s,y0,x1s,y1)
+8@@ThenBody
+25@@InfixExpression:previousValue != null
+8@@ThenBody
+25@@InfixExpression:column != 0
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x1s,y1,x1e,y1)
+21@@MethodInvocation:drawLine(g2,(State)state,orientation,x1s,y1,x1e,y1)
+21@@MethodInvocation:g2.drawLine(center.x,center.y,p.x,p.y)
+21@@MethodInvocation:g2.drawLine(center.x,center.y,p.x,p.y)
+61@@MethodInvocation:iterator.hasNext()
+21@@MethodInvocation:this.renderer.drawAngularGridLines(g2,this,angularTicks,dataArea)
+21@@MethodInvocation:this.renderer.drawAngularGridLines(g2,this,angularTicks,dataArea)
+8@@ThenBody
+25@@InfixExpression:(gridStroke != null) && (gridPaint != null)
+8@@ThenBody
+25@@MethodInvocation:isAngleGridlinesVisible()
+21@@MethodInvocation:drawDomainGridlines(g2,dataArea)
+21@@MethodInvocation:drawDomainGridlines(g2,dataArea)
+21@@MethodInvocation:getRenderer().drawOutline(g2,this,dataArea)
+21@@MethodInvocation:getRenderer().drawOutline(g2,this,dataArea)
+8@@ThenBody
+25@@InfixExpression:getRenderer() != null
+21@@MethodInvocation:drawOutline(g2,plotArea)
+21@@MethodInvocation:drawOutline(g2,plotArea)
+8@@ThenBody
+25@@MethodInvocation:DatasetUtilities.isEmptyOrNull(getDataset())
+21@@MethodInvocation:drawOutline(g2,originalPlotArea)
+21@@MethodInvocation:drawOutline(g2,originalPlotArea)
+21@@MethodInvocation:plot.drawOutline(g2,dataArea)
+21@@MethodInvocation:plot.drawOutline(g2,dataArea)
+21@@MethodInvocation:drawBackground(g2,dataArea)
+21@@MethodInvocation:drawBackground(g2,dataArea)
+21@@MethodInvocation:getRenderer().drawBackground(g2,this,dataArea)
+21@@MethodInvocation:getRenderer().drawBackground(g2,this,dataArea)
+8@@ThenBody
+25@@InfixExpression:getRenderer() != null
+21@@MethodInvocation:drawBackground(g2,plotArea)
+21@@MethodInvocation:drawBackground(g2,plotArea)
+21@@MethodInvocation:plot.drawBackground(g2,dataArea)
+21@@MethodInvocation:plot.drawBackground(g2,dataArea)
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.BACKGROUND,info)
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.BACKGROUND,info)
+8@@ThenBody
+25@@InfixExpression:r != null
+24@@[int i=0];i < rendererCount;[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.FOREGROUND,info)
+21@@MethodInvocation:r.drawAnnotations(g2,dataArea,domainAxis,rangeAxis,Layer.FOREGROUND,info)
+8@@ThenBody
+25@@InfixExpression:r != null
+24@@[int i=0];i < rendererCount;[i++]
+8@@ThenBody
+25@@InfixExpression:order == DatasetRenderingOrder.FORWARD
+21@@MethodInvocation:drawAnnotations(g2,dataArea,info)
+21@@MethodInvocation:drawAnnotations(g2,dataArea,info)
+21@@MethodInvocation:drawNoDataMessage(g2,dataArea)
+21@@MethodInvocation:drawNoDataMessage(g2,dataArea)
+8@@ThenBody
+25@@PrefixExpression:!foundData
+21@@MethodInvocation:drawNoDataMessage(g2,plotArea)
+21@@MethodInvocation:drawNoDataMessage(g2,plotArea)
+8@@ElseBody
+25@@InfixExpression:(this.dataset != null) && (this.dataset.getKeys().size() > 0)
+21@@MethodInvocation:drawBorder(g2,contentArea)
+21@@MethodInvocation:drawBorder(g2,contentArea)
+23@@private, boolean, [drawBorder=false]
+23@@private, boolean, [drawBorder=false]
+55@@[public]ClassName:CompassPlot, @@SuperClass:Plot, @@Interface:[Cloneable, Serializable]
+15@@JavaFile
