@@ -1,6 +1,7 @@
 package edu.lu.uni.serval.tbar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -600,6 +603,7 @@ public class TBarFixer extends AbstractFixer {
 		ft.setDictionary(dic);
 		String projectPath = ft.getSourceCodePath();
 		String sourceCodeFile = ft.getSourceCodeFile().getName();
+		String lcsRun = "no";
 
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 		if (donorCodes.size() == 0) {
@@ -610,15 +614,27 @@ public class TBarFixer extends AbstractFixer {
 		ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
 		JsStaticSlicer slicer = new JsStaticSlicer(projectPath);
 		ITree testNode = slicer.findRoot(suspStatementTree);
-		// System.out.println(testNode.toShortString());
 		slicer.staticSlicer(suspStatementTree);
+		// ArrayList<ITree> slicedStatementList = new ArrayList<>();
 		ArrayList<ITree> slicedStatementList = slicer.getSlicedStatement();
-		// System.out.println("size: " + slicer.getSlicedStatement().size());
-
-
+		System.out.println("size: " + slicer.getSlicedStatement().size());
 		// System.exit(0);
+
 		String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
 		String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
+		// System.out.println("=-=-=-=-=-=\n" + suspFileCode);
+		
+		// try {
+		// 	BufferedWriter nocontextBufWriter = new BufferedWriter(new FileWriter(new File("/root/DIRECTION/tfidf/dataset_nocontext/stmt0.txt")));
+		// 	BufferedWriter contextBufWriter = new BufferedWriter(new FileWriter(new File("/root/DIRECTION/tfidf/dataset_context/stmt0.txt")));
+		// 	nocontextBufWriter.write(suspStatementTree.getLabel());
+		// 	contextBufWriter.write(suspMethodCode);
+		// 	contextBufWriter.close();
+		// 	nocontextBufWriter.close();
+			
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 
 		int parentSize = suspStatementTree.getParents().size();
 		ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
@@ -627,7 +643,6 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
 		
 		HashSet<String> originalIngredient = new HashSet<>();
-		// ArrayList<ITree> slicedStatementList = new ArrayList<>();
 		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
@@ -640,8 +655,18 @@ public class TBarFixer extends AbstractFixer {
 			ITree projectFileTree =
 					new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
 			// JsUtils.staticSlicing(slicedStatementList, contextElementList, projectFileTree);
-			SimUtils.lcsSimNoContext(suspStatementTree, projectFileTree, noContextLcsScores);
-			SimUtils.lcsSimContext(suspMethodCode, projectFileTree, filePath, contextLcsScores);
+			if (lcsRun.equals("yes")) {
+				SimUtils.lcsSimNoContext(suspStatementTree, projectFileTree, noContextLcsScores);
+				SimUtils.lcsSimContext(suspMethodCode, projectFileTree, filePath, contextLcsScores);
+			}
+			// String noContextDir = "/root/DIRECTION/tfidf/dataset_nocontext/";
+			// String contextDir = "/root/DIRECTION/tfidf/dataset_context/";
+			// File noContextFolder = new File(noContextDir);
+			// File contextFolder = new File(contextDir);
+			// int noContextDirFileNum = noContextFolder.listFiles().length;
+			// int contextDirFileNum = contextFolder.listFiles().length;
+			
+			// SimUtils.tfidfNoContextDataset(noContextDir, noContextDirFileNum, node);
 		}
 
 		// System.exit(0);
@@ -652,12 +677,14 @@ public class TBarFixer extends AbstractFixer {
 		HashSet<String> lcsContextIngredients = new HashSet<String>();
 		JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
 		JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
-		JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
-		JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
-
 		JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients, "HitRatio");
-		JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
-		JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
+
+		if (lcsRun.equals("yes")) {
+			JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
+			JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
+		}
 
 		System.out.println("============ Analyze info ============");
 		System.out.println(" donorcode size: " + donorCodes.size());

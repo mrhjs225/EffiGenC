@@ -1,4 +1,5 @@
 import os
+from tqdm import tqdm
 
 os.system('mvn package')
 os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSHOT.jar')
@@ -42,7 +43,7 @@ for project_name in projects:
     elif project_name == 'Time':
         buggy_num = 27
 
-    for temp_buggy_num in range(start_num, buggy_num+1):
+    for temp_buggy_num in tqdm(range(start_num, buggy_num+1)):
         if project_name == 'Cli' and temp_buggy_num == 6:
             continue
         elif project_name == 'Closure' and (temp_buggy_num == 63 or temp_buggy_num == 93):
@@ -54,4 +55,4 @@ for project_name in projects:
         elif project_name == 'Time' and temp_buggy_num == 21:
             continue
         bugId = project_name + '_' + str(temp_buggy_num)
-        os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode)
+        os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode + ' > ./Data/Results/' + bugId + '.txt')

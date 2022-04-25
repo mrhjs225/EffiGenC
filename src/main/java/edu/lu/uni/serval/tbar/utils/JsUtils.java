@@ -401,10 +401,11 @@ public class JsUtils {
 
     public static String getMethodString(String code, ITree methodNode) {
         List<String> getMethodList = getMethodCodeList(code);
+        // System.out.println(getMethodList.size());
         String methodName = getMethodName(methodNode);
         String arguments = methodNode.toShortString().split("@@")[3].split(":")[1].trim();
         ArrayList<String> argumentList = new ArrayList<>();
-        methodName.split(":")[1].trim();
+        methodName = methodName.split(":")[1].trim();
 
         if (!arguments.equals("null")) {
             int i = 0;
@@ -421,10 +422,14 @@ public class JsUtils {
             }
         }
         for (String methodCode : getMethodList) {
+            // System.out.println("=-=-=-=-=-=\n" + methodCode);
             if (methodCode.contains("{")) {
                 String tempStr = methodCode.substring(0, methodCode.indexOf("{")).trim();
                 if (arguments.equals("null")) {
                     tempStr = tempStr.replaceAll(" ", "");
+                    // System.out.println("=======\n"+tempStr);
+                    // System.out.println("---\n"+methodName);
+                    // System.out.println("-----\n" + tempStr.contains(methodName+"()"));
                     if (tempStr.contains(methodName + "()")) {
                         return methodCode;
                     }

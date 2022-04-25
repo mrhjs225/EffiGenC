@@ -59,16 +59,7 @@ public class SimUtils {
         return lcsScore;
     }
 
-    public static void tfidfSimNoContext(ITree suspStatement, ITree node, HashMap<ITree, Double> noContextTfIdfScores) {
-        if (Checker.isPureStatement(node.getType())) {
-            noContextTfIdfScores.put(node, lcsScoring(suspStatement.getLabel(), node.getLabel()));
-        }
-        for (ITree childNode : node.getChildren()) {
-            tfidfSimNoContext(suspStatement, childNode, noContextTfIdfScores);
-        }
-    }
-
-    private static double tfidfScoring(String doc1, String doc2) {
-        return 0.0;
+    public static void tfidfNoContextDataset(String datasetDir, int fileNum, ITree node) {
+        // 재귀함수적으로 호출해서 부르기
     }
 }

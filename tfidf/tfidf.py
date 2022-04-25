@@ -3,24 +3,37 @@ import sys
 import os
 from pprint import pprint
 from math import log10
-import numpy as np
+import csv
 
 def idf(term, D):
     numerator = float(len(D))
     denominator = float(1 + len([True for d in D if term in D[d]]))
     return log10(numerator/denominator)
 
-def cosineSimilarity(vec1, vec2):
-    size1 = 1
+def cosineSimilarity(dictionary, vec1, vec2):
+    numerator = 0.0
+    denominator = vec_size(vec1) * vec_size(vec2)
+    for key in dictionary:
+        numerator += vec1[key]*vec2[key]
+    return numerator/denominator
 
-dataset_basic_dir = 'dataset/'
-stmt_file = ''
+def vec_size(vec):
+    sum = 0.0
+    for key in vec:
+        sum += vec[key] * vec[key]
+    return sum**(1/2)
+
+
+context = sys.argv[1]
+
+dataset_basic_dir = 'dataset_' + context + '/'
+susp_file = ''
 doc_list = []
 dictionary = []
 doc_dict = {}
 doc_vec = {}
 with open(dataset_basic_dir + 'stmt0.txt', 'r') as f:
-    stmt_file = f.read()
+    susp_file = f.read()
 
 for target_file in os.listdir(dataset_basic_dir):
     with open(dataset_basic_dir + target_file, 'r') as f :
@@ -37,7 +50,6 @@ for doc in doc_list:
             doc_dict[doc][token] += 1
 
 dictionary = set(dictionary)
-# print(doc_dict)
 
 number_of_doc = len(doc)
 
@@ -48,6 +60,11 @@ for doc in doc_dict:
             doc_vec[doc][term] = idf(term, doc_dict)
         else:
             doc_vec[doc][term] = 0
-# print(doc_vec)
-stmt_vec = doc_vec[stmt_file]
-print(stmt_vec)
+
+f = open('similarity_' + context + '.csv', 'w', newline='')
+for doc in doc_list:
+    sim_score = cosineSimilarity(dictionary, doc_vec[susp_file], doc_vec[doc])
+    print(doc)
+    print(type(doc))
+    f.write(doc + '@@' + str(sim_score) + '\n')
+f.close()

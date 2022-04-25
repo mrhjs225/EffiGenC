@@ -53,7 +53,7 @@ public class JsStaticSlicer {
     }
 
     private static void invocationSearcher(ITree targetNode, int mode) {
-        System.out.println("" + targetNode.toShortString());
+        // System.out.println("" + targetNode.toShortString());
         if (mode == 1) {
             backwardSlicer(targetNode);
         } else {
@@ -67,13 +67,17 @@ public class JsStaticSlicer {
                 keyword = keyword.trim();
             }
         } else {
-            ITree rootNode = JsUtils.findClass(targetNode);
-            keyword = JsUtils.getClassName(rootNode);
-            if (keyword != null) {
-                keyword = keyword.trim();
+            ITree classNode = JsUtils.findClass(targetNode);
+            if (classNode != null) {
+                keyword = JsUtils.getClassName(classNode);
+                if (keyword != null) {
+                    keyword = keyword.trim();
+                }
             }
         }
-
+        if (keyword == null || keyword.equals("")) {
+            return;
+        }
         if (keyword.contains(":")) {
             keyword = keyword.split(":")[1];
         }
