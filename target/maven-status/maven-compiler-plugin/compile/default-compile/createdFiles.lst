@@ -58,6 +58,7 @@ edu/lu/uni/serval/tbar/fixpatterns/ConditionalExpressionMutator$ExpressionAdder.
 edu/lu/uni/serval/tbar/fixtemplate/FixTemplate.class
 edu/lu/uni/serval/jdt/visitor/ExpJdtVisitor.class
 edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer.class
+edu/lu/uni/serval/tbar/utils/DonorCodeAnalyze.class
 edu/lu/uni/serval/tbar/fixpatterns/StatementRemover.class
 edu/lu/uni/serval/tbar/AbstractFixer$SuspCodeNode.class
 edu/lu/uni/serval/tbar/context/Field.class

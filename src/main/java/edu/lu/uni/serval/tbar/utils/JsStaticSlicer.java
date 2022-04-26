@@ -41,7 +41,7 @@ public class JsStaticSlicer {
         // System.out.println("" + targetNode.toShortString());
 
         ArrayList<ITree> slicingElement = new ArrayList<>();
-        JsUtils.extractNode(targetNode, slicingElement)
+        JsUtils.extractNode(targetNode, slicingElement);
         if (mode == 1) {
             backwardSlicer(targetNode, slicingElement);
         } else {
@@ -88,7 +88,7 @@ public class JsStaticSlicer {
         int i = nodeIndex - 1;
         while(i >= 0) {
             ITree siblingNode = targetNode.getParent().getChild(i);
-            if (isSlice(siblingNode)) {
+            if (isSlice(siblingNode, slicingElement)) {
                 slicedStatement.add(siblingNode);
                 overlapStatement.add(siblingNode.toShortString());
                 JsUtils.extractNode(siblingNode, slicingElement);

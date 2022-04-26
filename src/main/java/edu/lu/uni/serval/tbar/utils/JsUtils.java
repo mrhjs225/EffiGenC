@@ -25,7 +25,7 @@ public class JsUtils {
     private static String donorCodesFileDir = "/root/DIRECTION/Data/DonorCodes.txt";
     private static String hitRatioResultFolderDir = "/root/DIRECTION/Data/HitRatio/";
 
-    public static void staticSlicing(ArrayList<ITree> slicedStatementList,
+    public static void keywordBasedSearch(ArrayList<ITree> slicedStatementList,
             ArrayList<String> contextElementList, ITree node) {
         if (Checker.isPureStatement(node.getType())
                 || Checker.isComplexExpression(node.getType())) {
@@ -36,7 +36,7 @@ public class JsUtils {
             }
         }
         for (ITree childNode : node.getChildren()) {
-            staticSlicing(slicedStatementList, contextElementList, childNode);
+            keywordBasedSearch(slicedStatementList, contextElementList, childNode);
         }
     }
 
@@ -451,5 +451,4 @@ public class JsUtils {
         }
         return null;
     }
-
 }
