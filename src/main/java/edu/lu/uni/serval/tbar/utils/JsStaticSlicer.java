@@ -13,13 +13,11 @@ import edu.lu.uni.serval.tbar.utils.JsUtils;
 public class JsStaticSlicer {
 
     private static String projectPath;
-    private static ArrayList<ITree> slicingElement;
     private static ArrayList<ITree> slicedStatement;
     private static ArrayList<String> overlapStatement;
 
     public JsStaticSlicer(String projectPath) {
         this.projectPath = projectPath;
-        this.slicingElement = new ArrayList<>();
         this.slicedStatement = new ArrayList<>();
         this.overlapStatement = new ArrayList<>();
     }
@@ -28,36 +26,26 @@ public class JsStaticSlicer {
         return projectPath;
     }
 
-    public static ArrayList<ITree> getSlicingElement() {
-        return slicingElement;
-    }
-
     public static ArrayList<ITree> getSlicedStatement() {
         return slicedStatement;
     }
 
     public static void staticSlicer(ITree targetNode) {
-        staticBackwardSlicer(targetNode);
-        staticForwardSlicer(targetNode);
-    }
-
-    
-    public static void staticBackwardSlicer(ITree targetNode) {
-        JsUtils.extractNode(targetNode, slicingElement);
+        // for backward slicing
         invocationSearcher(targetNode, 1);
-    }
-    
-    public static void staticForwardSlicer(ITree targetNode) {
-        JsUtils.extractNode(targetNode, slicingElement);
+        // for forward slicing
         invocationSearcher(targetNode, 2);
     }
 
     private static void invocationSearcher(ITree targetNode, int mode) {
         // System.out.println("" + targetNode.toShortString());
+
+        ArrayList<ITree> slicingElement = new ArrayList<>();
+        JsUtils.extractNode(targetNode, slicingElement)
         if (mode == 1) {
-            backwardSlicer(targetNode);
+            backwardSlicer(targetNode, slicingElement);
         } else {
-            forwardSlicer(targetNode);
+            forwardSlicer(targetNode, slicingElement);
         }
         ITree methodNode = JsUtils.findMethod(targetNode);
         String keyword = "";
@@ -92,7 +80,7 @@ public class JsStaticSlicer {
         }
     }
 
-    private static void backwardSlicer(ITree targetNode) {      
+    private static void backwardSlicer(ITree targetNode, ArrayList<ITree> slicingElement) {      
         if (targetNode.getParent() == null) {
             return;
         }
@@ -103,32 +91,33 @@ public class JsStaticSlicer {
             if (isSlice(siblingNode)) {
                 slicedStatement.add(siblingNode);
                 overlapStatement.add(siblingNode.toShortString());
+                JsUtils.extractNode(siblingNode, slicingElement);
             }
             i--;
         }
         if (!Checker.isMethodDeclaration(targetNode.getParent().getType()) && (targetNode.getParent() != null)) {
-            backwardSlicer(targetNode.getParent());
+            backwardSlicer(targetNode.getParent(), slicingElement);
         }
     }
 
-    private static void forwardSlicer(ITree targetNode) {      
+    private static void forwardSlicer(ITree targetNode, ArrayList<ITree> slicingElement) {      
         int nodeIndex = findNodeIndex(targetNode);
         int i = nodeIndex + 1;
         int childrenNumber = targetNode.getParent().getChildren().size(); 
         while(i < childrenNumber) {
             ITree siblingNode = targetNode.getParent().getChild(i);
-            if (isSlice(siblingNode)) {
+            if (isSlice(siblingNode, slicingElement)) {
                 slicedStatement.add(siblingNode);
                 overlapStatement.add(siblingNode.toShortString());
             }
             i++;
         }
         if (!(Checker.isMethodDeclaration(targetNode.getParent().getType()) || targetNode.getParent().isRoot())) {
-            forwardSlicer(targetNode.getParent());
+            forwardSlicer(targetNode.getParent(), slicingElement);
         }
     }
 
-    private static boolean isSlice(ITree targetNode) {
+    private static boolean isSlice(ITree targetNode, ArrayList<ITree> slicingElement) {
         if (!Checker.isPureStatement(targetNode.getType())) {
             return false;
         }
@@ -146,7 +135,6 @@ public class JsStaticSlicer {
     }
 
     private static int findNodeIndex(ITree targetnode) {
-        // System.out.println(targetnode.toShortString());
         ITree parentNode = targetnode.getParent();
         int i = 0;
         for (ITree childNode : parentNode.getChildren()) {
