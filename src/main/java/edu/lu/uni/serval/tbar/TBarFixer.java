@@ -704,13 +704,13 @@ public class TBarFixer extends AbstractFixer {
 
 		if (slicingRun.equals("yes")){
 			JsUtils.levenDist(slicedStatementList, suspStatementTree, scoredStatements);
-			JsUtils.getPatchIngredient(contextElementList, scoredStatements, patchIngredients);
+			JsUtils.getPatchIngredient(scoredStatements, patchIngredients);
 			JsUtils.hitRatio(this.buggyProject, donorCodes, patchIngredients, "HitRatio");
 		}
 
 		if (lcsRun.equals("yes")) {
-			JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
-			JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+			JsUtils.getPatchIngredient(noContextLcsScores, lcsNoContextIngredients);
+			JsUtils.getPatchIngredient(contextLcsScores, lcsContextIngredients);
 			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
 			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
 		}
@@ -749,12 +749,14 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<ITree> slicedStatementList = new ArrayList<>();
 		HashSet<String> lcsNoContextIngredients = new HashSet<String>();
 		HashSet<String> lcsContextIngredients = new HashSet<String>();
+		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
+		HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 
-		for (SuspCodeNode suspNode : totalSuspNode) {
+		System.out.print("length of loop:" + totalSuspNode.size() + "/");
+		int i = 0;
+		for (SuspCodeNode scn : totalSuspNode) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 
-			ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
-			HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 			if (donorCodes.size() == 0) {
 				System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
 				System.exit(0);
@@ -783,7 +785,7 @@ public class TBarFixer extends AbstractFixer {
 			ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
 			ArrayList<ITree> contextElementNodes = new ArrayList<>();
 			JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
-			ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
+			ArrayList<String> contextElementList = JsUtils.extractContextElement(contextElementNodes);
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
 
 			for (String filePath : projectFileList) {
@@ -811,12 +813,12 @@ public class TBarFixer extends AbstractFixer {
 					DonorCodeAnalyze.findDonorCodes(fileRootNode, donorCodes, donorCodeStmt);
 				}
 			}
-
+			System.out.print(++i + ",");
 		}
 
 		if (lcsRun.equals("yes")) {
-			JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
-			JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+			JsUtils.getPatchIngredient(noContextLcsScores, lcsNoContextIngredients);
+			JsUtils.getPatchIngredient(contextLcsScores, lcsContextIngredients);
 			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
 			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
 		}

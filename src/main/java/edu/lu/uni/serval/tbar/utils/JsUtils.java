@@ -223,7 +223,7 @@ public class JsUtils {
         return donorCodes;
     }
 
-    public static void getPatchIngredient(ArrayList<String> contextElementList,
+    public static void getPatchIngredient(
             HashMap<ITree, Double> scoredStatements, HashSet<String> patchIngredients) {
         List<Entry<ITree, Double>> listEntries =
                 new ArrayList<Entry<ITree, Double>>(scoredStatements.entrySet());
