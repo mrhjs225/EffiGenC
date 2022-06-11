@@ -5,7 +5,7 @@ project = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time', \
             'Cli', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson',\
             'JacksonCore', 'JacksonDatabind', 'JacksonXml', 'Jsoup', 'JxPath']
 
-# project = ['Chart']
+project = ['Chart']
 basic_dir = '/root/EffiGenC/Answerfiles/'
 
 os.chdir('Parser')
@@ -20,7 +20,7 @@ for project_name in project:
     # start_num = 15
     if project_name == 'Chart':
         buggy_num = 26
-        # buggy_num = 2
+        buggy_num = 2
     elif project_name == 'Cli':
         buggy_num = 40
         # buggy_num = 1
@@ -73,6 +73,6 @@ for project_name in project:
         target_dir += '/changeAction.txt'
         # target_dir += '/changeActionNodeType.txt'
         # os.system('java -cp \"target/dependency/*\" -Xmx2g edu.lu.uni.serval.Main3 ' + project_name + ' ' + str(temp_buggy_num) + ' > ' + target_dir)
-        # print('{} {}'.format(project_name, str(temp_buggy_num)))
         os.system('java -cp \"target/dependency/*\" -Xmx2g edu.lu.uni.serval.Main3 ' + project_name + ' ' + str(temp_buggy_num))
-        # print('{} {} done'.format(project_name, str(temp_buggy_num)))
+
+        print('{} {} done'.format(project_name, str(temp_buggy_num)))

@@ -106,8 +106,21 @@ public class TBarFixer extends AbstractFixer {
 			return;
 
 		List<SuspCodeNode> triedSuspNode = new ArrayList<>();
-		System.out.println("number of suspiciousCodeList" + suspiciousCodeList.size());
+		System.out.println("number of suspiciousCodeList:" + suspiciousCodeList.size());
 		log.info("=======TBar: Start to fix suspicious code======");
+
+		List<SuspCodeNode> totalSuspNode = new ArrayList<>();
+		for (SuspiciousPosition suspiciousCode : suspiciousCodeList) {
+			List<SuspCodeNode> scns = parseSuspiciousCode(suspiciousCode);
+			if (scns == null)
+				continue;
+			for (SuspCodeNode scn : scns) {
+				totalSuspNode.add(scn);
+			}
+		}
+		ingredientSearcher(totalSuspNode);
+		System.exit(0);
+
 		for (SuspiciousPosition suspiciousCode : suspiciousCodeList) {
 			List<SuspCodeNode> scns = parseSuspiciousCode(suspiciousCode);
 			if (scns == null)
@@ -644,9 +657,9 @@ public class TBarFixer extends AbstractFixer {
 
 		int parentSize = suspStatementTree.getParents().size();
 		ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
-		ArrayList<ITree> contetElementNodes = new ArrayList<>();
-		JsUtils.extractContextNode(suspStatementTree, contetElementNodes);
-		ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
+		ArrayList<ITree> contextElementNodes = new ArrayList<>();
+		JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
+		ArrayList<String> contextElementList = JsUtils.extractContextElement(contextElementNodes);
 		
 		HashSet<String> originalIngredient = new HashSet<>();
 		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
@@ -721,6 +734,104 @@ public class TBarFixer extends AbstractFixer {
 		// System.out.println("number of patch:" + patchCandidates.size());
 		// For normal running please un-comment below code
 		// testGeneratedPatches(patchCandidates, scn);
+	}
+
+	public void ingredientSearcher(List<SuspCodeNode> totalSuspNode) {
+		String projectPath = dp.srcPath;
+		String lcsRun = "no";
+		String tfidfRun = "no";
+		String donorCodeAnalyzeRun = "no";
+
+		for (SuspCodeNode suspNode : totalSuspNode) {
+			ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
+			HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
+			if (donorCodes.size() == 0) {
+				System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
+				System.exit(0);
+			}
+
+			ITree suspStatementTree = scn.suspCodeAstNode;
+			ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
+			ArrayList<ITree> slicedStatementList = new ArrayList<>();
+			String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
+			String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
+
+			if (tfidfRun.equals("yes")) {
+				try {
+					BufferedWriter nocontextBufWriter = new BufferedWriter(new FileWriter(new File("/root/DIRECTION/tfidf/dataset_nocontext/stmt0.txt")));
+					BufferedWriter contextBufWriter = new BufferedWriter(new FileWriter(new File("/root/DIRECTION/tfidf/dataset_context/stmt0.txt")));
+					nocontextBufWriter.write(suspStatementTree.getLabel());
+					contextBufWriter.write(suspMethodCode);
+					contextBufWriter.close();
+					nocontextBufWriter.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			int parentSize = suspStatementTree.getParents().size();
+			ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
+			ArrayList<ITree> contextElementNodes = new ArrayList<>();
+			JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
+			ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
+
+			HashSet<String> originalIngredient = new HashSet<>();
+			HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
+			HashMap<ITree, Double> contextLcsScores = new HashMap<>();
+			HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
+			HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
+			ArrayList<String> projectFileList = new ArrayList<>();
+
+			JsUtils.listUpFiles(new File(projectPath), projectFileList);
+			for (String filePath : projectFileList) {
+				File tempFile = new File(filePath);
+				ITree fileRootNode =
+						new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
+				// JsUtils.keywordBasedSearch(slicedStatementList, contextElementList, fileRootNode);
+	
+				if (lcsRun.equals("yes")) {
+					SimUtils.lcsSimNoContext(suspStatementTree, fileRootNode, noContextLcsScores);
+					SimUtils.lcsSimContext(suspMethodCode, fileRootNode, filePath, contextLcsScores);
+				}
+	
+				if (tfidfRun.equals("yes")) {
+					String noContextDir = "/root/DIRECTION/tfidf/dataset_nocontext/";
+					String contextDir = "/root/DIRECTION/tfidf/dataset_context/";
+					File noContextFolder = new File(noContextDir);
+					File contextFolder = new File(contextDir);
+					int noContextDirFileNum = noContextFolder.listFiles().length;
+					int contextDirFileNum = contextFolder.listFiles().length;
+					
+				}
+	
+				if (donorCodeAnalyzeRun.equals("yes")) {
+					DonorCodeAnalyze.findDonorCodes(fileRootNode, donorCodes, donorCodeStmt);
+				}
+			}
+			HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
+			HashSet<String> patchIngredients = new HashSet<String>();
+			HashSet<String> lcsNoContextIngredients = new HashSet<String>();
+			HashSet<String> lcsContextIngredients = new HashSet<String>();
+	
+			if (lcsRun.equals("yes")) {
+				JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
+				JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+				JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
+				JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
+			}
+	
+			if (donorCodeAnalyzeRun.equals("yes")) {
+				DonorCodeAnalyze.printDonorCodes(this.buggyProject, donorCodes, donorCodeStmt);
+			}
+	
+			System.out.println("============ Analyze info ============");
+			System.out.println(" donorcode size: " + donorCodes.size());
+			System.out.println(" slicedStatement size: " + slicedStatementList.size());
+			System.out.println(" patchIngredient size: " + patchIngredients.size());
+			System.out.println("======================================");
+			System.exit(0);
+		}
 	}
 
 	public List<Integer> readAllNodeTypes(ITree suspCodeAstNode) {

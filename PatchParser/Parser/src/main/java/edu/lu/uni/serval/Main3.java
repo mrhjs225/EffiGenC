@@ -16,7 +16,7 @@ import edu.lu.uni.serval.gumtree.regroup.HierarchicalActionSet;
 public class Main3 {
 
 	public static void main(String[] args) throws IOException {
-		String basic_dir = "/root/EffiGenC/Answerfiles/";
+		String basic_dir = "/root/DIRECTION/Data/AnswerFiles/";
 		String project = args[0];
 		int buggyNum = Integer.parseInt(args[1]);
 		String before_dir = basic_dir + project + "/" + buggyNum + "/before/";
@@ -28,7 +28,7 @@ public class Main3 {
 		//System.out.println("=-=-=-=-=-=-=-=-=-=-=");
 		for (File file : files) {
 			String fileName = file.toString().split("/")[file.toString().split("/").length - 1];
-			System.out.print(project + "_" + buggyNum + "," + fileName);
+			System.out.println(project + "_" + buggyNum + "," + fileName);
 			File beforeFile = new File(before_dir + fileName);
 			File afterFile = new File(after_dir + fileName);
 			List<HierarchicalActionSet> results = new PatchParser().parseChangedSourceCodeWithGumTreeSub(beforeFile, afterFile);
@@ -37,13 +37,16 @@ public class Main3 {
 			for (HierarchicalActionSet result: results) {
 				String actionStr = result.getActionString();
 				if (actionStr.startsWith("INS")) {
+					System.out.print(result.getBugStartLineNum());
+					System.out.print("," + result.getBugEndLineNum());
 					System.out.print("," + result.getFixStartLineNum());
+					System.out.println("," + result.getFixEndLineNum());
 				} else {
 					String testStr = result.toString();
-					System.out.print("," + result.getBugStartLineNum());
-					//System.out.println(result.getBugEndLineNum());
-					//System.out.println(result.getFixStartLineNum());
-					//System.out.println(result.getFixEndLineNum());
+					System.out.print(result.getBugStartLineNum());
+					System.out.print("," + result.getBugEndLineNum());
+					System.out.print("," + result.getFixStartLineNum());
+					System.out.println("," + result.getFixEndLineNum());
 				}
 			}
 			System.out.println("");
