@@ -738,11 +738,21 @@ public class TBarFixer extends AbstractFixer {
 
 	public void ingredientSearcher(List<SuspCodeNode> totalSuspNode) {
 		String projectPath = dp.srcPath;
-		String lcsRun = "no";
+		String lcsRun = "yes";
 		String tfidfRun = "no";
 		String donorCodeAnalyzeRun = "no";
 
+		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
+		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
+		HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
+		HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
+		ArrayList<ITree> slicedStatementList = new ArrayList<>();
+		HashSet<String> lcsNoContextIngredients = new HashSet<String>();
+		HashSet<String> lcsContextIngredients = new HashSet<String>();
+
 		for (SuspCodeNode suspNode : totalSuspNode) {
+			ArrayList<String> projectFileList = new ArrayList<>();
+
 			ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 			HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 			if (donorCodes.size() == 0) {
@@ -752,7 +762,6 @@ public class TBarFixer extends AbstractFixer {
 
 			ITree suspStatementTree = scn.suspCodeAstNode;
 			ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
-			ArrayList<ITree> slicedStatementList = new ArrayList<>();
 			String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
 			String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
 
@@ -775,15 +784,8 @@ public class TBarFixer extends AbstractFixer {
 			ArrayList<ITree> contextElementNodes = new ArrayList<>();
 			JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
 			ArrayList<String> contextElementList = JsUtils.extractContextElement(contetElementNodes);
-
-			HashSet<String> originalIngredient = new HashSet<>();
-			HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
-			HashMap<ITree, Double> contextLcsScores = new HashMap<>();
-			HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
-			HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
-			ArrayList<String> projectFileList = new ArrayList<>();
-
 			JsUtils.listUpFiles(new File(projectPath), projectFileList);
+
 			for (String filePath : projectFileList) {
 				File tempFile = new File(filePath);
 				ITree fileRootNode =
@@ -809,28 +811,18 @@ public class TBarFixer extends AbstractFixer {
 					DonorCodeAnalyze.findDonorCodes(fileRootNode, donorCodes, donorCodeStmt);
 				}
 			}
-			HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
-			HashSet<String> patchIngredients = new HashSet<String>();
-			HashSet<String> lcsNoContextIngredients = new HashSet<String>();
-			HashSet<String> lcsContextIngredients = new HashSet<String>();
-	
-			if (lcsRun.equals("yes")) {
-				JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
-				JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
-				JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
-				JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
-			}
-	
-			if (donorCodeAnalyzeRun.equals("yes")) {
-				DonorCodeAnalyze.printDonorCodes(this.buggyProject, donorCodes, donorCodeStmt);
-			}
-	
-			System.out.println("============ Analyze info ============");
-			System.out.println(" donorcode size: " + donorCodes.size());
-			System.out.println(" slicedStatement size: " + slicedStatementList.size());
-			System.out.println(" patchIngredient size: " + patchIngredients.size());
-			System.out.println("======================================");
-			System.exit(0);
+
+		}
+
+		if (lcsRun.equals("yes")) {
+			JsUtils.getPatchIngredient(contextElementList, noContextLcsScores, lcsNoContextIngredients);
+			JsUtils.getPatchIngredient(contextElementList, contextLcsScores, lcsContextIngredients);
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
+		}
+
+		if (donorCodeAnalyzeRun.equals("yes")) {
+			DonorCodeAnalyze.printDonorCodes(this.buggyProject, donorCodes, donorCodeStmt);
 		}
 	}
 
