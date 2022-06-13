@@ -14,13 +14,13 @@ mode = 'project'
 machine_num = 1
 
 if machine_num == 1:
-    projects = ['Chart', 'Closure']
+    projects = ['Chart', 'Closure', 'Lang']
 elif machine_num == 3:
     projects = ['Closure', 'Lang']
 elif machine_num == 4:
     projects = ['Math']
 elif machine_num == 2:
-    projects = ['Mockito', 'Time']
+    projects = ['Math', 'Mockito', 'Time']
 
 for project_name in projects:
     buggy_num = 0
@@ -30,7 +30,7 @@ for project_name in projects:
         buggy_num = 26
     elif project_name == 'Closure':
         if machine_num == 1:
-            buggy_num = 80
+            buggy_num = 133
         elif machine_num == 3:
             start_num = 81
             buggy_num = 133

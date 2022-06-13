@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.lang.Math;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -738,7 +739,8 @@ public class TBarFixer extends AbstractFixer {
 
 	public void ingredientSearcher(List<SuspCodeNode> totalSuspNode) {
 		String projectPath = dp.srcPath;
-		String lcsRun = "yes";
+		String keywordRun = "yes"; 
+		String lcsRun = "no";
 		String tfidfRun = "no";
 		String donorCodeAnalyzeRun = "no";
 
@@ -746,16 +748,20 @@ public class TBarFixer extends AbstractFixer {
 		HashMap<ITree, Double> contextLcsScores = new HashMap<>();
 		HashMap<ITree, Double> noContextTfIdfScores = new HashMap<>();
 		HashMap<ITree, Double> contextTfIdfScores = new HashMap<>();
-		ArrayList<ITree> slicedStatementList = new ArrayList<>();
+		HashMap<ITree, Double> scoredStatements = new HashMap<ITree, Double>();
 		HashSet<String> lcsNoContextIngredients = new HashSet<String>();
 		HashSet<String> lcsContextIngredients = new HashSet<String>();
+		HashSet<String> keywordIngredients = new HashSet<String>();
+		
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 		HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 
-		System.out.print("length of loop:" + totalSuspNode.size() + "/");
+		int loopSize = totalSuspNode.size();
+		System.out.print("loop|" + loopSize + "|");
 		int i = 0;
 		for (SuspCodeNode scn : totalSuspNode) {
 			ArrayList<String> projectFileList = new ArrayList<>();
+			ArrayList<ITree> keywordStatementList = new ArrayList<>();
 
 			if (donorCodes.size() == 0) {
 				System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
@@ -794,6 +800,11 @@ public class TBarFixer extends AbstractFixer {
 						new ASTGenerator().generateTreeForJavaFile(tempFile, TokenType.EXP_JDT);
 				// JsUtils.keywordBasedSearch(slicedStatementList, contextElementList, fileRootNode);
 	
+				if (keywordRun.equals("yes")) {
+					JsUtils.keywordBasedSearch(keywordStatementList, contextElementList, fileRootNode);
+					JsUtils.levenDist(keywordStatementList, suspStatementTree, scoredStatements);
+				}
+
 				if (lcsRun.equals("yes")) {
 					SimUtils.lcsSimNoContext(suspStatementTree, fileRootNode, noContextLcsScores);
 					SimUtils.lcsSimContext(suspMethodCode, fileRootNode, filePath, contextLcsScores);
@@ -816,6 +827,10 @@ public class TBarFixer extends AbstractFixer {
 			System.out.print(++i + ",");
 		}
 
+		if (keywordRun.equals("yes")) {
+			JsUtils.getPatchIngredient(scoredStatements, keywordIngredients);
+			JsUtils.hitRatio(this.buggyProject, donorCodes, keywordIngredients, "keyword");
+		}
 		if (lcsRun.equals("yes")) {
 			JsUtils.getPatchIngredient(noContextLcsScores, lcsNoContextIngredients);
 			JsUtils.getPatchIngredient(contextLcsScores, lcsContextIngredients);
