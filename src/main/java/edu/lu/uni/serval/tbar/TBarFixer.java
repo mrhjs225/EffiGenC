@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.lang.Math;
 
@@ -739,8 +740,8 @@ public class TBarFixer extends AbstractFixer {
 
 	public void ingredientSearcher(List<SuspCodeNode> totalSuspNode) {
 		String projectPath = dp.srcPath;
-		String keywordRun = "yes"; 
-		String lcsRun = "no";
+		String keywordRun = "no"; 
+		String lcsRun = "yes";
 		String tfidfRun = "no";
 		String donorCodeAnalyzeRun = "no";
 
@@ -756,6 +757,33 @@ public class TBarFixer extends AbstractFixer {
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
 		HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 
+		if (donorCodes.size() == 0) {
+			System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
+			String hitRatioResultFolderDir = "/root/DIRECTION/Data/HitRatio/";
+			if (keywordRun.equals("yes")) {
+				String hitRatioResultDir = hitRatioResultFolderDir + "keyword.csv";
+				try {
+					BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
+					hitRatioWriter.write(this.buggyProject + ",none,0,0\n");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (lcsRun.equals("yes")) {
+				String hitRatioResultDirNoc = hitRatioResultFolderDir + "lcs_noc.csv";
+				String hitRatioResultDirC = hitRatioResultFolderDir + "lcs_c.csv";
+				try {
+					BufferedWriter hitRatioWriterNoc = new BufferedWriter(new FileWriter(new File(hitRatioResultDirNoc), true));
+					BufferedWriter hitRatioWriterC = new BufferedWriter(new FileWriter(new File(hitRatioResultDirC), true));
+					hitRatioWriterNoc.write(this.buggyProject + ",none,0,0\n");
+					hitRatioWriterC.write(this.buggyProject + ",none,0,0\n");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.exit(0);
+		}
+
 		int loopSize = totalSuspNode.size();
 		System.out.print("loop|" + loopSize + "|");
 		int i = 0;
@@ -763,15 +791,12 @@ public class TBarFixer extends AbstractFixer {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			ArrayList<ITree> keywordStatementList = new ArrayList<>();
 
-			if (donorCodes.size() == 0) {
-				System.out.println("%%%%%%%%% There is no donorcode! %%%%%%%%");
-				System.exit(0);
-			}
-
 			ITree suspStatementTree = scn.suspCodeAstNode;
 			ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
 			String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
-			String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
+			// TODO: notion 참고
+			// String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
+			String suspMethodCode = "";
 
 			if (tfidfRun.equals("yes")) {
 				try {
@@ -834,8 +859,8 @@ public class TBarFixer extends AbstractFixer {
 		if (lcsRun.equals("yes")) {
 			JsUtils.getPatchIngredient(noContextLcsScores, lcsNoContextIngredients);
 			JsUtils.getPatchIngredient(contextLcsScores, lcsContextIngredients);
-			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcsNoContext");
-			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcsContext");
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsNoContextIngredients, "lcs_noc");
+			JsUtils.hitRatio(this.buggyProject, donorCodes, lcsContextIngredients, "lcs_c");
 		}
 
 		if (donorCodeAnalyzeRun.equals("yes")) {

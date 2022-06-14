@@ -55,4 +55,4 @@ for project_name in projects:
         elif project_name == 'Time' and temp_buggy_num == 21:
             continue
         bugId = project_name + '_' + str(temp_buggy_num)
-        os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode + ' > ./Data/Results/' + bugId + '.txt')
+        os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode + ' > ./Data/Results/TerminalOutput/' + bugId + '.txt')
