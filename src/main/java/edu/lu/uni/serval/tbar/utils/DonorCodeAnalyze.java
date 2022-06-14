@@ -88,4 +88,34 @@ public class DonorCodeAnalyze {
             }
         }
     }
+
+    public static void findDonorCode(ITree node, ArrayList<String> donorCodes, String buggyProject) {
+        if (Checker.isPureStatement(node.getType())) {
+            ArrayList<ITree> candidateIdentifiers = new ArrayList<>();
+            JsUtils.extractNode(node, candidateIdentifiers);
+
+            for (ITree candidateIdentifier : candidateIdentifiers) {
+                String nodeStr = candidateIdentifier.getLabel();
+                if (nodeStr.contains("Name:")) {
+                    nodeStr = nodeStr.split(":")[1].trim();
+                }
+                for (String donorCode : donorCodes) {
+                    if (nodeStr.equals(donorCode)) {
+                        try {
+                            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("/root/DIRECTION/Data/globalsearch.csv"), true));
+                            bufferedWriter.write(buggyProject + "," + donorCode + ",o\n");
+                            bufferedWriter.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        donorCodes.remove(donorCode);
+                        break;
+                    }
+                }
+            }
+        }
+        for (ITree childNode : node.getChildren()) {
+            findDonorCode(childNode, donorCodes, buggyProject);
+        }
+    }
 }

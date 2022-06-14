@@ -740,9 +740,10 @@ public class TBarFixer extends AbstractFixer {
 
 	public void ingredientSearcher(List<SuspCodeNode> totalSuspNode) {
 		String projectPath = dp.srcPath;
-		String keywordRun = "no"; 
-		String lcsRun = "yes";
+		String keywordRun = "yes";
+		String lcsRun = "no";
 		String tfidfRun = "no";
+		String globalSearchRun = "yes";
 		String donorCodeAnalyzeRun = "no";
 
 		HashMap<ITree, Double> noContextLcsScores = new HashMap<>();
@@ -755,6 +756,7 @@ public class TBarFixer extends AbstractFixer {
 		HashSet<String> keywordIngredients = new HashSet<String>();
 		
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
+		ArrayList<String> donorCodes2 = JsUtils.getDonorCodes(this.buggyProject);
 		HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 
 		if (donorCodes.size() == 0) {
@@ -765,6 +767,7 @@ public class TBarFixer extends AbstractFixer {
 				try {
 					BufferedWriter hitRatioWriter = new BufferedWriter(new FileWriter(new File(hitRatioResultDir), true));
 					hitRatioWriter.write(this.buggyProject + ",none,0,0\n");
+					hitRatioWriter.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -777,6 +780,8 @@ public class TBarFixer extends AbstractFixer {
 					BufferedWriter hitRatioWriterC = new BufferedWriter(new FileWriter(new File(hitRatioResultDirC), true));
 					hitRatioWriterNoc.write(this.buggyProject + ",none,0,0\n");
 					hitRatioWriterC.write(this.buggyProject + ",none,0,0\n");
+					hitRatioWriterNoc.close();
+					hitRatioWriterC.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -847,6 +852,9 @@ public class TBarFixer extends AbstractFixer {
 	
 				if (donorCodeAnalyzeRun.equals("yes")) {
 					DonorCodeAnalyze.findDonorCodes(fileRootNode, donorCodes, donorCodeStmt);
+				}
+				if (globalSearchRun.equals("yes")) {
+					DonorCodeAnalyze.findDonorCode(fileRootNode, donorCodes2, this.buggyProject);
 				}
 			}
 			System.out.print(++i + ",");
