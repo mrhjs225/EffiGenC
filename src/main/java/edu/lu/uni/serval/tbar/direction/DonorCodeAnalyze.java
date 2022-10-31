@@ -1,4 +1,4 @@
-package edu.lu.uni.serval.tbar.utils;
+package edu.lu.uni.serval.tbar.direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ import java.util.Comparator;
 
 
 import edu.lu.uni.serval.jdt.tree.ITree;
-import edu.lu.uni.serval.tbar.utils.JsUtils;
 import edu.lu.uni.serval.tbar.utils.Checker;
 
 public class DonorCodeAnalyze {

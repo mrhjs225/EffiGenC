@@ -1,4 +1,4 @@
-package edu.lu.uni.serval.tbar.utils;
+package edu.lu.uni.serval.tbar.direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,12 @@ import java.util.Comparator;
 
 import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.tbar.utils.Checker;
+
+import edu.lu.uni.serval.AST.ASTGenerator;
+import edu.lu.uni.serval.AST.ASTGenerator.TokenType;
+import org.eclipse.jdt.core.dom.CompilationUnit;
+
+
 
 public class JsUtils {
 
@@ -361,20 +367,17 @@ public class JsUtils {
     }
 
     public static void testNodePrint(ITree node) {
-        if (Checker.isMethodDeclaration(node.getType())) {
-            System.out.println("================================");
-            System.out.println(node.toShortString());
-            System.out.println(node.getSize());
-            System.out.println(node.getLength());
-            System.out.println(node.getHeight());
-            System.out.println(node.getPos());
-            System.out.println(node.getEndPos());
-        }
-        // System.out.println(node.toShortString());
-        for (ITree childNode: node.getChildren()) {
-            testNodePrint(childNode);
-        }
+        System.out.println("================================");
+        System.out.println(node.toShortString());
+        System.out.println(node.getSize());
+        System.out.println(node.getLength());
+        System.out.println(node.getHeight());
+        System.out.println(node.getPos());
+        System.out.println(node.getEndPos());
+        int startPosition = node.getPos();
     }
+
+
 
     public static List<String> getMethodCodeList(String code) {
 		List<String> result = new ArrayList<String>();
@@ -450,5 +453,14 @@ public class JsUtils {
             }
         }
         return null;
+    }
+
+    public static void collectStatement(ArrayList<ITree> candStmts, ITree node) {
+        if (Checker.isPureStatement(node.getType())) {
+            candStmts.add(node);
+        }
+        for (ITree childNode : node.getChildren()) {
+            collectStatement(candStmts, childNode);
+        }
     }
 }

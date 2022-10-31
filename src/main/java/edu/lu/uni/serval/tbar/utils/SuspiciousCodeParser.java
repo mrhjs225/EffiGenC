@@ -67,6 +67,32 @@ public class SuspiciousCodeParser {
 			}
 		}
 	}
+
+	public ITree findTargetNodeLine(File javaFile, int suspLineNum) {
+		this.javaFile = javaFile;
+		unit = new MyUnit().createCompilationUnit(javaFile);
+		ITree rootTree = new ASTGenerator().generateTreeForJavaFile(javaFile, TokenType.EXP_JDT);
+		return findTargetNode(rootTree, suspLineNum);
+	}
+
+	public ITree findTargetNode(ITree node, int suspLineNum) {
+		int startPosition = node.getPos();
+		int endPosition = startPosition + node.getLength();
+		int startLine = this.unit.getLineNumber(startPosition);
+		int endLine = this.unit.getLineNumber(endPosition);
+		if (endLine == -1) endLine = this.unit.getLineNumber(endPosition - 1);
+		if (startLine == suspLineNum || endLine == suspLineNum) {
+			return node;
+		}
+
+		for (ITree child : node.getChildren()) {
+			ITree tempNode = findTargetNode(child, suspLineNum);
+			if (tempNode != null) {
+				return tempNode;
+			}
+		}
+		return null;
+	}
 	
 	private boolean isRequiredAstNode(ITree tree) {
 		int astNodeType = tree.getType();

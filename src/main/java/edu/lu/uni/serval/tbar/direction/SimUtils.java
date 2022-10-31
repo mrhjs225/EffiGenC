@@ -1,10 +1,8 @@
-package edu.lu.uni.serval.tbar.utils;
+package edu.lu.uni.serval.tbar.direction;
 
 import java.util.HashMap;
 import edu.lu.uni.serval.jdt.tree.ITree;
-
 import edu.lu.uni.serval.tbar.utils.Checker;
-import edu.lu.uni.serval.tbar.utils.JsUtils;
 import edu.lu.uni.serval.tbar.utils.FileUtils;
 
 
