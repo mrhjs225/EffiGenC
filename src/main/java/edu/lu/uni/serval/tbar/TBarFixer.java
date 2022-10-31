@@ -27,6 +27,7 @@ import edu.lu.uni.serval.tbar.config.Configuration;
 import edu.lu.uni.serval.tbar.context.ContextReader;
 import edu.lu.uni.serval.tbar.direction.DonorCodeAnalyze;
 import edu.lu.uni.serval.tbar.direction.JsUtils;
+import edu.lu.uni.serval.tbar.direction.KeywordSearcher;
 import edu.lu.uni.serval.tbar.direction.SimUtils;
 import edu.lu.uni.serval.tbar.fixpatterns.CNIdiomNoSuperCall;
 import edu.lu.uni.serval.tbar.fixpatterns.ClassCastChecker;
@@ -687,26 +688,21 @@ public class TBarFixer extends AbstractFixer {
 			System.exit(0);
 		}
 
-		int loopSize = totalSuspNode.size();
-		System.out.println("loop|" + loopSize + "|");
-		// System.out.println(totalSuspNode.toString());
+		System.out.println("loop|" + totalSuspNode.size() + "|");
 
-		for (SuspCodeNode scn : totalSuspNode) {
-			System.out.println(scn.suspCodeStr);
+		String targetSearchSpace = 'Project'; // Project, Package, File, Method
+		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode);
+
+		ArrayList<ITree> keywordList = keywordSearcher.extractKeywords();
+
+		for (ITree keyword : keywordList) {
+			System.out.println(keyword);
 		}
 
 		System.exit(0);
+
+
 		int i = 0;
-
-		// Extract all keyword from suspicious statements
-
-		
-		// Collect statement which include keyword from target space.
-
-
-		
-
-
 		for (SuspCodeNode scn : totalSuspNode) {
 			ArrayList<String> projectFileList = new ArrayList<>();
 			ArrayList<ITree> keywordStatementList = new ArrayList<>();

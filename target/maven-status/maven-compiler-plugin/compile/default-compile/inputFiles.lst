@@ -1,5 +1,6 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/SetUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/generator/Registry.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/KeywordSearcher.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/generator/Register.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/tree/TreeContext.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/TestUtils.java
@@ -10,8 +11,6 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/ConditionalExpressionMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/RangeChecker.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/ASTNodeMap.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JsUtils.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JsStaticSlicer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/TBarFixer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/LiteralExpressionMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixtemplate/IFixTemplate.java
@@ -43,16 +42,20 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/visitor/ExpJdtVisitor.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/entity/Pair.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/ClassCastChecker.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/SimUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/entity/EntityType.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/JavaLibrary.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/JsUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/StatementMover.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/FileUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/main/Main_NFL.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/DonorCodeAnalyze.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/config/Configuration.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/NPEqualsShouldHandleNullArgument.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/dataprepare/TestFinder.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/TBarFixer_NFL.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/KeywordTree.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/VariableReplacer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/generator/AbstractJdtTreeGenerator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/dataprepare/SourceFolderFinder.java
@@ -76,7 +79,6 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/ReturnStatementMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/MapSorter.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/tree/Tree.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/SimUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/Checker.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/MethodInvocationMutator.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/ListSorter.java
@@ -87,4 +89,3 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/AssertUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/tree/TreeUtils.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/jdt/tree/hash/RollingHashGenerator.java
-/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/DonorCodeAnalyze.java

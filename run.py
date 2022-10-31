@@ -12,7 +12,7 @@ mode = 'project'
 for project_name in projects:
     if project_name == 'Chart':
         bugList = [1, 4, 7, 8, 9, 11, 12, 14, 18, 19, 20, 24, 25, 26]
-        bugList = [1]
+        bugList = [2]
     elif project_name == 'Closure':
         bugList = [2, 4, 6, 10, 11, 13, 18, 21, 22, 31, 38, 40, 46, 62, 63, 70, 73, 85, 86, 102, 106, 115, 126]
         bugList = [62]

@@ -366,18 +366,6 @@ public class JsUtils {
         return null;
     }
 
-    public static void testNodePrint(ITree node) {
-        System.out.println("================================");
-        System.out.println(node.toShortString());
-        System.out.println(node.getSize());
-        System.out.println(node.getLength());
-        System.out.println(node.getHeight());
-        System.out.println(node.getPos());
-        System.out.println(node.getEndPos());
-        int startPosition = node.getPos();
-    }
-
-
 
     public static List<String> getMethodCodeList(String code) {
 		List<String> result = new ArrayList<String>();
