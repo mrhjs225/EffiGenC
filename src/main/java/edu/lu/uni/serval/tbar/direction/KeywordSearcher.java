@@ -8,12 +8,15 @@ import edu.lu.uni.serval.tbar.AbstractFixer.SuspCodeNode;
 public class KeywordSearcher {
     List<SuspCodeNode> totalSuspNode;
     ArrayList<ITree> keywordList;
-    String targetSpace;
+    String targetSpace; // Project, Package, File, Method
+    ArrayList<ITree> stmtList;
+
 
     public KeywordSearcher(List<SuspCodeNode> totalSuspNode, String targetSpace) {
         this.totalSuspNode = totalSuspNode;
         this.keywordList = new ArrayList<>();
         this.targetSpace = targetSpace;
+        this.stmtList = new ArrayList<>();
     }
 
     public ArrayList<ITree> extractKeywords() {
@@ -24,8 +27,39 @@ public class KeywordSearcher {
         return keywordList;
     }
 
-    public void collectStatement() {
+    public ArrayList<ITree> collectStatement() {
+        if (targetSpace.equals("Method")) {
+            return collectMethodStmt();
+        } else if (targetSpace.equals("File")) {
+            return collectFileStmt();
+        } else if (targetSpace.equals("Package")) {
+            return collectPackageStmt();
+        } else if (targetSpace.equals("Project")) {
+            return collectProjectStmt();
+        } else {
+            return new ArrayList<>();
+        }
+    }
 
+    private ArrayList<ITree> collectMethodStmt() {
+        ArrayList<ITree> methodNodeList = new ArrayList<>();
+        for (ITree suspNode : this.totalSuspNode) {
+            ITree methodNode = JsUtils.findMethod(suspNode);
+            methodNodeList.add(methodNode);
+        }
+        return new ArrayList<>();
+    }
+
+    private ArrayList<ITree> collectFileStmt() {
+        return new ArrayList<>();
+    }
+
+    private ArrayList<ITree> collectPackageStmt() {
+        return new ArrayList<>();
+    }
+
+    private ArrayList<ITree> collectProjectStmt() {
+        return new ArrayList<>();
     }
 
     public static void makeTree() {

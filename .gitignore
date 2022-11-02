@@ -6,5 +6,9 @@
 .__MACOSX
 logs/
 Data/
+target/classes/*
+
+*.class
+*.log
 data.tar.gz
 example_nodetree.txt
