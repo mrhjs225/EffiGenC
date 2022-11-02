@@ -104,12 +104,7 @@ public class JsUtils {
         }
     }
 
-    public static ITree findMethodNode(ITree node) {
-        if (Checker.isMethodDeclaration(node.getType())) {
-            return node;
-        }
-        return findMethodNode(node.getParent());
-    }
+
 
     public static ArrayList<String> extractContextElement(ArrayList<ITree> contextElementNodes) {
         ArrayList<String> contextElementList = new ArrayList<String>();
@@ -329,15 +324,6 @@ public class JsUtils {
         return findStatement(node.getParent());
     }
 
-    public static ITree findMethod(ITree node) {
-        for (ITree parentNode : node.getParents()) {
-            if (parentNode.getLabel().contains("MethodName:")) {
-                return parentNode;
-            }
-        }
-        return null;
-    }
-
     public static String getMethodName(ITree methodNode) {
         for (ITree childNode : methodNode.getChildren()) {
             if (childNode.toShortString().contains("42@@MethodName:")) {
@@ -443,12 +429,4 @@ public class JsUtils {
         return null;
     }
 
-    public static void collectStatement(ArrayList<ITree> candStmts, ITree node) {
-        if (Checker.isPureStatement(node.getType())) {
-            candStmts.add(node);
-        }
-        for (ITree childNode : node.getChildren()) {
-            collectStatement(candStmts, childNode);
-        }
-    }
 }

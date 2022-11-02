@@ -29,6 +29,7 @@ import edu.lu.uni.serval.tbar.direction.DonorCodeAnalyze;
 import edu.lu.uni.serval.tbar.direction.JsUtils;
 import edu.lu.uni.serval.tbar.direction.KeywordSearcher;
 import edu.lu.uni.serval.tbar.direction.SimUtils;
+import edu.lu.uni.serval.tbar.direction.TreeUtil;
 import edu.lu.uni.serval.tbar.fixpatterns.CNIdiomNoSuperCall;
 import edu.lu.uni.serval.tbar.fixpatterns.ClassCastChecker;
 import edu.lu.uni.serval.tbar.fixpatterns.ConditionalExpressionMutator;
@@ -708,7 +709,7 @@ public class TBarFixer extends AbstractFixer {
 			ArrayList<ITree> keywordStatementList = new ArrayList<>();
 
 			ITree suspStatementTree = scn.suspCodeAstNode;
-			ITree suspMethodNode = JsUtils.findMethod(suspStatementTree);
+			ITree suspMethodNode = TreeUtil.findMethodNode(suspStatementTree);
 			String suspFileCode = FileUtils.getCodeFromFile(scn.targetJavaFile);
 
 			// String suspMethodCode = JsUtils.getMethodString(suspFileCode, suspMethodNode);
@@ -747,7 +748,7 @@ public class TBarFixer extends AbstractFixer {
 				// fileRootNode);
 
 				if (keywordRun.equals("yes")) {
-					JsUtils.collectStatement(candStmts, fileRootNode);
+					TreeUtil.collectStatement(candStmts, fileRootNode);
 				}
 
 				if (lcsRun.equals("yes")) {

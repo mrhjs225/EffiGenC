@@ -27,40 +27,20 @@ public class KeywordSearcher {
         return keywordList;
     }
 
-    public ArrayList<ITree> collectStatement() {
-        if (targetSpace.equals("Method")) {
-            return collectMethodStmt();
-        } else if (targetSpace.equals("File")) {
-            return collectFileStmt();
+    public ArrayList<ITree> collectSearchSpace() {
+        if (targetSpace.equals("Project")) {
+            return TreeUtil.collectStmtInProject();
         } else if (targetSpace.equals("Package")) {
-            return collectPackageStmt();
-        } else if (targetSpace.equals("Project")) {
-            return collectProjectStmt();
+            return TreeUtil.collectStmtInPackage();
+        } else if (targetSpace.equals("File")) {
+            return TreeUtil.collectStmtInFile(totalSuspNode);
+        } else if (targetSpace.equals("Method")) {
+            return TreeUtil.collectStmtInMethod(totalSuspNode);
         } else {
             return new ArrayList<>();
         }
     }
 
-    private ArrayList<ITree> collectMethodStmt() {
-        ArrayList<ITree> methodNodeList = new ArrayList<>();
-        for (ITree suspNode : this.totalSuspNode) {
-            ITree methodNode = JsUtils.findMethod(suspNode);
-            methodNodeList.add(methodNode);
-        }
-        return new ArrayList<>();
-    }
-
-    private ArrayList<ITree> collectFileStmt() {
-        return new ArrayList<>();
-    }
-
-    private ArrayList<ITree> collectPackageStmt() {
-        return new ArrayList<>();
-    }
-
-    private ArrayList<ITree> collectProjectStmt() {
-        return new ArrayList<>();
-    }
 
     public static void makeTree() {
         // Collect statement which include keyword from target space.
