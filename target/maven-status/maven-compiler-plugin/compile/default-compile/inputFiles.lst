@@ -49,6 +49,7 @@
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/StatementMover.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/fixpatterns/DataTypeReplacer.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/utils/FileUtils.java
+/root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/TreeUtil.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/main/Main_NFL.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/direction/DonorCodeAnalyze.java
 /root/DIRECTION/src/main/java/edu/lu/uni/serval/tbar/config/Configuration.java

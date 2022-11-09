@@ -691,14 +691,11 @@ public class TBarFixer extends AbstractFixer {
 
 		System.out.println("loop|" + totalSuspNode.size() + "|");
 
-		String targetSearchSpace = "Project"; // Project, Package, File, Method
-		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode, targetSearchSpace);
+		String targetSearchSpace = "Package"; // Project, Package, File, Method
+		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode, targetSearchSpace, projectPath);
 
-		ArrayList<ITree> keywordList = keywordSearcher.extractKeywords();
 
-		for (ITree keyword : keywordList) {
-			System.out.println(keyword);
-		}
+		keywordSearcher.collectSearchSpace();
 
 		System.exit(0);
 
@@ -737,7 +734,7 @@ public class TBarFixer extends AbstractFixer {
 			JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
 			ArrayList<String> contextElementList =
 					JsUtils.extractContextElement(contextElementNodes);
-			JsUtils.listUpFiles(new File(projectPath), projectFileList);
+			JsUtils.findSubFileInPath(new File(projectPath), projectFileList);
 			ArrayList<ITree> candStmts = new ArrayList<>();
 
 			for (String filePath : projectFileList) {

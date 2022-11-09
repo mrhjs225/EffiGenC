@@ -89,7 +89,7 @@ public class JsUtils {
         return null;
     }
 
-    public static void listUpFiles(File path, ArrayList<String> fileList) {
+    public static void findSubFileInPath(File path, ArrayList<String> fileList) {
         File files[] = path.listFiles();
 
         for (int i = 0; i < files.length; i++) {
@@ -99,7 +99,7 @@ public class JsUtils {
                     fileList.add(tempFile.getAbsolutePath());
                 }
             } else if (tempFile.isDirectory()) {
-                listUpFiles(tempFile, fileList);
+                findSubFileInPath(tempFile, fileList);
             }
         }
     }

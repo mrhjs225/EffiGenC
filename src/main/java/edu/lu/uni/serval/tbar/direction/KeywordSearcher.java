@@ -10,13 +10,15 @@ public class KeywordSearcher {
     ArrayList<ITree> keywordList;
     String targetSpace; // Project, Package, File, Method
     ArrayList<ITree> stmtList;
+    String projectPath;
 
 
-    public KeywordSearcher(List<SuspCodeNode> totalSuspNode, String targetSpace) {
+    public KeywordSearcher(List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
         this.totalSuspNode = totalSuspNode;
         this.keywordList = new ArrayList<>();
         this.targetSpace = targetSpace;
         this.stmtList = new ArrayList<>();
+        this.projectPath = projectPath;
     }
 
     public ArrayList<ITree> extractKeywords() {
@@ -27,24 +29,24 @@ public class KeywordSearcher {
         return keywordList;
     }
 
+    // To construct search space, it collect all statement from target search space
     public ArrayList<ITree> collectSearchSpace() {
         if (targetSpace.equals("Project")) {
-            return TreeUtil.collectStmtInProject();
+            stmtList = TreeUtil.collectStmtInProject(projectPath);
         } else if (targetSpace.equals("Package")) {
-            return TreeUtil.collectStmtInPackage();
+            stmtList = TreeUtil.collectStmtInPackage(totalSuspNode);
         } else if (targetSpace.equals("File")) {
-            return TreeUtil.collectStmtInFile(totalSuspNode);
+            stmtList = TreeUtil.collectStmtInFile(totalSuspNode);
         } else if (targetSpace.equals("Method")) {
-            return TreeUtil.collectStmtInMethod(totalSuspNode);
-        } else {
-            return new ArrayList<>();
+            stmtList = TreeUtil.collectStmtInMethod(totalSuspNode);
         }
+        return stmtList;
     }
 
 
     public static void makeTree() {
         // Collect statement which include keyword from target space.
-
+        
 
         // Add ingredient in tree
 
