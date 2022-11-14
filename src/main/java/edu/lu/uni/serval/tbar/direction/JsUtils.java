@@ -120,30 +120,7 @@ public class JsUtils {
         return contextElementList;
     }
 
-    public static void extractContextNode(ITree targetTree, ArrayList<ITree> contextElementNodes) {
-        if (Checker.isIfStatement(targetTree.getType())) {
-            for (ITree childNode : targetTree.getChildren()) {
-                if (Checker.isInfixExpression(childNode.getType())) {
-                    extractNode(childNode, contextElementNodes);
-                    break;
-                }
-            }
-        } else {
-            extractNode(targetTree, contextElementNodes);
-        }
-    }
 
-    public static void extractNode(ITree targetTree, ArrayList<ITree> nodeList) {
-        int nodeType = targetTree.getType();
-        if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType)
-                || (Checker.isMethodInvocation(nodeType)
-                        && targetTree.toShortString().contains("Name:"))) {
-            nodeList.add(targetTree);
-        }
-        for (ITree childNode : targetTree.getChildren()) {
-            extractNode(childNode, nodeList);
-        }
-    }
 
     public static void levenDist(ArrayList<ITree> slicedStatementList, ITree suspStatementTree,
             HashMap<ITree, Double> scoredStatements) {
@@ -427,6 +404,17 @@ public class JsUtils {
             }
         }
         return null;
+    }
+
+    public static boolean isListHasSameNode(ITree node, ArrayList<ITree> nodeList) {
+        boolean tag = False;
+        for (ITree targetNode : nodeList) {
+            if (targetNode.toString().equals(node.toString())) {
+                tag = True;
+                break;
+            }
+        }
+        return tag;
     }
 
 }

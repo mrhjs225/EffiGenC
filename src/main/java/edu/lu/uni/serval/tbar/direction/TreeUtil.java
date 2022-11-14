@@ -97,4 +97,29 @@ public class TreeUtil {
         return findFileRootNode(node.getParent());
     }
 
+    public static void extractContextNode(ITree targetTree, ArrayList<ITree> contextElementNodes) {
+        if (Checker.isIfStatement(targetTree.getType())) {
+            for (ITree childNode : targetTree.getChildren()) {
+                if (Checker.isInfixExpression(childNode.getType())) {
+                    extractNode(childNode, contextElementNodes);
+                    break;
+                }
+            }
+        } else {
+            extractNode(targetTree, contextElementNodes);
+        }
+    }
+
+    public static void extractNode(ITree targetTree, ArrayList<ITree> nodeList) {
+        int nodeType = targetTree.getType();
+        if (Checker.isSimpleName(nodeType) || Checker.isSimpleType(nodeType)
+                || (Checker.isMethodInvocation(nodeType)
+                        && targetTree.toShortString().contains("Name:"))) {
+            nodeList.add(targetTree);
+        }
+        for (ITree childNode : targetTree.getChildren()) {
+            extractNode(childNode, nodeList);
+        }
+    }
+
 }
