@@ -123,4 +123,15 @@ public class TreeUtil {
         }
     }
 
+    public static String getITreeName(ITree targetNode) {
+        String nodeStr = targetNode.toString();
+        if (nodeStr.contains("MethodName:")) {
+            return nodeStr.split(":")[1].trim();
+        } else if (nodeStr.contains("@@Name:")) {
+            return nodeStr.split(":")[1].trim();
+        } else {
+            return nodeStr.split("@@")[1].trim();
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package edu.lu.uni.serval.tbar.direction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import edu.lu.uni.serval.jdt.tree.ITree;
@@ -14,6 +15,8 @@ public class KeywordSearcher {
     private String projectPath;
     private HashSet<String> treeContents;
     private KeywordTree rootNode;
+    private ArrayList<String> donorCodes;
+    private HashMap<Integer, ArrayList<String>> searchTree;
 
     public KeywordSearcher(List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
         this.totalSuspNode = totalSuspNode;
@@ -23,17 +26,15 @@ public class KeywordSearcher {
         this.stmtList = new ArrayList<>();
         this.treeContents = new HashSet<>();
         this.rootNode = new KeywordTree(null, "root", 1);
+        this.donorCodes = new ArrayList<>();
+        this.searchTree = new HashMap<>();
     }
 
     public ArrayList<ITree> extractKeywords() {
         for (SuspCodeNode scn : this.totalSuspNode) {
             ITree suspStatementTree = scn.suspCodeAstNode;
-            // System.out.println(suspStatementTree.toString());
             TreeUtil.extractNode(suspStatementTree, this.keywordList);
         }
-        // for (ITree keyword : this.keywordList) {
-		// 	System.out.print(keyword.toString() + ",");
-		// }
         return this.keywordList;
     }
 
@@ -55,18 +56,22 @@ public class KeywordSearcher {
     public void makeTree() {
         ArrayList<KeywordTree> targetLevelNodeList = new ArrayList<>();
         
+        ArrayList<String> targetLevelStrList = new ArrayList<>();
         for (ITree secondLevelNode : keywordList) {
-            KeywordTree node = new KeywordTree(secondLevelNode, secondLevelNode.toString(), 2);
+            String identifierStr = TreeUtil.getITreeName(secondLevelNode);
+            KeywordTree node = new KeywordTree(secondLevelNode, identifierStr, 2);
             String nodePackageName = "";
             node.setStmtContents(null);
             this.rootNode.childNodes.add(node);
             targetLevelNodeList.add(node);
-            treeContents.add(secondLevelNode.toString());
+            targetLevelStrList.add(identifierStr);
         }
-
+        searchTree.put(2, targetLevelStrList);
+        
         int level = 3;
         while (!this.stmtList.isEmpty()) {
             boolean isEnd = true;
+            targetLevelStrList = new ArrayList<>();
             ArrayList<KeywordTree> nextLevelNodeList = new ArrayList<>();
             ArrayList<ITree> removedStmtList = new ArrayList<>();
             System.out.println(level + ":" + this.stmtList.size());
@@ -83,12 +88,14 @@ public class KeywordSearcher {
                     if (tag == true) {
                         for (ITree identifier : identifierList) {
                             // tree 내용에 없으면 추가
-                            if (!treeContents.contains(identifier.toString())) {
-                                KeywordTree node = new KeywordTree(identifier, identifier.toString(), level);
+                            String identifierStr = TreeUtil.getITreeName(identifier);
+                            if (!treeContents.contains(identifierStr)) {
+                                KeywordTree node = new KeywordTree(identifier, identifierStr, level);
                                 node.setStmtContents(statement);
                                 targetNode.childNodes.add(node);
                                 nextLevelNodeList.add(node); 
-                                treeContents.add(identifier.toString());
+                                treeContents.add(identifierStr);
+                                targetLevelStrList.add(identifierStr);
                             }
                         }
                         // statement를 list에서 제거
@@ -96,16 +103,20 @@ public class KeywordSearcher {
                     }
                 }
             }
+            searchTree.put(level, targetLevelStrList);
             if (isEnd == true) {
                 break;
             }
 
-            // TODO: deep copy 안될수도 있음
             targetLevelNodeList = nextLevelNodeList;
             this.stmtList.removeAll(removedStmtList);
             level++;
         }
 
+    }
+
+    public void setDonorCodes(ArrayList<String> donorCodes) {
+        this.donorCodes = donorCodes;
     }
 
     public KeywordTree getRootNode() {
@@ -120,7 +131,29 @@ public class KeywordSearcher {
         return this.treeContents;
     }
 
-    public static void searchDonorCode() {
+    public void searchDonorCode() {
+        for (String donorCode : this.donorCodes) {
+            int rank = 0;
+            boolean tag = false;
+            if (treeContents.contains(donorCode)) {
+                for (Integer level : searchTree.keySet()) {
+                    if (searchTree.get(level).contains(donorCode)) {
+                        rank += searchTree.get(level).indexOf(donorCode);
+                        tag = true;
+                        // identifier, pass/fail, search space, rank, total node size, level
+                        System.out.println(donorCode + ",P," + this.targetSpace + "," + Integer.toString(rank) + "," + Integer.toString(treeContents.size()) + "," + Integer.toString(level));
+                        continue;
+                    }
+                    rank += searchTree.get(level).size();
+                }
+            }
+            if (tag == false) {
+                System.out.println(donorCode + ",F," + treeContents.size());
+            }
+        }
+        for (String content : treeContents) {
+            System.out.print(content+",");
+        }
 
     }
 

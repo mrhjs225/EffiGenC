@@ -652,7 +652,6 @@ public class TBarFixer extends AbstractFixer {
 		HashSet<String> keywordIngredients = new HashSet<String>();
 
 		ArrayList<String> donorCodes = JsUtils.getDonorCodes(this.buggyProject);
-		ArrayList<String> donorCodes2 = JsUtils.getDonorCodes(this.buggyProject);
 		HashMap<String, ArrayList<ITree>> donorCodeStmt = new HashMap<>();
 
 		// Write the result of no donorcode case.
@@ -694,6 +693,7 @@ public class TBarFixer extends AbstractFixer {
 
 		String targetSearchSpace = "File"; // Project, Package, File, Method
 		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode, targetSearchSpace, projectPath);
+		keywordSearcher.setDonorCodes(donorCodes);
 		keywordSearcher.extractKeywords();
 		keywordSearcher.collectSearchSpace();
 		System.out.println("collect search space done");
@@ -703,7 +703,8 @@ public class TBarFixer extends AbstractFixer {
 		KeywordTree rootNode = keywordSearcher.getRootNode();
 		KeywordTree targetNode = rootNode;
 
-		System.out.println("tree size:" + keywordSearcher.getTreeContents().size());
+		// System.out.println("tree size:" + keywordSearcher.getTreeContents().size());
+		keywordSearcher.searchDonorCode();
 		
 
 		System.exit(0);
