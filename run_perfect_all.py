@@ -5,22 +5,30 @@ os.system('mvn package')
 os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSHOT.jar')
 os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
-# projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
+projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
 projects = []
 bugList = []
-mode = 'project'
+mode = 'File' # Method, File, Package, Project
 
-# 1: 148.effigenc1, 2: 148.effigenc2, 3:160.effigenc1, 4:160.effigenc2
+# 1: 148.direction1, 2: 148.direction2, 3:kkc_direction1, 4:kkc_direction2, 5: soty_direction_1, 6:soty_direction_2
 machine_num = 1
 
 if machine_num == 1:
-    projects = ['Chart', 'Closure', 'Lang']
-elif machine_num == 3:
-    projects = ['Closure', 'Lang']
-elif machine_num == 4:
-    projects = ['Math']
+    mode = 'Method'
 elif machine_num == 2:
+    mode = 'File'
+elif machine_num == 3:
+    projects = ['Chart', 'Closure', 'Lang']
+    mode = 'Package'
+elif machine_num == 4:
     projects = ['Math', 'Mockito', 'Time']
+    mode = 'Package'
+elif machine_num == 5:
+    projects = ['Chart', 'Closure', 'Lang']
+    mode = 'Project'
+elif machine_num == 6:
+    projects = ['Math', 'Mockito', 'Time']
+    mode = 'Project'
 
 for project_name in projects:
     buggy_num = 0
@@ -29,11 +37,7 @@ for project_name in projects:
     if project_name == 'Chart':
         buggy_num = 26
     elif project_name == 'Closure':
-        if machine_num == 1:
-            buggy_num = 133
-        elif machine_num == 3:
-            start_num = 81
-            buggy_num = 133
+        buggy_num = 133
     elif project_name == 'Lang':
         buggy_num = 65
     elif project_name == 'Math':

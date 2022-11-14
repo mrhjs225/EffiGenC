@@ -691,14 +691,14 @@ public class TBarFixer extends AbstractFixer {
 
 		System.out.println("loop|" + totalSuspNode.size() + "|");
 
-		String targetSearchSpace = "File"; // Project, Package, File, Method
-		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode, targetSearchSpace, projectPath);
+		String targetSearchSpace = this.mode; // Project, Package, File, Method
+		KeywordSearcher keywordSearcher = new KeywordSearcher(this.buggyProject, totalSuspNode, targetSearchSpace, projectPath);
 		keywordSearcher.setDonorCodes(donorCodes);
 		keywordSearcher.extractKeywords();
 		keywordSearcher.collectSearchSpace();
-		System.out.println("collect search space done");
+		System.out.println("===== Collect search space done =====");
 		keywordSearcher.makeTree();
-		System.out.println("make tree done");
+		System.out.println("===== Making tree done =====");
 
 		KeywordTree rootNode = keywordSearcher.getRootNode();
 		KeywordTree targetNode = rootNode;

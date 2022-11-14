@@ -7,7 +7,7 @@ os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
 projects = ['Chart']
 bugList = []
-mode = 'project'
+mode = 'File'
 
 for project_name in projects:
     if project_name == 'Chart':

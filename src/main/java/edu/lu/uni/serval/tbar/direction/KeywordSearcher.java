@@ -1,5 +1,8 @@
 package edu.lu.uni.serval.tbar.direction;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +11,7 @@ import edu.lu.uni.serval.jdt.tree.ITree;
 import edu.lu.uni.serval.tbar.AbstractFixer.SuspCodeNode;
 
 public class KeywordSearcher {
+    private String bugId;
     private List<SuspCodeNode> totalSuspNode;
     private ArrayList<ITree> keywordList;
     public String targetSpace; // Project, Package, File, Method
@@ -17,8 +21,10 @@ public class KeywordSearcher {
     private KeywordTree rootNode;
     private ArrayList<String> donorCodes;
     private HashMap<Integer, ArrayList<String>> searchTree;
+    private String resultFileDir;
 
-    public KeywordSearcher(List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
+    public KeywordSearcher(String bugId, List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
+        this.bugId = bugId;
         this.totalSuspNode = totalSuspNode;
         this.keywordList = new ArrayList<>();
         this.targetSpace = targetSpace;
@@ -28,6 +34,7 @@ public class KeywordSearcher {
         this.rootNode = new KeywordTree(null, "root", 1);
         this.donorCodes = new ArrayList<>();
         this.searchTree = new HashMap<>();
+        this.resultFileDir = "/root/DIRECTION/Data/HitRatio/keyword_based_search.csv";
     }
 
     public ArrayList<ITree> extractKeywords() {
@@ -132,6 +139,7 @@ public class KeywordSearcher {
     }
 
     public void searchDonorCode() {
+        String experimentResult = "";
         for (String donorCode : this.donorCodes) {
             int rank = 0;
             boolean tag = false;
@@ -141,20 +149,25 @@ public class KeywordSearcher {
                         rank += searchTree.get(level).indexOf(donorCode);
                         tag = true;
                         // identifier, pass/fail, search space, rank, total node size, level
-                        System.out.println(donorCode + ",P," + this.targetSpace + "," + Integer.toString(rank) + "," + Integer.toString(treeContents.size()) + "," + Integer.toString(level));
-                        continue;
+                        experimentResult += this.bugId + "," + donorCode + ",P," + this.targetSpace + "," + rank + "," + treeContents.size() + "," + level + "\n";
+                        // System.out.println(this.bugId + "," + donorCode + ",P," + this.targetSpace + "," + rank + "," + treeContents.size() + "," + level);
+                        break;
                     }
                     rank += searchTree.get(level).size();
                 }
             }
             if (tag == false) {
-                System.out.println(donorCode + ",F," + treeContents.size());
+                experimentResult += this.bugId + "," + donorCode + ",F,,," + treeContents.size() + ",\n";
+                // System.out.println(this.bugId + "," + donorCode + ",F,,," + treeContents.size() + ",");
             }
         }
-        for (String content : treeContents) {
-            System.out.print(content+",");
-        }
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(this.resultFileDir), true));
+            bufferedWriter.write(experimentResult);
+            bufferedWriter.close();
+        } catch(Exception e) {
 
+        }
     }
 
     public static void saveTree() {
