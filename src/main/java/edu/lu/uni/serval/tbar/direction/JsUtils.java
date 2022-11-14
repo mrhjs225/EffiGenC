@@ -214,7 +214,7 @@ public class JsUtils {
         });
         for (Entry<ITree, Double> entry : listEntries) {
             ArrayList<ITree> targetNodeList = new ArrayList<>();
-            extractNode(entry.getKey(), targetNodeList);
+            TreeUtil.extractNode(entry.getKey(), targetNodeList);
 
             for (ITree targetNode : targetNodeList) {
                 String targetStr = targetNode.getLabel().trim();
@@ -407,10 +407,10 @@ public class JsUtils {
     }
 
     public static boolean isListHasSameNode(ITree node, ArrayList<ITree> nodeList) {
-        boolean tag = False;
+        boolean tag = false;
         for (ITree targetNode : nodeList) {
             if (targetNode.toString().equals(node.toString())) {
-                tag = True;
+                tag = true;
                 break;
             }
         }

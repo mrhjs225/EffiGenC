@@ -25,7 +25,7 @@ public class DonorCodeAnalyze {
         if (Checker.isPureStatement(node.getType())) {
             ArrayList<ITree> candidateIdentifiers = new ArrayList<>();
 
-            JsUtils.extractNode(node, candidateIdentifiers);
+            TreeUtil.extractNode(node, candidateIdentifiers);
 
             for (ITree candidateIdentifier : candidateIdentifiers) {
                 String nodeStr = candidateIdentifier.getLabel();
@@ -91,7 +91,7 @@ public class DonorCodeAnalyze {
     public static void findDonorCode(ITree node, ArrayList<String> donorCodes, String buggyProject) {
         if (Checker.isPureStatement(node.getType())) {
             ArrayList<ITree> candidateIdentifiers = new ArrayList<>();
-            JsUtils.extractNode(node, candidateIdentifiers);
+            TreeUtil.extractNode(node, candidateIdentifiers);
 
             for (ITree candidateIdentifier : candidateIdentifiers) {
                 String nodeStr = candidateIdentifier.getLabel();

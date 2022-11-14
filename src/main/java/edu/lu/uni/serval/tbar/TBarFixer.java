@@ -28,6 +28,7 @@ import edu.lu.uni.serval.tbar.context.ContextReader;
 import edu.lu.uni.serval.tbar.direction.DonorCodeAnalyze;
 import edu.lu.uni.serval.tbar.direction.JsUtils;
 import edu.lu.uni.serval.tbar.direction.KeywordSearcher;
+import edu.lu.uni.serval.tbar.direction.KeywordTree;
 import edu.lu.uni.serval.tbar.direction.SimUtils;
 import edu.lu.uni.serval.tbar.direction.TreeUtil;
 import edu.lu.uni.serval.tbar.fixpatterns.CNIdiomNoSuperCall;
@@ -691,11 +692,18 @@ public class TBarFixer extends AbstractFixer {
 
 		System.out.println("loop|" + totalSuspNode.size() + "|");
 
-		String targetSearchSpace = "Project"; // Project, Package, File, Method
+		String targetSearchSpace = "File"; // Project, Package, File, Method
 		KeywordSearcher keywordSearcher = new KeywordSearcher(totalSuspNode, targetSearchSpace, projectPath);
-
+		keywordSearcher.extractKeywords();
 		keywordSearcher.collectSearchSpace();
+		System.out.println("collect search space done");
 		keywordSearcher.makeTree();
+		System.out.println("make tree done");
+
+		KeywordTree rootNode = keywordSearcher.getRootNode();
+		KeywordTree targetNode = rootNode;
+
+		System.out.println("tree size:" + keywordSearcher.getTreeContents().size());
 		
 
 		System.exit(0);
@@ -732,7 +740,7 @@ public class TBarFixer extends AbstractFixer {
 			int parentSize = suspStatementTree.getParents().size();
 			ITree suspFileTree = suspStatementTree.getParents().get(parentSize - 1);
 			ArrayList<ITree> contextElementNodes = new ArrayList<>();
-			JsUtils.extractContextNode(suspStatementTree, contextElementNodes);
+			TreeUtil.extractContextNode(suspStatementTree, contextElementNodes);
 			ArrayList<String> contextElementList =
 					JsUtils.extractContextElement(contextElementNodes);
 			JsUtils.findSubFileInPath(new File(projectPath), projectFileList);

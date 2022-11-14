@@ -13,6 +13,7 @@ public class TreeUtil {
 
     public static ArrayList<ITree> collectStmtInProject(String projectPath) {
         ArrayList<String> projectFileList = new ArrayList<>();
+        System.out.println(projectPath);
         JsUtils.findSubFileInPath(new File(projectPath), projectFileList);
         ArrayList<ITree> stmtList = new ArrayList<>();
         for (String filePath : projectFileList) {

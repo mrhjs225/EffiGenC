@@ -13,7 +13,7 @@ public class KeywordTree {
     private String identifier;
     private ITree targetNode;
     private int level;
-    public ArrayList<ITree> childNodes;
+    public ArrayList<KeywordTree> childNodes;
 
     public KeywordTree(ITree node, String identifier, int level) {
         this.childNodes = new ArrayList<>();
@@ -23,14 +23,22 @@ public class KeywordTree {
     }
 
     public void setStmtContents(ITree stmtNode) {
-        this.stmtContents = stmtNode;
+        if (stmtNode == null) {
+            this.stmtContents = "";
+        } else {
+            this.stmtContents = stmtNode.toString();
+        }
     }
 
     public int getLevel() {
         return this.level;
     }
-    
+
     public String toString() {
         return identifier;
+    }
+
+    public ITree getNode() {
+        return this.targetNode;
     }
 }
