@@ -6,7 +6,6 @@ os.system('mv target/TBar-0.0.1-SNAPSHOT.jar target/dependency/TBar-0.0.1-SNAPSH
 os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
-projects = []
 bugList = []
 mode = 'File' # Method, File, Package, Project
 
