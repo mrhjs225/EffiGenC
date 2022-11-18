@@ -7,12 +7,12 @@ os.system('export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8')
 projects = ['Chart', 'Closure', 'Lang', 'Math', 'Mockito', 'Time']
 projects = ['Chart']
 bugList = []
-mode = 'Package'
+mode = 'Method'
 
 for project_name in projects:
     if project_name == 'Chart':
         bugList = [1, 4, 7, 8, 9, 11, 12, 14, 18, 19, 20, 24, 25, 26]
-        bugList = [18]
+        bugList = [2]
     elif project_name == 'Closure':
         bugList = [2, 4, 6, 10, 11, 13, 18, 21, 22, 31, 38, 40, 46, 62, 63, 70, 73, 85, 86, 102, 106, 115, 126]
         bugList = [62]
@@ -26,16 +26,15 @@ for project_name in projects:
         bugList = [3, 7, 19, 26]
     
     for bugNum in bugList:
-        if project_name == 'Cli' and temp_buggy_num == 6:
+        if project_name == 'Cli' and bugNum == 6:
             continue
-        elif project_name == 'Closure' and (temp_buggy_num == 63 or temp_buggy_num == 93):
+        elif project_name == 'Closure' and (bugNum == 63 or bugNum == 93):
             continue
-        elif project_name == 'Collections' and (temp_buggy_num <= 24):
+        elif project_name == 'Collections' and (bugNum <= 24):
             continue
-        elif project_name == 'Lang' and temp_buggy_num == 2:
+        elif project_name == 'Lang' and bugNum == 2:
             continue
-        elif project_name == 'Time' and temp_buggy_num == 21:
+        elif project_name == 'Time' and bugNum == 21:
             continue
         bugId = project_name + '_' + str(bugNum)
-        # os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false > ./Results/' + bugId + '.txt')
         os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode)

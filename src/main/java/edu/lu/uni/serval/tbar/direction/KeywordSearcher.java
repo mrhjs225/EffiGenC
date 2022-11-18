@@ -68,12 +68,15 @@ public class KeywordSearcher {
         ArrayList<String> targetLevelStrList = new ArrayList<>();
         for (ITree secondLevelNode : keywordList) {
             String identifierStr = TreeUtil.getITreeName(secondLevelNode);
-            KeywordTree node = new KeywordTree(secondLevelNode, identifierStr, 2);
-            String nodePackageName = "";
-            node.setStmtContents(null);
-            this.rootNode.childNodes.add(node);
-            targetLevelNodeList.add(node);
-            targetLevelStrList.add(identifierStr);
+            if (!treeContents.contains(identifierStr)) {
+                KeywordTree node = new KeywordTree(secondLevelNode, identifierStr, 2);
+                String nodePackageName = "";
+                node.setStmtContents(null);
+                this.rootNode.childNodes.add(node);
+                targetLevelNodeList.add(node);
+                treeContents.add(identifierStr);
+                targetLevelStrList.add(identifierStr);
+            }
         }
         searchTree.put(2, targetLevelStrList);
         
@@ -174,7 +177,7 @@ public class KeywordSearcher {
         }
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(this.treeInfoFileDir), true));
-            bufferedWriter.write(treeInfo);
+            bufferedWriter.write(treeInfo + "\n");
             bufferedWriter.close();
         } catch (Exception e) {}
     }
