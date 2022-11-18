@@ -59,3 +59,5 @@ for project_name in projects:
             continue
         bugId = project_name + '_' + str(temp_buggy_num)
         os.system('./PerfectFLTBarRunner.sh /root/projects/ ' + bugId + ' /root/opt/defects4j/ false ' + mode + ' > ./Data/Results/TerminalOutput/' + bugId + '.txt')
+
+os.system('cp /root/DIRECTION/DATA/HitRatio/keyword_based_search.csv /root/dockermount/keyword_based_search.csv')

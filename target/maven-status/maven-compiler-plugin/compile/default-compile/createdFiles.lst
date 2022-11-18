@@ -65,8 +65,8 @@ edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$ArithmeticOperatorMutator.cla
 edu/lu/uni/serval/tbar/dataprepare/CustomClassLoaderThreadFactory.class
 edu/lu/uni/serval/tbar/utils/ASTNodeMap.class
 edu/lu/uni/serval/jdt/generator/AbstractJdtTreeGenerator.class
-edu/lu/uni/serval/tbar/DiffMatchPatch$1.class
 edu/lu/uni/serval/tbar/fixpatterns/ReturnStatementMutator.class
+edu/lu/uni/serval/tbar/DiffMatchPatch$1.class
 edu/lu/uni/serval/tbar/fixpatterns/OperatorMutator$DLSDeadLocalStoreInReturn.class
 edu/lu/uni/serval/tbar/fixpatterns/CNIdiomNoSuperCall.class
 edu/lu/uni/serval/jdt/visitor/JdtVisitor.class
@@ -138,6 +138,7 @@ edu/lu/uni/serval/jdt/tree/TreeUtils$4.class
 edu/lu/uni/serval/tbar/utils/SuspiciousCodeParser$MyUnit.class
 edu/lu/uni/serval/tbar/utils/AssertUtils.class
 edu/lu/uni/serval/tbar/fixpatterns/RangeChecker.class
+edu/lu/uni/serval/tbar/direction/TreeUtil.class
 edu/lu/uni/serval/AST/ASTGenerator$TokenType.class
 edu/lu/uni/serval/tbar/dataprepare/TestClassesFinder.class
 edu/lu/uni/serval/tbar/fixpatterns/MethodInvocationMutator.class

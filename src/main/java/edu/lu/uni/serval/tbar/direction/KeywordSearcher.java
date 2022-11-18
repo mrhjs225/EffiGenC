@@ -22,6 +22,7 @@ public class KeywordSearcher {
     private ArrayList<String> donorCodes;
     private HashMap<Integer, ArrayList<String>> searchTree;
     private String resultFileDir;
+    private String treeInfoFileDir;
 
     public KeywordSearcher(String bugId, List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
         this.bugId = bugId;
@@ -35,6 +36,7 @@ public class KeywordSearcher {
         this.donorCodes = new ArrayList<>();
         this.searchTree = new HashMap<>();
         this.resultFileDir = "/root/DIRECTION/Data/HitRatio/keyword_based_search.csv";
+        this.treeInfoFileDir = "/root/DIRECTION/Data/HitRatio/keyword_based_search_treeinfo.csv";
     }
 
     public ArrayList<ITree> extractKeywords() {
@@ -81,7 +83,6 @@ public class KeywordSearcher {
             targetLevelStrList = new ArrayList<>();
             ArrayList<KeywordTree> nextLevelNodeList = new ArrayList<>();
             ArrayList<ITree> removedStmtList = new ArrayList<>();
-            System.out.println(level + ":" + this.stmtList.size());
 
             // 여기서 keywordnode에 대한 특정 level의 list 만들어야 할 듯
             for (KeywordTree targetNode : targetLevelNodeList) {
@@ -149,7 +150,7 @@ public class KeywordSearcher {
                         rank += searchTree.get(level).indexOf(donorCode);
                         tag = true;
                         // identifier, pass/fail, search space, rank, total node size, level
-                        experimentResult += this.bugId + "," + donorCode + ",P," + this.targetSpace + "," + rank + "," + treeContents.size() + "," + level + "\n";
+                        experimentResult += this.bugId + "," + donorCode + ",P," + this.targetSpace + "," + rank + "," + treeContents.size() + "," + level + "," + searchTree.size() + "\n";
                         // System.out.println(this.bugId + "," + donorCode + ",P," + this.targetSpace + "," + rank + "," + treeContents.size() + "," + level);
                         break;
                     }
@@ -157,7 +158,7 @@ public class KeywordSearcher {
                 }
             }
             if (tag == false) {
-                experimentResult += this.bugId + "," + donorCode + ",F,,," + treeContents.size() + ",\n";
+                experimentResult += this.bugId + "," + donorCode + ",F,,," + treeContents.size() + ",,\n";
                 // System.out.println(this.bugId + "," + donorCode + ",F,,," + treeContents.size() + ",");
             }
         }
@@ -165,9 +166,17 @@ public class KeywordSearcher {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(this.resultFileDir), true));
             bufferedWriter.write(experimentResult);
             bufferedWriter.close();
-        } catch(Exception e) {
+        } catch (Exception e) {}
 
+        String treeInfo = this.bugId + ",";
+        for (Integer level : searchTree.keySet()) {
+            treeInfo += searchTree.get(level).size() + ",";
         }
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(this.treeInfoFileDir), true));
+            bufferedWriter.write(treeInfo);
+            bufferedWriter.close();
+        } catch (Exception e) {}
     }
 
     public static void saveTree() {
