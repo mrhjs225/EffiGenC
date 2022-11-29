@@ -48,17 +48,17 @@ public class KeywordSearcher {
     }
 
     // To construct search space, it collect all statement from target search space
-    public ArrayList<ITree> collectSearchSpace() {
+    public void collectSearchSpace() {
+        String targetNode = "Statement";
         if (targetSpace.equals("Project")) {
-            stmtList = TreeUtil.collectStmtInProject(projectPath);
+            this.stmtList = TreeUtil.collectNodeInProject(projectPath, targetNode);
         } else if (targetSpace.equals("Package")) {
-            stmtList = TreeUtil.collectStmtInPackage(totalSuspNode);
+            this.stmtList = TreeUtil.collectNodeInPackage(totalSuspNode, targetNode);
         } else if (targetSpace.equals("File")) {
-            stmtList = TreeUtil.collectStmtInFile(totalSuspNode);
+            this.stmtList = TreeUtil.collectNodeInFile(totalSuspNode, targetNode);
         } else if (targetSpace.equals("Method")) {
-            stmtList = TreeUtil.collectStmtInMethod(totalSuspNode);
+            this.stmtList = TreeUtil.collectNodeInMethod(totalSuspNode, targetNode);
         }
-        return stmtList;
     }
 
 
