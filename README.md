@@ -1,4 +1,4 @@
-# DIRECTION
+# EffiGenC
 Experiment setting
 ## Included projects
 - TBar

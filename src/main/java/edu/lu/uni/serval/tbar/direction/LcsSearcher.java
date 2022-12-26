@@ -2,6 +2,7 @@ package edu.lu.uni.serval.tbar.direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import edu.lu.uni.serval.jdt.tree.ITree;
@@ -19,6 +20,7 @@ public class LcsSearcher {
     private HashMap<ITree, Double> contextMaxScore;
     private ArrayList<ITree> stmtList;
     private ArrayList<ITree> methodList;
+    private ArrayList<String> donorCodes;
 
     public LcsSearcher(String bugId, List<SuspCodeNode> totalSuspNode, String targetSpace, String projectPath) {
         this.bugId = bugId;
@@ -27,14 +29,14 @@ public class LcsSearcher {
         this.projectPath = projectPath;
         this.noContextScoreList = new HashMap<>();
         this.contextScoreList = new HashMap<>();
-        noContextAverageScore = new HashMap<>();
-        noContextMaxScore = new HashMap<>();
-        contextAverageScore = new HashMap<>();
-        contextMaxScore = new HashMap<>();
+        this.noContextAverageScore = new HashMap<>();
+        this.noContextMaxScore = new HashMap<>();
+        this.contextAverageScore = new HashMap<>();
+        this.contextMaxScore = new HashMap<>();
         this.stmtList = new ArrayList<>();
         this.methodList = new ArrayList<>();
+        this.donorCodes = new ArrayList<>();
     }
-
 
     // To construct search space, it collect all statement from target search space
     public void collectSearchSpace() {
@@ -53,6 +55,7 @@ public class LcsSearcher {
         }
     }
 
+    // calculate lcs score and average or max similarity
     public void calculateSimilarity() {
         // noContext
         for (SuspCodeNode scn : totalSuspNode) {
@@ -116,6 +119,8 @@ public class LcsSearcher {
             noContextAverageScore.put(key, averageValue);
             noContextMaxScore.put(key, maxValue);
         }
+        noContextAverageScore = sortMapByValue(noContextAverageScore);
+        noContextMaxScore = sortMapByValue(noContextMaxScore);
 
         // calculate context average, max score
         for (ITree key : contextScoreList.keySet()) {
@@ -131,9 +136,36 @@ public class LcsSearcher {
             contextAverageScore.put(key, averageValue);
             contextMaxScore.put(key, maxValue);
         }
+        contextAverageScore = sortMapByValue(contextAverageScore);
+        contextMaxScore = sortMapByValue(contextMaxScore);
     }
 
+    public void searchDonorCode() {
+        for (String donorCode : this.donorCodes) {
+            int rank = 0;
+            // get key list
+            
+            // get index of donorcode
 
+            // print
+        }
+    }
+
+    // ref: https://codechacha.com/ko/java-sort-map/
+    public LinkedHashMap<String, Double> sortMapByValue(Map<String, Double> map) {
+        List<Map.Entry<String, Double>> entries = new LinkedList<>(map.entrySet());
+        Collections.sort(entries, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+
+        LinkedHashMap<String, Double> result = new LinkedHashMap<>();
+        for (Map.Entry<String, Double> entry : entries) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    public void setDonorCodes(ArrayList<String> donorCodes) {
+        this.donorCodes = donorCodes;
+    }
 
     public static double lcsScoring(String str1, String str2) {
         int dp[][];
